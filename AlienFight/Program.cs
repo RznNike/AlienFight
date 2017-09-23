@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AlienFight.Controller;
+
 namespace AlienFight
 {
     static class Program
@@ -16,7 +18,7 @@ namespace AlienFight
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            Application.Run(new FormMain(new GameController()));
         }
     }
 }
