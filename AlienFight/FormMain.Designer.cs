@@ -1,6 +1,6 @@
 ﻿namespace AlienFight
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         /// Обязательная переменная конструктора.
