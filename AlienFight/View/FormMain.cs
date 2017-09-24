@@ -23,7 +23,7 @@ namespace AlienFight
         {
             InitializeComponent();
             _controller = parController;
-            _controller.SetViewForm(this);
+            _controller.View = this;
             _canvas = new Bitmap(this.Width, this.Height);
             _graphics = Graphics.FromImage(_canvas);
         }
@@ -37,7 +37,7 @@ namespace AlienFight
         public void DrawLevel(GameLevel parLevel)
         {
             _graphics.Clear(Color.White);
-            foreach (GameObject levelElement in parLevel.Level)
+            foreach (GameObject levelElement in parLevel.LevelObjects)
             {
                 DrawGameObject(levelElement, parLevel);
             }
@@ -84,6 +84,11 @@ namespace AlienFight
         private void FormMain_KeyUp(object sender, KeyEventArgs e)
         {
             _controller.KeyUp(e);
+        }
+
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

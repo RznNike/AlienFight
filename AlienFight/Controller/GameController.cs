@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlienFight.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,21 +11,71 @@ namespace AlienFight.Controller
     public class GameController
     {
         private FormMain _view;
+        private GameLevel _level;
+        private SaveFile _save;
+        private List<EnemyLogic> _enemyLogics;
+        private PlayerLogic _playerLogics;
 
         public FormMain View { get => _view; set => _view = value; }
+        public GameLevel Level { get => _level; set => _level = value; }
+        public SaveFile Save { get => _save; set => _save = value; }
+        public List<EnemyLogic> EnemyLogics { get => _enemyLogics; set => _enemyLogics = value; }
+        public PlayerLogic PlayerLogics { get => _playerLogics; set => _playerLogics = value; }
 
-        public void SetViewForm(FormMain parView)
+        public GameController()
         {
-            View = parView;
+            LoadLevel(0);
+            Save = SaveFile.GetInstance();
+            // запустить событие отрисовки по таймеру View.DrawLevel(Level);
         }
+
+        public void LoadLevel(int parLevelID)
+        {
+            Level = LevelLoader.Load(parLevelID);
+            PlayerLogics = new PlayerLogic(Level);
+            EnemyLogics = new List<EnemyLogic>();
+            foreach (EnemyObject enemy in _level.Enemies)
+            {
+                EnemyLogics.Add(new EnemyLogic(Level, enemy));
+            }
+            // для логик игрока и врагов запустить обработку в отд. потоках
+            View.DrawLevel(Level);
+        }
+
+        public void EndLevel(bool parWin, bool parExit)
+        {
+            if (parWin)
+            {
+                Save.UpdateLevelsList(Level.LevelID);
+                if (!parExit)
+                {
+                    LoadLevel(Level.LevelID + 1);
+                }
+            }
+            else if (!parExit)
+            {
+                LoadLevel(Level.LevelID);
+            }
+            if (parExit)
+            {
+                LoadLevel(0);
+            }
+        }
+
         public void KeyDown(KeyEventArgs e)
         {
-            throw new NotImplementedException();
+            PlayerLogics.KeyDown(e);
         }
 
         public void KeyUp(KeyEventArgs e)
         {
-            throw new NotImplementedException();
+            PlayerLogics.KeyUp(e);
+        }
+
+        public void MoveGameObject(GameObject parObject, float parDX, float parDY)
+        {
+            // проверка возможности сдвига объекта (полного или частичного)
+            // сдвиг на возможное расстояние в заданном направлении
         }
     }
 }

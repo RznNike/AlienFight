@@ -50,9 +50,12 @@
   <ItemGroup>
     <Compile Include="Controller\EnemyLogic.cs" />
     <Compile Include="Controller\GameController.cs" />
+    <Compile Include="Controller\LevelLoader.cs" />
     <Compile Include="Controller\PlayerLogic.cs" />
+    <Compile Include="Model\EnemyObject.cs" />
     <Compile Include="Model\GameLevel.cs" />
     <Compile Include="Model\GameObject.cs" />
+    <Compile Include="Model\SaveFile.cs" />
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
