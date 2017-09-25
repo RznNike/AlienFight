@@ -12,9 +12,32 @@ namespace AlienFight.Controller
         private GameLevel _level;
         private EnemyObject _object;
 
-        public GameLevel Level { get => _level; set => _level = value; }
-        public EnemyObject Object { get => _object; set => _object = value; }
+        public GameLevel Level
+        {
+            get
+            {
+                return _level;
+            }
 
+            set
+            {
+                _level = value;
+            }
+        }
+
+        public EnemyObject Object
+        {
+            get
+            {
+                return _object;
+            }
+
+            set
+            {
+                _object = value;
+            }
+        }
+        
         public EnemyLogic(GameLevel parLevel, EnemyObject parEnemy)
         {
             Level = parLevel;

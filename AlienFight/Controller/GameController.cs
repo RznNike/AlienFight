@@ -16,11 +16,70 @@ namespace AlienFight.Controller
         private List<EnemyLogic> _enemyLogics;
         private PlayerLogic _playerLogics;
 
-        public FormMain View { get => _view; set => _view = value; }
-        public GameLevel Level { get => _level; set => _level = value; }
-        public SaveFile Save { get => _save; set => _save = value; }
-        public List<EnemyLogic> EnemyLogics { get => _enemyLogics; set => _enemyLogics = value; }
-        public PlayerLogic PlayerLogics { get => _playerLogics; set => _playerLogics = value; }
+        public FormMain View
+        {
+            get
+            {
+                return _view;
+            }
+
+            set
+            {
+                _view = value;
+            }
+        }
+
+        public GameLevel Level
+        {
+            get
+            {
+                return _level;
+            }
+
+            set
+            {
+                _level = value;
+            }
+        }
+
+        public SaveFile Save
+        {
+            get
+            {
+                return _save;
+            }
+
+            set
+            {
+                _save = value;
+            }
+        }
+
+        public List<EnemyLogic> EnemyLogics
+        {
+            get
+            {
+                return _enemyLogics;
+            }
+
+            set
+            {
+                _enemyLogics = value;
+            }
+        }
+
+        public PlayerLogic PlayerLogics
+        {
+            get
+            {
+                return _playerLogics;
+            }
+
+            set
+            {
+                _playerLogics = value;
+            }
+        }
 
         public GameController()
         {
@@ -34,7 +93,7 @@ namespace AlienFight.Controller
             Level = LevelLoader.Load(parLevelID);
             PlayerLogics = new PlayerLogic(Level);
             EnemyLogics = new List<EnemyLogic>();
-            foreach (EnemyObject enemy in _level.Enemies)
+            foreach (EnemyObject enemy in Level.Enemies)
             {
                 EnemyLogics.Add(new EnemyLogic(Level, enemy));
             }

@@ -17,12 +17,95 @@ namespace AlienFight.Model
         private int _activeSprite;
         private bool _flipped;
 
-        public float X { get => _x; set => _x = value; }
-        public float Y { get => _y; set => _y = value; }
-        public int SizeX { get => _sizeX; set => _sizeX = value; }
-        public int SizeY { get => _sizeY; set => _sizeY = value; }
-        public Image[ ] Sprites { get => _sprites; set => _sprites = value; }
-        public int ActiveSprite { get => _activeSprite; set => _activeSprite = value; }
-        public bool Flipped { get => _flipped; set => _flipped = value; }
+        public float X
+        {
+            get
+            {
+                return _x;
+            }
+
+            set
+            {
+                _x = value;
+            }
+        }
+
+        public float Y
+        {
+            get
+            {
+                return _y;
+            }
+
+            set
+            {
+                _y = value;
+            }
+        }
+
+        public int SizeX
+        {
+            get
+            {
+                return _sizeX;
+            }
+
+            set
+            {
+                _sizeX = value;
+            }
+        }
+
+        public int SizeY
+        {
+            get
+            {
+                return _sizeY;
+            }
+
+            set
+            {
+                _sizeY = value;
+            }
+        }
+
+        public Image[] Sprites
+        {
+            get
+            {
+                return _sprites;
+            }
+
+            set
+            {
+                _sprites = value;
+            }
+        }
+
+        public int ActiveSprite
+        {
+            get
+            {
+                return _activeSprite;
+            }
+
+            set
+            {
+                _activeSprite = value;
+            }
+        }
+
+        public bool Flipped
+        {
+            get
+            {
+                return _flipped;
+            }
+
+            set
+            {
+                _flipped = value;
+            }
+        }
     }
 }

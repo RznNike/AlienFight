@@ -12,8 +12,43 @@ namespace AlienFight.Model
         private int _leftWalkingBound;
         private int _rightWalkingBound;
 
-        public bool IsMoving { get => _isMoving; set => _isMoving = value; }
-        public int LeftWalkingBound { get => _leftWalkingBound; set => _leftWalkingBound = value; }
-        public int RightWalkingBound { get => _rightWalkingBound; set => _rightWalkingBound = value; }
+        public bool IsMoving
+        {
+            get
+            {
+                return _isMoving;
+            }
+
+            set
+            {
+                _isMoving = value;
+            }
+        }
+
+        public int LeftWalkingBound
+        {
+            get
+            {
+                return _leftWalkingBound;
+            }
+
+            set
+            {
+                _leftWalkingBound = value;
+            }
+        }
+
+        public int RightWalkingBound
+        {
+            get
+            {
+                return _rightWalkingBound;
+            }
+
+            set
+            {
+                _rightWalkingBound = value;
+            }
+        }
     }
 }
