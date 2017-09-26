@@ -99,6 +99,8 @@ namespace AlienFight.Controller
                 if ((View != null) && (Level != null))
                 {
                     View.DrawLevel(Level);
+                    Level.CameraX -= 0.5f;
+                    Level.CameraY -= 0.5f;
                 }
             }
         }
