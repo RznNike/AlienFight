@@ -24,7 +24,6 @@ namespace AlienFight
         private GameController _controller;
         private Bitmap _canvas;
         private Graphics _graphics;
-        private Graphics _formGraphics;
 
         public FormMain(GameController parController)
         {
@@ -37,12 +36,12 @@ namespace AlienFight
             _controller.View = this;
             _canvas = new Bitmap(this.Width, this.Height);
             _graphics = Graphics.FromImage(_canvas);
-            _formGraphics = this.CreateGraphics();
         }
 
         public void ViewCanvas()
         {
-            _formGraphics.DrawImage(_canvas, 0, 0);
+            this.BackgroundImage = (Bitmap)_canvas.Clone();
+            GC.Collect();
 #if FPSMETER
             FormMain_Paint();
 #endif
@@ -95,7 +94,6 @@ namespace AlienFight
         {
             _canvas = new Bitmap(this.Width, this.Height);
             _graphics = Graphics.FromImage(_canvas);
-            _formGraphics = this.CreateGraphics();
         }
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
