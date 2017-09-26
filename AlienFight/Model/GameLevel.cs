@@ -9,8 +9,8 @@ namespace AlienFight.Model
     public class GameLevel
     {
         private int _levelID;
-        private GameObject[ ] _levelObjects;
-        private EnemyObject[ ] _enemies;
+        private List<GameObject> _levelObjects;
+        private List<EnemyObject> _enemies;
         private GameObject _player;
         private int _sizeX;
         private int _sizeY;
@@ -30,7 +30,7 @@ namespace AlienFight.Model
             }
         }
 
-        public GameObject[] LevelObjects
+        public List<GameObject> LevelObjects
         {
             get
             {
@@ -43,7 +43,7 @@ namespace AlienFight.Model
             }
         }
 
-        public EnemyObject[] Enemies
+        public List<EnemyObject> Enemies
         {
             get
             {

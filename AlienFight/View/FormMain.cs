@@ -30,7 +30,7 @@ namespace AlienFight
 
         public void ViewCanvas()
         {
-            _canvas.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            //_canvas.RotateFlip(RotateFlipType.RotateNoneFlipY);
             this.BackgroundImage = new Bitmap(_canvas);
         }
 
@@ -45,7 +45,7 @@ namespace AlienFight
             {
                 DrawGameObject(enemy, parLevel);
             }
-            DrawGameObject(parLevel.Player, parLevel);
+            //DrawGameObject(parLevel.Player, parLevel);
             ViewCanvas();
         }
 
@@ -53,16 +53,18 @@ namespace AlienFight
         {
             if (IsVisible(parObject, parLevel))
             {
-                _graphics.DrawImage(parObject.Sprites[parObject.ActiveSprite], parObject.X, parObject.Y);
+                _graphics.DrawImage(parObject.Sprites[parObject.ActiveSprite],
+                    parObject.X + parLevel.CameraX,
+                    parObject.Y + parLevel.CameraY);
             }
         }
 
         private bool IsVisible(GameObject parObject, GameLevel parLevel)
         {
-            double leftBound = parLevel.CameraX - parLevel.SizeX / 2;
-            double rightBound = parLevel.CameraX + parLevel.SizeX / 2;
-            double upBound = parLevel.CameraY - parLevel.SizeY / 2;
-            double downBound = parLevel.CameraY + parLevel.SizeY / 2;
+            double leftBound = parLevel.CameraX;
+            double rightBound = parLevel.CameraX + this.Width;
+            double downBound = parLevel.CameraY;
+            double upBound = parLevel.CameraY + this.Height;
 
             return ((parObject.X < rightBound)
                     || ((parObject.X + parObject.SizeX) > leftBound))
@@ -88,7 +90,7 @@ namespace AlienFight
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
     }
 }

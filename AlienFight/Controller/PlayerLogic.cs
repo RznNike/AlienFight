@@ -19,12 +19,12 @@ namespace AlienFight.Controller
 
         public void KeyDown(KeyEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void KeyUp(KeyEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

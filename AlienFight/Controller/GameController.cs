@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -84,8 +85,22 @@ namespace AlienFight.Controller
         public GameController()
         {
             LoadLevel(0);
-            Save = SaveFile.GetInstance();
+            Thread framesSender = new Thread(SendDrawCommand);
+            framesSender.Start();
+            //Save = SaveFile.GetInstance();
             // запустить событие отрисовки по таймеру View.DrawLevel(Level);
+        }
+
+        private void SendDrawCommand()
+        {
+            while (true)
+            {
+                Thread.Sleep(10);
+                if ((View != null) && (Level != null))
+                {
+                    View.DrawLevel(Level);
+                }
+            }
         }
 
         public void LoadLevel(int parLevelID)
@@ -98,7 +113,7 @@ namespace AlienFight.Controller
                 EnemyLogics.Add(new EnemyLogic(Level, enemy));
             }
             // для логик игрока и врагов запустить обработку в отд. потоках
-            View.DrawLevel(Level);
+            //View.DrawLevel(Level);
         }
 
         public void EndLevel(bool parWin, bool parExit)
