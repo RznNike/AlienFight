@@ -22,7 +22,7 @@ namespace AlienFight.Controller
             grass1.SizeY = 70;
             grass1.Flipped = false;
             grass1.Sprites = new Image[1];
-            grass1.Sprites[0] = Image.FromFile("grass.png");
+            grass1.Sprites[0] = Image.FromFile("resources/levels/grass/grass.png");
             grass1.ActiveSprite = 0;
             levelObjects.Add(grass1);
             GameObject grass = new GameObject();
@@ -32,7 +32,7 @@ namespace AlienFight.Controller
             grass.SizeY = 50;
             grass.Flipped = false;
             grass.Sprites = new Image[1];
-            grass.Sprites[0] = Image.FromFile("grass.png");
+            grass.Sprites[0] = Image.FromFile("resources/levels/grass/grass.png");
             grass.ActiveSprite = 0;
             levelObjects.Add(grass);
 
