@@ -32,10 +32,10 @@ namespace AlienFight
             _counter = new int[4];
             _time = DateTime.UtcNow;
 #endif
-            _controller = parController;
-            _controller.View = this;
             _canvas = new Bitmap(this.Width, this.Height);
             _graphics = Graphics.FromImage(_canvas);
+            _controller = parController;
+            _controller.View = this;
         }
 
         public void ViewCanvas()

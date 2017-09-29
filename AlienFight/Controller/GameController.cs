@@ -11,76 +11,11 @@ namespace AlienFight.Controller
 {
     public class GameController
     {
-        private FormMain _view;
-        private GameLevel _level;
-        private SaveFile _save;
-        private List<EnemyLogic> _enemyLogics;
-        private PlayerLogic _playerLogics;
-
-        public FormMain View
-        {
-            get
-            {
-                return _view;
-            }
-
-            set
-            {
-                _view = value;
-            }
-        }
-
-        public GameLevel Level
-        {
-            get
-            {
-                return _level;
-            }
-
-            set
-            {
-                _level = value;
-            }
-        }
-
-        public SaveFile Save
-        {
-            get
-            {
-                return _save;
-            }
-
-            set
-            {
-                _save = value;
-            }
-        }
-
-        public List<EnemyLogic> EnemyLogics
-        {
-            get
-            {
-                return _enemyLogics;
-            }
-
-            set
-            {
-                _enemyLogics = value;
-            }
-        }
-
-        public PlayerLogic PlayerLogics
-        {
-            get
-            {
-                return _playerLogics;
-            }
-
-            set
-            {
-                _playerLogics = value;
-            }
-        }
+        public FormMain View { get; set; }
+        public GameLevel Level { get; set; }
+        public SaveFile Save { get; set; }
+        public List<EnemyLogic> EnemyLogics { get; set; }
+        public PlayerLogic PlayerLogics { get; set; }
 
         public GameController()
         {
@@ -95,7 +30,6 @@ namespace AlienFight.Controller
         {
             while (true)
             {
-                Thread.Sleep(10);
                 if ((View != null) && (Level != null))
                 {
                     View.DrawLevel(Level);

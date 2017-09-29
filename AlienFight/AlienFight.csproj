@@ -49,10 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\EnemyLogic.cs" />
+    <Compile Include="Model\EnemyLogic.cs" />
     <Compile Include="Controller\GameController.cs" />
-    <Compile Include="Controller\LevelLoader.cs" />
-    <Compile Include="Controller\PlayerLogic.cs" />
+    <Compile Include="Model\LevelLoader.cs" />
+    <Compile Include="Model\PlayerLogic.cs" />
     <Compile Include="Model\EnemyObject.cs" />
     <Compile Include="Model\GameLevel.cs" />
     <Compile Include="Model\GameObject.cs" />

@@ -1,20 +1,19 @@
-﻿using AlienFight.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AlienFight.Controller
+namespace AlienFight.Model
 {
     public class PlayerLogic
     {
-        private GameLevel _level;
+        public GameLevel Level { get; set; }
 
         public PlayerLogic(GameLevel parLevel)
         {
-            _level = parLevel;
+            Level = parLevel;
         }
 
         public void KeyDown(KeyEventArgs e)

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AlienFight.Model;
 using System.Drawing;
 
-namespace AlienFight.Controller
+namespace AlienFight.Model
 {
     public class LevelLoader
     {
