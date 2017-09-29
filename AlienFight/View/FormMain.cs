@@ -22,8 +22,9 @@ namespace AlienFight
         private DateTime _time;
 #endif
         private GameController _controller;
-        private Bitmap _canvas;
-        private Graphics _graphics;
+        private Graphics _formGraphics;
+        private BufferedGraphicsContext _bufGraphicsContext;
+        private BufferedGraphics _bufGraphics;
 
         public FormMain(GameController parController)
         {
@@ -32,16 +33,17 @@ namespace AlienFight
             _counter = new int[4];
             _time = DateTime.UtcNow;
 #endif
-            _canvas = new Bitmap(this.Width, this.Height);
-            _graphics = Graphics.FromImage(_canvas);
+            _bufGraphicsContext = BufferedGraphicsManager.Current;
+            _bufGraphicsContext.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
+            _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
+            _formGraphics = this.CreateGraphics();
             _controller = parController;
             _controller.View = this;
         }
 
         public void ViewCanvas()
         {
-            this.BackgroundImage = (Bitmap)_canvas.Clone();
-            GC.Collect();
+            _bufGraphics.Render(_formGraphics);
 #if FPSMETER
             FormMain_Paint();
 #endif
@@ -49,7 +51,7 @@ namespace AlienFight
 
         public void DrawLevel(GameLevel parLevel)
         {
-            _graphics.Clear(Color.White);
+            _bufGraphics.Graphics.Clear(Color.White);
             foreach (GameObject levelElement in parLevel.LevelObjects)
             {
                 DrawGameObject(levelElement, parLevel);
@@ -60,7 +62,7 @@ namespace AlienFight
             }
             //DrawGameObject(parLevel.Player, parLevel);
 #if FPSMETER
-            _graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.Black, 0, 0);
+            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.Black, 0, 0);
 #endif
             ViewCanvas();
         }
@@ -69,7 +71,7 @@ namespace AlienFight
         {
             if (IsVisible(parObject, parLevel))
             {
-                _graphics.DrawImage(parObject.Sprites[parObject.ActiveSprite],
+                _bufGraphics.Graphics.DrawImage(parObject.Sprites[parObject.ActiveSprite],
                     parObject.X - parLevel.CameraX,
                     this.Height - (parObject.Y + parObject.SizeY - parLevel.CameraY),
                     parObject.SizeX,
@@ -92,8 +94,20 @@ namespace AlienFight
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
-            _canvas = new Bitmap(this.Width, this.Height);
-            _graphics = Graphics.FromImage(_canvas);
+            Graphics oldFormGraphics = _formGraphics;
+            _formGraphics = this.CreateGraphics();
+            _bufGraphicsContext.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
+            BufferedGraphics oldGraphics = _bufGraphics;
+            _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
+
+            if (oldFormGraphics != null)
+            {
+                oldFormGraphics.Dispose();
+            }
+            if (oldGraphics != null)
+            {
+                oldGraphics.Dispose();
+            }
         }
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
