@@ -1,4 +1,4 @@
-﻿namespace AlienFight
+﻿namespace AlienFight.View
 {
     partial class FormMain
     {

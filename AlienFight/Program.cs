@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using AlienFight.Controller;
+using AlienFight.View;
 
 namespace AlienFight
 {
@@ -18,7 +19,8 @@ namespace AlienFight
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain(new GameController()));
+            WinFormController controller = new WinFormController();
+            Application.Run();
         }
     }
 }

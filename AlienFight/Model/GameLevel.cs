@@ -16,5 +16,11 @@ namespace AlienFight.Model
         public int SizeY { get; set; }
         public float CameraX { get; set; }
         public float CameraY { get; set; }
+
+        public void MoveGameObject(GameObject parObject, float parDX, float parDY)
+        {
+            // проверка возможности сдвига объекта (полного или частичного)
+            // сдвиг на возможное расстояние в заданном направлении
+        }
     }
 }

@@ -14,20 +14,20 @@ using AlienFight.Model;
 using AlienFight.Controller;
 using System.Threading;
 
-namespace AlienFight
+namespace AlienFight.View
 {
-    public partial class FormMain : Form
+    public partial class FormMain : Form, IViewable
     {
 #if FPSMETER
         private int[ ] _counter;
         private DateTime _time;
 #endif
-        private GameController _controller;
+        private WinFormController _controller;
         private Graphics _formGraphics;
         private BufferedGraphicsContext _bufGraphicsContext;
         private BufferedGraphics _bufGraphics;
 
-        public FormMain(GameController parController)
+        public FormMain(WinFormController parController)
         {
             InitializeComponent();
 #if FPSMETER
@@ -39,18 +39,9 @@ namespace AlienFight
             _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
             _formGraphics = this.CreateGraphics();
             _controller = parController;
-            _controller.View = this;
         }
 
-        public void ViewCanvas()
-        {
-            _bufGraphics.Render(_formGraphics);
-#if FPSMETER
-            FormMain_Paint();
-#endif
-        }
-
-        public void DrawLevel(GameLevel parLevel)
+        public void ViewLevel(GameLevel parLevel)
         {
             _bufGraphics.Graphics.Clear(Color.White);
             foreach (GameObject levelElement in parLevel.LevelObjects)
@@ -91,6 +82,14 @@ namespace AlienFight
                     || ((parObject.X + parObject.SizeX) > leftBound))
                    && ((parObject.Y < upBound)
                     || ((parObject.Y + parObject.SizeY) > downBound));
+        }
+
+        private void ViewCanvas()
+        {
+            _bufGraphics.Render(_formGraphics);
+#if FPSMETER
+            FormMain_Paint();
+#endif
         }
 
         private void FormMain_SizeChanged(object sender, EventArgs e)

@@ -16,12 +16,7 @@ namespace AlienFight.Model
             Level = parLevel;
         }
 
-        public void KeyDown(KeyEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void KeyUp(KeyEventArgs e)
+        public void Command(object p)
         {
             //throw new NotImplementedException();
         }
