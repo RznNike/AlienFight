@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 using AlienFight.Model;
 using AlienFight.Controller;
+using System.Threading;
 
 namespace AlienFight
 {
@@ -94,20 +95,19 @@ namespace AlienFight
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
-            Graphics oldFormGraphics = _formGraphics;
             _formGraphics = this.CreateGraphics();
             _bufGraphicsContext.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
-            BufferedGraphics oldGraphics = _bufGraphics;
             _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
 
-            if (oldFormGraphics != null)
-            {
-                oldFormGraphics.Dispose();
-            }
-            if (oldGraphics != null)
-            {
-                oldGraphics.Dispose();
-            }
+
+            Thread delayedGC = new Thread(GCcollectWithDelay);
+            delayedGC.Start(500);
+        }
+
+        private void GCcollectWithDelay(object parData)
+        {
+            Thread.Sleep((int)parData);
+            GC.Collect();
         }
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
