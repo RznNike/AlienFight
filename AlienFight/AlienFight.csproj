@@ -50,24 +50,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\WinFormController.cs" />
-    <Compile Include="Model\EnemyLogic.cs" />
+    <Compile Include="Model\Logic\EnemyLogic.cs" />
     <Compile Include="Controller\GameController.cs" />
-    <Compile Include="Model\LevelLoader.cs" />
-    <Compile Include="Model\PlayerLogic.cs" />
-    <Compile Include="Model\EnemyObject.cs" />
+    <Compile Include="Model\Objects\LevelObject.cs" />
+    <Compile Include="Model\Objects\PlayerObjectType.cs" />
+    <Compile Include="Model\Objects\EnemyObjectType.cs" />
+    <Compile Include="Model\Objects\PlayerObject.cs" />
+    <Compile Include="Model\Objects\LevelObjectType.cs" />
+    <Compile Include="Model\Utility\LevelLoader.cs" />
+    <Compile Include="Model\Logic\PlayerLogic.cs" />
+    <Compile Include="Model\Objects\EnemyObject.cs" />
     <Compile Include="Model\GameLevel.cs" />
-    <Compile Include="Model\GameObject.cs" />
-    <Compile Include="Model\SaveFile.cs" />
-    <Compile Include="View\FormMain.cs">
+    <Compile Include="Model\Objects\GameObject.cs" />
+    <Compile Include="Model\Utility\SaveFile.cs" />
+    <Compile Include="View\WinForm\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FormMain.Designer.cs">
+    <Compile Include="View\WinForm\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\IViewable.cs" />
-    <EmbeddedResource Include="View\FormMain.resx">
+    <Compile Include="View\WinForm\SpritesContainer.cs" />
+    <Compile Include="View\WinForm\ResourceLoader.cs" />
+    <EmbeddedResource Include="View\WinForm\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
