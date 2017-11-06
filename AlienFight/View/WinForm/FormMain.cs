@@ -46,15 +46,17 @@ namespace AlienFight.View
         public void ViewLevel(GameLevel parLevel)
         {
             DrawBackground();
+            float cameraX = parLevel.CameraX;
+            float cameraY = parLevel.CameraY;
             foreach (GameObject levelElement in parLevel.LevelObjects)
             {
-                DrawGameObject(levelElement, parLevel);
+                DrawGameObject(levelElement, parLevel, cameraX, cameraY);
             }
             foreach (GameObject enemy in parLevel.Enemies)
             {
-                DrawGameObject(enemy, parLevel);
+                DrawGameObject(enemy, parLevel, cameraX, cameraY);
             }
-            DrawGameObject(parLevel.Player, parLevel);
+            DrawGameObject(parLevel.Player, parLevel, cameraX, cameraY);
 #if FPSMETER
             _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.White, 0, 0);
 #endif
@@ -66,17 +68,17 @@ namespace AlienFight.View
             _bufGraphics.Graphics.FillRectangle(_backgroundBrush, 0, 0, this.Width, this.Height);
         }
 
-        private void DrawGameObject(GameObject parObject, GameLevel parLevel)
+        private void DrawGameObject(GameObject parObject, GameLevel parLevel, float parCameraX, float parCameraY)
         {
             if (IsVisible(parObject, parLevel))
             {
                 Image sprite = _spritesContainer.GetSprite(parObject);
                 _bufGraphics.Graphics.DrawImage(
                     sprite,
-                    parObject.X * _cellSize - parLevel.CameraX * _cellSize,
-                    this.Height - (parObject.Y * _cellSize + parObject.SizeY * _cellSize - parLevel.CameraY * _cellSize),
-                    parObject.SizeX * _cellSize,
-                    parObject.SizeY * _cellSize);
+                    parObject.X * _cellSize - parCameraX * _cellSize - 0.5f,
+                    this.Height - (parObject.Y * _cellSize + parObject.SizeY * _cellSize - parCameraY * _cellSize) - 0.5f,
+                    parObject.SizeX * _cellSize + 1,
+                    parObject.SizeY * _cellSize + 1);
             }
         }
 
