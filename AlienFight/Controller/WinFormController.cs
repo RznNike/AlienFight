@@ -11,7 +11,7 @@ namespace AlienFight.Controller
         {
             View = new FormMain(this);
             ((Form)View).Show();
-            LoadLevel(0);
+            LoadLevel(1);
             Thread framesSender = new Thread(SendViewCommand);
             framesSender.Start();
             //Save = SaveFile.GetInstance();
@@ -35,19 +35,19 @@ namespace AlienFight.Controller
             // test
             if (e.KeyCode == Keys.Left)
             {
-                Level.CameraX -= 10;
+                Level.CameraX -= 0.1f;
             }
             else if (e.KeyCode == Keys.Right)
             {
-                Level.CameraX += 10;
+                Level.CameraX += 0.1f;
             }
             else if (e.KeyCode == Keys.Up)
             {
-                Level.CameraY += 10;
+                Level.CameraY += 0.1f;
             }
             else if (e.KeyCode == Keys.Down)
             {
-                Level.CameraY -= 10;
+                Level.CameraY -= 0.1f;
             }
         }
 

@@ -6,7 +6,7 @@
         public bool IsDoubleJumpPossible { get; set; }
         public int Health { get; set; }
         public int HealthMax { get; set; }
-        public int Energy { get; set; }
-        public int EnergyMax { get; set; }
+        public double Energy { get; set; }
+        public double EnergyMax { get; set; }
     }
 }

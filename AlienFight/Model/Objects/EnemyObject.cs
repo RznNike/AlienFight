@@ -4,7 +4,7 @@
     {
         public EnemyObjectType Type { get; set; }
         public bool IsMoving { get; set; }
-        public int LeftWalkingBound { get; set; }
-        public int RightWalkingBound { get; set; }
+        public float LeftWalkingBound { get; set; }
+        public float RightWalkingBound { get; set; }
     }
 }

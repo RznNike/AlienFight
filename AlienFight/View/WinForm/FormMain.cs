@@ -22,6 +22,8 @@ namespace AlienFight.View
         private BufferedGraphics _bufGraphics;
         private SpritesContainer _spritesContainer;
         private TextureBrush _backgroundBrush;
+        private int _cellSize;
+        private int _cellsCapacity = 1;
 
         public FormMain(WinFormController parController)
         {
@@ -37,6 +39,8 @@ namespace AlienFight.View
             _controller = parController;
             _spritesContainer = ResourceLoader.LoadSprites();
             _backgroundBrush = new TextureBrush(_spritesContainer.Background);
+            _cellsCapacity = 20;
+            _cellSize = this.Width / _cellsCapacity;
         }
 
         public void ViewLevel(GameLevel parLevel)
@@ -50,9 +54,9 @@ namespace AlienFight.View
             {
                 DrawGameObject(enemy, parLevel);
             }
-            //DrawGameObject(parLevel.Player, parLevel);
+            DrawGameObject(parLevel.Player, parLevel);
 #if FPSMETER
-            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.Black, 0, 0);
+            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.White, 0, 0);
 #endif
             ViewCanvas();
         }
@@ -67,20 +71,21 @@ namespace AlienFight.View
             if (IsVisible(parObject, parLevel))
             {
                 Image sprite = _spritesContainer.GetSprite(parObject);
-                _bufGraphics.Graphics.DrawImage(sprite,
-                    parObject.X - parLevel.CameraX,
-                    this.Height - (parObject.Y + parObject.SizeY - parLevel.CameraY),
-                    parObject.SizeX,
-                    parObject.SizeY);
+                _bufGraphics.Graphics.DrawImage(
+                    sprite,
+                    parObject.X * _cellSize - parLevel.CameraX * _cellSize,
+                    this.Height - (parObject.Y * _cellSize + parObject.SizeY * _cellSize - parLevel.CameraY * _cellSize),
+                    parObject.SizeX * _cellSize,
+                    parObject.SizeY * _cellSize);
             }
         }
 
         private bool IsVisible(GameObject parObject, GameLevel parLevel)
         {
             double leftBound = parLevel.CameraX;
-            double rightBound = parLevel.CameraX + this.Width;
+            double rightBound = parLevel.CameraX + this.Width / _cellSize;
             double downBound = parLevel.CameraY;
-            double upBound = parLevel.CameraY + this.Height;
+            double upBound = parLevel.CameraY + this.Height / _cellSize;
 
             return ((parObject.X < rightBound)
                     || ((parObject.X + parObject.SizeX) > leftBound))
@@ -101,7 +106,7 @@ namespace AlienFight.View
             _formGraphics = this.CreateGraphics();
             _bufGraphicsContext.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
             _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
-
+            _cellSize = this.Width / _cellsCapacity;
 
             Thread delayedGC = new Thread(GCcollectWithDelay);
             delayedGC.Start(500);
