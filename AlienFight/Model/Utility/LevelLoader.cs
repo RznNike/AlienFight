@@ -17,7 +17,7 @@ namespace AlienFight.Model
                 SizeY = 70,
                 FlippedY = false,
                 Type = LevelObjectType.Stone,
-                State = 0
+                State = 5
             };
             levelObjects.Add(stone1);
             LevelObject stone = new LevelObject

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\WinFormController.cs" />
+    <Compile Include="Model\Objects\CustomAttribute.cs" />
     <Compile Include="Model\Logic\EnemyLogic.cs" />
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Model\Objects\LevelObject.cs" />

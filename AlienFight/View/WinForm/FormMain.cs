@@ -21,6 +21,7 @@ namespace AlienFight.View
         private BufferedGraphicsContext _bufGraphicsContext;
         private BufferedGraphics _bufGraphics;
         private SpritesContainer _spritesContainer;
+        private TextureBrush _backgroundBrush;
 
         public FormMain(WinFormController parController)
         {
@@ -35,11 +36,12 @@ namespace AlienFight.View
             _formGraphics = this.CreateGraphics();
             _controller = parController;
             _spritesContainer = ResourceLoader.LoadSprites();
+            _backgroundBrush = new TextureBrush(_spritesContainer.Background);
         }
 
         public void ViewLevel(GameLevel parLevel)
         {
-            _bufGraphics.Graphics.Clear(Color.White);
+            DrawBackground();
             foreach (GameObject levelElement in parLevel.LevelObjects)
             {
                 DrawGameObject(levelElement, parLevel);
@@ -53,6 +55,11 @@ namespace AlienFight.View
             _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.Black, 0, 0);
 #endif
             ViewCanvas();
+        }
+
+        private void DrawBackground()
+        {
+            _bufGraphics.Graphics.FillRectangle(_backgroundBrush, 0, 0, this.Width, this.Height);
         }
 
         private void DrawGameObject(GameObject parObject, GameLevel parLevel)

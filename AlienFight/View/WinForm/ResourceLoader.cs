@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using AlienFight.Model;
+using System.IO;
+using System;
+using System.Linq;
 
 namespace AlienFight.View
 {
@@ -9,47 +11,39 @@ namespace AlienFight.View
     {
         public static SpritesContainer LoadSprites()
         {
-            Dictionary<int, List<Image>> levelObjectSprites = LoadLevelObjectSprites();
-            Dictionary<int, List<Image>> enemySprites = LoadEnemySprites();
-            Dictionary<int, List<Image>> playerSprites = LoadPlayerSprites();
+            Dictionary<int, List<Image>> levelObjectSprites = LoadSpritesForEnum(typeof(LevelObjectType));
+            Dictionary<int, List<Image>> enemySprites = LoadSpritesForEnum(typeof(EnemyObjectType));
+            Dictionary<int, List<Image>> playerSprites = LoadSpritesForEnum(typeof(PlayerObjectType));
+            Image background = Image.FromFile("resources/sprites/levels/background.png");
 
-            return new SpritesContainer(levelObjectSprites, enemySprites, playerSprites);
+            return new SpritesContainer(levelObjectSprites, enemySprites, playerSprites, background);
         }
 
-        private static Dictionary<int, List<Image>> LoadLevelObjectSprites()
+        private static Dictionary<int, List<Image>> LoadSpritesForEnum(Type parEnumType)
         {
             Dictionary<int, List<Image>> sprites = new Dictionary<int, List<Image>>();
 
-            sprites.Add((int)LevelObjectType.Stone, LoadStoneSprites());
-
-            return sprites;
-        }
-
-        private static Dictionary<int, List<Image>> LoadEnemySprites()
-        {
-            Dictionary<int, List<Image>> sprites = new Dictionary<int, List<Image>>();
-
-            return sprites;
-        }
-
-        private static Dictionary<int, List<Image>> LoadPlayerSprites()
-        {
-            Dictionary<int, List<Image>> sprites = new Dictionary<int, List<Image>>();
-
-            return sprites;
-        }
-
-        private static List<Image> LoadStoneSprites()
-        {
-            List<Image> result = new List<Image>
+            int min = Enum.GetValues(parEnumType).Cast<int>().Min();
+            int max = Enum.GetValues(parEnumType).Cast<int>().Max();
+            for (int i = min; i <= max; i++)
             {
-                Image.FromFile("resources/sprites/levels/stone/single.png"),
-                Image.FromFile("resources/sprites/levels/stone/left.png"),
-                Image.FromFile("resources/sprites/levels/stone/mid.png"),
-                Image.FromFile("resources/sprites/levels/stone/right.png"),
-                Image.FromFile("resources/sprites/levels/stone/center.png"),
-                Image.FromFile("resources/sprites/levels/stone/center_round.png")
-            };
+                string fieldName = parEnumType.GetFields()[i + 1].Name;
+                string path = CustomAttribute.GetValue(parEnumType, fieldName);
+                sprites.Add(i, LoadSpritesFromFolder(path));
+            }
+
+            return sprites;
+        }
+
+        private static List<Image> LoadSpritesFromFolder(string parPath)
+        {
+            List<Image> result = new List<Image>();
+            List<string> files = new List<string>(Directory.EnumerateFiles(parPath));
+            files.Sort();
+            foreach (string file in files)
+            {
+                result.Add(Image.FromFile(file));
+            }
 
             return result;
         }

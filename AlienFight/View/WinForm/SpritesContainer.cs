@@ -10,14 +10,18 @@ namespace AlienFight.View
         private Dictionary<int, List<Image>> _enemySprites;
         private Dictionary<int, List<Image>> _playerSprites;
 
+        public Image Background { get; private set; }
+
         public SpritesContainer(
             Dictionary<int, List<Image>> parLevelObjectSprites,
             Dictionary<int, List<Image>> parEnemySprites,
-            Dictionary<int, List<Image>> parPlayerSprites)
+            Dictionary<int, List<Image>> parPlayerSprites,
+            Image parBackground)
         {
             _levelObjectSprites = parLevelObjectSprites;
             _enemySprites = parEnemySprites;
             _playerSprites = parPlayerSprites;
+            Background = parBackground;
         }
 
         public Image GetSprite(GameObject parObject)
