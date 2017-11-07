@@ -72,7 +72,7 @@ namespace AlienFight.View
         {
             if (IsVisible(parObject, parLevel))
             {
-                Image sprite = _spritesContainer.GetSprite(parObject);
+                Image sprite = _spritesContainer.GetSprite(parObject, parObject.FlippedY);
                 _bufGraphics.Graphics.DrawImage(
                     sprite,
                     parObject.X * _cellSize - parCameraX * _cellSize - 0.5f,

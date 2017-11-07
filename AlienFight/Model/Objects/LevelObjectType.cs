@@ -3,6 +3,6 @@
     public enum LevelObjectType
     {
         [Custom("resources/sprites/levels/stone")]
-        Stone
+        Stone = 1
     }
 }

@@ -27,9 +27,11 @@ namespace AlienFight.View
             int max = Enum.GetValues(parEnumType).Cast<int>().Max();
             for (int i = min; i <= max; i++)
             {
-                string fieldName = parEnumType.GetFields()[i + 1].Name;
+                string fieldName = parEnumType.GetFields()[i].Name;
                 string path = CustomAttribute.GetValue(parEnumType, fieldName);
-                sprites.Add(i, LoadSpritesFromFolder(path));
+                List<Image> list = LoadSpritesFromFolder(path);
+                sprites.Add(i, list);
+                sprites.Add(-i, FlipSprites(list));
             }
 
             return sprites;
@@ -46,6 +48,19 @@ namespace AlienFight.View
             }
 
             return result;
+        }
+
+        private static List<Image> FlipSprites(List<Image> parOriginalSprites)
+        {
+            List<Image> sprites = new List<Image>();
+            foreach (Image elSprite in parOriginalSprites)
+            {
+                Image flippedSprite = (Image)elSprite.Clone();
+                flippedSprite.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                sprites.Add(flippedSprite);
+            }
+
+            return sprites;
         }
     }
 }

@@ -3,7 +3,7 @@
     public enum PlayerObjectType
     {
         [Custom("resources/sprites/player/green")]
-        Green,
+        Green = 1,
         [Custom("resources/sprites/player/pink")]
         Pink
     }

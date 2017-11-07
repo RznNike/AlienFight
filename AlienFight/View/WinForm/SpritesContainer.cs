@@ -24,19 +24,20 @@ namespace AlienFight.View
             Background = parBackground;
         }
 
-        public Image GetSprite(GameObject parObject)
+        public Image GetSprite(GameObject parObject, bool parFlipped)
         {
+            int sign = parFlipped ? -1 : 1;
             if (typeof(LevelObject).IsInstanceOfType(parObject))
             {
-                return _levelObjectSprites[(int)((LevelObject)parObject).Type][parObject.State];
+                return _levelObjectSprites[(int)((LevelObject)parObject).Type * sign][parObject.State];
             }
             else if (typeof(EnemyObject).IsInstanceOfType(parObject))
             {
-                return _enemySprites[(int)((EnemyObject)parObject).Type][parObject.State];
+                return _enemySprites[(int)((EnemyObject)parObject).Type * sign][parObject.State];
             }
             else
             {
-                return _playerSprites[(int)((PlayerObject)parObject).Type][parObject.State];
+                return _playerSprites[(int)((PlayerObject)parObject).Type * sign][parObject.State];
             }
         }
     }

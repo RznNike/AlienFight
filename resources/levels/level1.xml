@@ -217,7 +217,7 @@
         <sizeX>0.72</sizeX>
         <sizeY>1</sizeY>
         <state>4</state>
-        <flippedY>false</flippedY>
+        <flippedY>true</flippedY>
         <health>100</health>
         <healthMax>100</healthMax>
         <energyMax>100</energyMax>
