@@ -10,8 +10,6 @@ namespace AlienFight.Controller
         public IViewable View { get; set; }
         public GameLevel Level { get; set; }
         public SaveFile Save { get; set; }
-        public List<EnemyLogic> EnemyLogics { get; set; }
-        public PlayerLogic PlayerLogics { get; set; }
 
         public GameController()
         {
@@ -20,12 +18,7 @@ namespace AlienFight.Controller
         public void LoadLevel(int parLevelID)
         {
             Level = LevelLoader.Load(parLevelID);
-            PlayerLogics = new PlayerLogic(Level);
-            EnemyLogics = new List<EnemyLogic>();
-            foreach (EnemyObject enemy in Level.Enemies)
-            {
-                EnemyLogics.Add(new EnemyLogic(Level, enemy));
-            }
+            Level.PlayerLogics.Start();
             // для логик игрока и врагов запустить обработку в отд. потоках
         }
 

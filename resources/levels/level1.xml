@@ -8,6 +8,15 @@
         <cameraY>0</cameraY>
     </settings>
     <levelObjects>
+        <object>
+            <type>Stone</type>
+            <x>2</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         <!-- основа -->
         <object>
             <type>Stone</type>
@@ -204,9 +213,9 @@
     <player>
         <type>Green</type>
         <x>2</x>
-        <y>2</y>
-        <sizeX>1</sizeX>
-        <sizeY>1.4</sizeY>
+        <y>2.05</y>
+        <sizeX>0.72</sizeX>
+        <sizeY>1</sizeY>
         <state>4</state>
         <flippedY>false</flippedY>
         <health>100</health>

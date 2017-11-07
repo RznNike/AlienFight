@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 
 using AlienFight.View;
+using AlienFight.Model;
 
 namespace AlienFight.Controller
 {
@@ -15,7 +16,6 @@ namespace AlienFight.Controller
             Thread framesSender = new Thread(SendViewCommand);
             framesSender.Start();
             //Save = SaveFile.GetInstance();
-            // запустить событие отрисовки по таймеру View.DrawLevel(Level);
         }
 
         private void SendViewCommand()
@@ -31,29 +31,34 @@ namespace AlienFight.Controller
 
         public void KeyDown(KeyEventArgs e)
         {
-            PlayerLogics.Command(null);
-            // test
-            if (e.KeyCode == Keys.Left)
-            {
-                Level.CameraX -= 0.1f;
-            }
-            else if (e.KeyCode == Keys.Right)
-            {
-                Level.CameraX += 0.1f;
-            }
-            else if (e.KeyCode == Keys.Up)
-            {
-                Level.CameraY += 0.1f;
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                Level.CameraY -= 0.1f;
-            }
+            bool beginCommand = true;
+            SendCommandToPlayer(e, beginCommand);
         }
 
         public void KeyUp(KeyEventArgs e)
         {
-            PlayerLogics.Command(null);
+            bool beginCommand = false;
+            SendCommandToPlayer(e, beginCommand);
+        }
+
+        private void SendCommandToPlayer(KeyEventArgs e, bool parBeginCommand)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                Level.PlayerLogics.ReceiveCommand(PlayerCommand.Left, parBeginCommand);
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                Level.PlayerLogics.ReceiveCommand(PlayerCommand.Right, parBeginCommand);
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                Level.PlayerLogics.ReceiveCommand(PlayerCommand.Up, parBeginCommand);
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                Level.PlayerLogics.ReceiveCommand(PlayerCommand.Down, parBeginCommand);
+            }
         }
     }
 }

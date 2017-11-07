@@ -18,6 +18,12 @@ namespace AlienFight.Model
             level.LevelObjects = ParseLevelObjects(xmlReader);
             level.Enemies = ParseEnemies(xmlReader);
             level.Player = ParsePlayer(xmlReader);
+            level.PlayerLogics = new PlayerLogic(level);
+            level.EnemyLogics = new List<EnemyLogic>();
+            foreach (EnemyObject enemy in level.Enemies)
+            {
+                level.EnemyLogics.Add(new EnemyLogic(level, enemy));
+            }
 
             fileStream.Close();
             xmlReader.Close();
