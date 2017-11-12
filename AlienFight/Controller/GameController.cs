@@ -7,22 +7,22 @@ namespace AlienFight.Controller
 {
     public abstract class GameController
     {
-        public IViewable View { get; set; }
-        public GameLevel Level { get; set; }
-        public SaveFile Save { get; set; }
+        protected IViewable View { get; set; }
+        protected GameLevel Level { get; set; }
+        protected SaveFile Save { get; set; }
 
         public GameController()
         {
         }
 
-        public void LoadLevel(int parLevelID)
+        protected void LoadLevel(int parLevelID)
         {
             Level = LevelLoader.Load(parLevelID);
             Level.PlayerLogics.Start();
             // для логик игрока и врагов запустить обработку в отд. потоках
         }
 
-        public void EndLevel(bool parWin, bool parExit)
+        protected void EndLevel(bool parWin, bool parExit)
         {
             if (parWin)
             {
@@ -39,6 +39,17 @@ namespace AlienFight.Controller
             if (parExit)
             {
                 LoadLevel(0);
+            }
+        }
+
+        protected void SendViewCommand()
+        {
+            while (true)
+            {
+                if ((View != null) && (Level != null))
+                {
+                    View.ViewLevel(Level);
+                }
             }
         }
     }

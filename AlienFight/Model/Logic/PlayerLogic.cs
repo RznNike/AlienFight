@@ -7,13 +7,13 @@ namespace AlienFight.Model
 {
     public class PlayerLogic
     {
-        private const float EPSILON = 0.01f;
-        private const float G = 15.0f;
-        private const float MAX_SPEED = 10.0f;
-        private const float HORISONTAL_SPEED = MAX_SPEED / 2;
-        private const float JUMP_SPEED = MAX_SPEED / 1.3f;
-        private const int MAX_JUMPS = 2;
-        private const float LOOKUP_DIST = 1.5f;
+        private static readonly float EPSILON = 0.01f;
+        private static readonly float G = 15.0f;
+        private static readonly float MAX_SPEED = 10.0f;
+        private static readonly float HORISONTAL_SPEED = MAX_SPEED / 2;
+        private static readonly float JUMP_SPEED = MAX_SPEED / 1.3f;
+        private static readonly int MAX_JUMPS = 2;
+        private static readonly float LOOKUP_DIST = 1.5f;
 
         public GameLevel Level { get; set; }
         public PlayerObject Player { get; set; }
@@ -51,7 +51,10 @@ namespace AlienFight.Model
         public void Start()
         {
             _stopThread = false;
-            _logicThread = new Thread(IterativeAction);
+            _logicThread = new Thread(IterativeAction)
+            {
+                IsBackground = true
+            };
             _logicThread.Start();
         }
 

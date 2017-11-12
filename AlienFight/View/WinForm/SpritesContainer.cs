@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using AlienFight.Model;
 using System.Collections.Generic;
 

@@ -10,32 +10,23 @@ namespace AlienFight.Controller
     {
         public WinFormController()
         {
-            View = new FormMain(this);
+            View = new FormPlay();
             ((Form)View).Show();
+            ((Form)View).KeyDown += KeyDown;
+            ((Form)View).KeyUp += KeyUp;
             LoadLevel(1);
             Thread framesSender = new Thread(SendViewCommand);
             framesSender.Start();
             //Save = SaveFile.GetInstance();
         }
 
-        private void SendViewCommand()
-        {
-            while (true)
-            {
-                if ((View != null) && (Level != null))
-                {
-                    View.ViewLevel(Level);
-                }
-            }
-        }
-
-        public void KeyDown(KeyEventArgs e)
+        public void KeyDown(object sender, KeyEventArgs e)
         {
             bool beginCommand = true;
             SendCommandToPlayer(e, beginCommand);
         }
 
-        public void KeyUp(KeyEventArgs e)
+        public void KeyUp(object sender, KeyEventArgs e)
         {
             bool beginCommand = false;
             SendCommandToPlayer(e, beginCommand);

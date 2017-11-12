@@ -214,8 +214,8 @@
         <type>Green</type>
         <x>2</x>
         <y>2.05</y>
-        <sizeX>0.72</sizeX>
-        <sizeY>1</sizeY>
+        <sizeX>0.36</sizeX>
+        <sizeY>0.5</sizeY>
         <state>4</state>
         <flippedY>true</flippedY>
         <health>100</health>

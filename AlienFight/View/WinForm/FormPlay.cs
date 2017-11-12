@@ -5,27 +5,25 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using AlienFight.Model;
-using AlienFight.Controller;
 using System.Threading;
 
 namespace AlienFight.View
 {
-    public partial class FormMain : Form, IViewable
+    public partial class FormPlay : Form, IViewable
     {
 #if FPSMETER
         private int[ ] _counter;
         private DateTime _time;
 #endif
-        private WinFormController _controller;
         private Graphics _formGraphics;
         private BufferedGraphicsContext _bufGraphicsContext;
         private BufferedGraphics _bufGraphics;
         private SpritesContainer _spritesContainer;
         private TextureBrush _backgroundBrush;
         private int _cellSize;
-        private int _cellsCapacity = 1;
+        private int _cellsCapacity = 15;
 
-        public FormMain(WinFormController parController)
+        public FormPlay()
         {
             InitializeComponent();
 #if FPSMETER
@@ -36,10 +34,8 @@ namespace AlienFight.View
             _bufGraphicsContext.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
             _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
             _formGraphics = this.CreateGraphics();
-            _controller = parController;
             _spritesContainer = ResourceLoader.LoadSprites();
             _backgroundBrush = new TextureBrush(_spritesContainer.Background);
-            _cellsCapacity = 20;
             _cellSize = this.Width / _cellsCapacity;
         }
 
@@ -118,16 +114,6 @@ namespace AlienFight.View
         {
             Thread.Sleep((int)parData);
             GC.Collect();
-        }
-
-        private void FormMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            _controller.KeyDown(e);
-        }
-
-        private void FormMain_KeyUp(object sender, KeyEventArgs e)
-        {
-            _controller.KeyUp(e);
         }
 
 #if FPSMETER
