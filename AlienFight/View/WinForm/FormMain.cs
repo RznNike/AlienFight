@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace AlienFight.View
 {
-    public partial class FormPlay : Form, IViewable
+    public partial class FormMain : Form, IViewable
     {
 #if FPSMETER
         private int[ ] _counter;
@@ -23,7 +23,7 @@ namespace AlienFight.View
         private int _cellSize;
         private int _cellsCapacity = 15;
 
-        public FormPlay()
+        public FormMain()
         {
             InitializeComponent();
 #if FPSMETER
@@ -52,10 +52,10 @@ namespace AlienFight.View
             {
                 DrawGameObject(enemy, parLevel, cameraX, cameraY);
             }
-            DrawGameObject(parLevel.Player, parLevel, cameraX, cameraY);
-#if FPSMETER
-            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.White, 0, 0);
-#endif
+            if (parLevel.Player != null)
+            {
+                DrawGameObject(parLevel.Player, parLevel, cameraX, cameraY);
+            }
             ViewCanvas();
         }
 
@@ -93,6 +93,9 @@ namespace AlienFight.View
 
         private void ViewCanvas()
         {
+#if FPSMETER
+            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.White, 0, 0);
+#endif
             _bufGraphics.Render(_formGraphics);
 #if FPSMETER
             FormMain_Paint();

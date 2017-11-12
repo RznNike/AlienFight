@@ -10,7 +10,7 @@ namespace AlienFight.Controller
     {
         public WinFormController()
         {
-            View = new FormPlay();
+            View = new FormMain();
             ((Form)View).Show();
             ((Form)View).KeyDown += KeyDown;
             ((Form)View).KeyUp += KeyUp;
