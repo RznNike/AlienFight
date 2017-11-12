@@ -7,25 +7,24 @@ namespace AlienFight.Model
     [AttributeUsage(AttributeTargets.Field)]
     public class CustomAttribute : Attribute
     {
-        private string _value;
+        private object _value;
         
-		public CustomAttribute(string parValue)
+		public CustomAttribute(object parValue)
         {
             _value = parValue;
         }
         
-        public static string GetValue(Type parEnumType, string parValue)
+        public static object GetValue(Type parEnumType, string parEnumValue)
         {
-            IEnumerable<CustomAttributeData> attributes = parEnumType.GetField(parValue).CustomAttributes;
+            IEnumerable<CustomAttributeData> attributes = parEnumType.GetField(parEnumValue).CustomAttributes;
             IEnumerator<CustomAttributeData> attributesEnumerator = attributes.GetEnumerator();
             attributesEnumerator.MoveNext();
             IList<CustomAttributeTypedArgument> arguments = attributesEnumerator.Current.ConstructorArguments;
             IEnumerator<CustomAttributeTypedArgument> argumentsEnumerator = arguments.GetEnumerator();
             argumentsEnumerator.MoveNext();
             CustomAttributeTypedArgument argument = argumentsEnumerator.Current;
-            string path = (string)argument.Value;
 
-            return path;
+            return argument.Value;
         }
     }
 }

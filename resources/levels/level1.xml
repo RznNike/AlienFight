@@ -211,12 +211,15 @@
         </enemy>
     </enemies>
     <player>
+        <!-- X / Y = 72 / 97 = 0.74 -->
         <type>Green</type>
         <x>2</x>
         <y>2.05</y>
-        <sizeX>0.36</sizeX>
+        <sizeX>0.37</sizeX>
         <sizeY>0.5</sizeY>
-        <state>4</state>
+        <sizeYstandart>0.5</sizeYstandart>
+        <sizeYsmall>0.37</sizeYsmall>
+        <state>0</state>
         <flippedY>true</flippedY>
         <health>100</health>
         <healthMax>100</healthMax>

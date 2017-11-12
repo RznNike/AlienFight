@@ -42,11 +42,11 @@ namespace AlienFight.Controller
             {
                 Level.PlayerLogics.ReceiveCommand(PlayerCommand.Right, parBeginCommand);
             }
-            else if (e.KeyCode == Keys.Up)
+            else if ((e.KeyCode == Keys.Up) || (e.KeyCode == Keys.Space))
             {
                 Level.PlayerLogics.ReceiveCommand(PlayerCommand.Up, parBeginCommand);
             }
-            else if (e.KeyCode == Keys.Down)
+            else if ((e.KeyCode == Keys.Down) || (e.KeyCode == Keys.ControlKey))
             {
                 Level.PlayerLogics.ReceiveCommand(PlayerCommand.Down, parBeginCommand);
             }

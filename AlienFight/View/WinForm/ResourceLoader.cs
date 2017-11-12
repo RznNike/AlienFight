@@ -28,7 +28,7 @@ namespace AlienFight.View
             for (int i = min; i <= max; i++)
             {
                 string fieldName = parEnumType.GetFields()[i].Name;
-                string path = CustomAttribute.GetValue(parEnumType, fieldName);
+                string path = (string)CustomAttribute.GetValue(parEnumType, fieldName);
                 List<Image> list = LoadSpritesFromFolder(path);
                 sprites.Add(i, list);
                 sprites.Add(-i, FlipSprites(list));

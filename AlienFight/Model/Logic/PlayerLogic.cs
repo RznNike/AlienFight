@@ -9,14 +9,15 @@ namespace AlienFight.Model
     {
         private static readonly float EPSILON = 0.01f;
         private static readonly float G = 15.0f;
-        private static readonly float MAX_SPEED = 10.0f;
-        private static readonly float HORISONTAL_SPEED = MAX_SPEED / 2;
-        private static readonly float JUMP_SPEED = MAX_SPEED / 1.3f;
+        private static readonly float MAX_SPEED = 9.0f;
+        private static readonly float HORISONTAL_SPEED = MAX_SPEED / 3;
+        private static readonly float JUMP_SPEED = MAX_SPEED / 1.5f;
         private static readonly int MAX_JUMPS = 2;
         private static readonly float LOOKUP_DIST = 1.5f;
 
         public GameLevel Level { get; set; }
         public PlayerObject Player { get; set; }
+        private PlayerStateMachine _stateMachine;
         private HashSet<PlayerCommand> _activeCommands;
         private Thread _logicThread;
         private bool _stopThread;
@@ -25,6 +26,7 @@ namespace AlienFight.Model
         {
             Level = parLevel;
             Player = parLevel.Player;
+            _stateMachine = new PlayerStateMachine();
             _activeCommands = new HashSet<PlayerCommand>();
         }
 
@@ -105,6 +107,8 @@ namespace AlienFight.Model
                 speed = FindSpeed(speed, freeSpace, deltaSeconds, ref jumpsCount, ref jumpActive);
                 move = FindMove(speed, freeSpace, deltaSeconds);
                 MovePlayer(move);
+                FlipPayer(move);
+                _stateMachine.ChangeState(Player, freeSpace, move, deltaSeconds);
                 Thread.Sleep(5);
             }
         }
@@ -282,6 +286,14 @@ namespace AlienFight.Model
         {
             Player.X += parMove[0];
             Player.Y += parMove[1];
+        }
+
+        private void FlipPayer(float[ ] parMove)
+        {
+            if (Math.Abs(parMove[0]) > EPSILON)
+            {
+                Player.FlippedY = parMove[0] < 0;
+            }
         }
     }
 }

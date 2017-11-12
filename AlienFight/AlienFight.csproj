@@ -51,6 +51,9 @@
   <ItemGroup>
     <Compile Include="Controller\WinFormController.cs" />
     <Compile Include="Model\Logic\PlayerCommand.cs" />
+    <Compile Include="Model\StateMachines\PlayerStateType.cs" />
+    <Compile Include="Model\StateMachines\PlayerStateMachine.cs" />
+    <Compile Include="Model\StateMachines\StateMachine.cs" />
     <Compile Include="Model\Utility\CustomAttribute.cs" />
     <Compile Include="Model\Logic\EnemyLogic.cs" />
     <Compile Include="Controller\GameController.cs" />
