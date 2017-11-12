@@ -18,7 +18,7 @@ namespace AlienFight.Model
         public GameLevel Level { get; set; }
         public PlayerObject Player { get; set; }
         private PlayerStateMachine _stateMachine;
-        private HashSet<PlayerCommand> _activeCommands;
+        private List<PlayerCommand> _activeCommands;
         private Thread _logicThread;
         private bool _stopThread;
 
@@ -27,21 +27,16 @@ namespace AlienFight.Model
             Level = parLevel;
             Player = parLevel.Player;
             _stateMachine = new PlayerStateMachine();
-            _activeCommands = new HashSet<PlayerCommand>();
+            _activeCommands = new List<PlayerCommand>();
         }
 
         public void ReceiveCommand(PlayerCommand parCommand, bool parBeginCommand)
         {
             if (parBeginCommand)
             {
-                _activeCommands.Add(parCommand);
-                if (parCommand == PlayerCommand.Left)
+                if (!_activeCommands.Contains(parCommand))
                 {
-                    _activeCommands.Remove(PlayerCommand.Right);
-                }
-                else if (parCommand == PlayerCommand.Right)
-                {
-                    _activeCommands.Remove(PlayerCommand.Left);
+                    _activeCommands.Add(parCommand);
                 }
             }
             else
@@ -189,11 +184,13 @@ namespace AlienFight.Model
             float[ ] speed = new float[2] { 0, 0 };
 
             // Обработка движений по горизонтали
-            if (_activeCommands.Contains(PlayerCommand.Left) && (parFreeSpace[0] > EPSILON))
+            int leftCommandPosition = _activeCommands.FindIndex(element => element == PlayerCommand.Left);
+            int rightCommandPosition = _activeCommands.FindIndex(element => element == PlayerCommand.Right);
+            if ((leftCommandPosition >= 0) && (leftCommandPosition >rightCommandPosition) && (parFreeSpace[0] > EPSILON))
             {
                 speed[0] = -HORISONTAL_SPEED;
             }
-            else if (_activeCommands.Contains(PlayerCommand.Right) && (parFreeSpace[2] > EPSILON))
+            else if ((rightCommandPosition >= 0) && (rightCommandPosition > leftCommandPosition) && (parFreeSpace[2] > EPSILON))
             {
                 speed[0] = HORISONTAL_SPEED;
             }
