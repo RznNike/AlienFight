@@ -198,11 +198,64 @@
     </levelObjects>
     <enemies>
         <enemy>
+            <!-- X / Y = 70 / 35 = 2 -->
             <type>Spikes</type>
             <x>4</x>
             <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
+            <sizeX>0.5</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+            <leftWalkingBound>0</leftWalkingBound>
+            <rightWalkingBound>0</rightWalkingBound>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 70 / 35 = 2 -->
+            <type>Spikes</type>
+            <x>4.5</x>
+            <y>1</y>
+            <sizeX>0.5</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+            <leftWalkingBound>0</leftWalkingBound>
+            <rightWalkingBound>0</rightWalkingBound>
+        </enemy>
+        <!-- X / Y = 57 / 34 = 1.68 -->
+        <enemy>
+            <type>Slime</type>
+            <x>3</x>
+            <y>2.05</y>
+            <sizeX>0.35</sizeX>
+            <sizeY>0.21</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+            <leftWalkingBound>0</leftWalkingBound>
+            <rightWalkingBound>0</rightWalkingBound>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 88 / 44 = 2 -->
+            <type>Bat</type>
+            <x>3</x>
+            <y>3</y>
+            <sizeX>0.5</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+            <leftWalkingBound>0</leftWalkingBound>
+            <rightWalkingBound>0</rightWalkingBound>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 53 / 75 = 0.71 -->
+            <type>Ghost</type>
+            <x>5</x>
+            <y>2.05</y>
+            <sizeX>0.35</sizeX>
+            <sizeY>0.5</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
