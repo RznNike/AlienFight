@@ -210,9 +210,15 @@ namespace AlienFight.Model
             }
 
             // Сброс счетчика прыжков, если игрок на земле
-                if (parFreeSpace[3] < EPSILON)
+            if (parFreeSpace[3] < EPSILON)
             {
                 refJumpsCount = 0;
+            }
+
+            // Счетчик прыжков >= 1, если игрок в воздухе
+            if ((parFreeSpace[3] > EPSILON) & (refJumpsCount == 0))
+            {
+                refJumpsCount = 1;
             }
 
             // Обработка попытки прыжка
