@@ -6,7 +6,7 @@ namespace AlienFight.Model
     public class BatLogic : BaseLogic<BatStateMachine, BatStateType>
     {
         private static readonly float MOVE_SPEED = MAX_SPEED / 10;
-        protected static readonly int THREAD_SLEEP_MS = 15;
+        private static readonly int THREAD_SLEEP_MS = 15;
 
         public EnemyObject Enemy { get { return (EnemyObject)Object; } set { Object = value; } }
 

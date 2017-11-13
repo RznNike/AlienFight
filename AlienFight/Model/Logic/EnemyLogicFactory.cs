@@ -14,6 +14,7 @@
                     logic = new BatLogic(parLevel, parObject);
                     break;
                 case EnemyObjectType.Ghost:
+                    logic = new GhostLogic(parLevel, parObject);
                     break;
             }
             return logic;

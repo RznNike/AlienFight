@@ -89,7 +89,7 @@ namespace AlienFight.Model
             return freeSpace;
         }
 
-        private bool IsIntersected(float parMin1, float parMax1, float parMin2, float parMax2)
+        protected bool IsIntersected(float parMin1, float parMax1, float parMin2, float parMax2)
         {
             return ((parMax2 >= parMin1) && (parMax2 <= parMax1))
                 || ((parMax2 > parMax1) && (parMin2 <= parMax1));

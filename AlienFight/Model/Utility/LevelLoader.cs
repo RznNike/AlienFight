@@ -144,6 +144,10 @@ namespace AlienFight.Model
             player.SizeX = xmlReader.ReadElementContentAsFloat();
             xmlReader.ReadToNextSibling("sizeY");
             player.SizeY = xmlReader.ReadElementContentAsFloat();
+            xmlReader.ReadToNextSibling("sizeYstandart");
+            player.SizeYstandart = xmlReader.ReadElementContentAsFloat();
+            xmlReader.ReadToNextSibling("sizeYsmall");
+            player.SizeYsmall = xmlReader.ReadElementContentAsFloat();
             xmlReader.ReadToNextSibling("state");
             player.State = xmlReader.ReadElementContentAsInt();
             xmlReader.ReadToNextSibling("flippedY");

@@ -72,6 +72,14 @@ namespace AlienFight.Model
         {
             float[ ] speed = new float[2] { 0, 0 };
 
+            // Обработка приседания
+            if ((parFreeSpace[3] < EPSILON) && _activeCommands.Contains(PlayerCommand.Down))
+            {
+                Player.SizeY = Player.SizeYsmall;
+                return speed;
+            }
+            Player.SizeY = Player.SizeYstandart;
+
             // Обработка движений по горизонтали
             int leftCommandPosition = _activeCommands.FindIndex(element => element == PlayerCommand.Left);
             int rightCommandPosition = _activeCommands.FindIndex(element => element == PlayerCommand.Right);

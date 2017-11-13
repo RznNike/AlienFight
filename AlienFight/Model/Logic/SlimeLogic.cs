@@ -6,7 +6,7 @@ namespace AlienFight.Model
     public class SlimeLogic : BaseLogic<SlimeStateMachine, SlimeStateType>
     {
         private static readonly float HORISONTAL_SPEED = MAX_SPEED / 20;
-        protected static readonly int THREAD_SLEEP_MS = 25;
+        private static readonly int THREAD_SLEEP_MS = 25;
 
         public EnemyObject Enemy { get { return (EnemyObject)Object; } set { Object = value; } }
 
