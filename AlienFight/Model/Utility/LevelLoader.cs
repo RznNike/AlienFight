@@ -19,10 +19,13 @@ namespace AlienFight.Model
             level.Enemies = ParseEnemies(xmlReader);
             level.Player = ParsePlayer(xmlReader);
             level.PlayerLogics = new PlayerLogic(level);
-            level.EnemyLogics = new List<EnemyLogic>();
-            foreach (EnemyObject enemy in level.Enemies)
+            level.EnemyLogics = new List<ILogic>();
+            foreach (EnemyObject elEnemy in level.Enemies)
             {
-                level.EnemyLogics.Add(new EnemyLogic(level, enemy));
+                if (elEnemy.Type != EnemyObjectType.Spikes)
+                {
+                    level.EnemyLogics.Add(EnemyLogicFactory.CreateLogic(level, elEnemy));
+                }
             }
 
             fileStream.Close();
@@ -100,11 +103,25 @@ namespace AlienFight.Model
                 enemy.FlippedY = xmlReader.ReadElementContentAsBoolean();
                 xmlReader.ReadToNextSibling("isMoving");
                 enemy.IsMoving = xmlReader.ReadElementContentAsBoolean();
-                xmlReader.ReadToNextSibling("leftWalkingBound");
-                enemy.LeftWalkingBound = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("rightWalkingBound");
-                enemy.RightWalkingBound = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadEndElement();
+                if (xmlReader.ReadToNextSibling("leftWalkingBoundX"))
+                {
+                    enemy.LeftWalkingBoundX = xmlReader.ReadElementContentAsFloat();
+                    xmlReader.ReadToNextSibling("leftWalkingBoundY");
+                    enemy.LeftWalkingBoundY = xmlReader.ReadElementContentAsFloat();
+                    xmlReader.ReadToNextSibling("rightWalkingBoundX");
+                    enemy.RightWalkingBoundX = xmlReader.ReadElementContentAsFloat();
+                    xmlReader.ReadToNextSibling("rightWalkingBoundY");
+                    enemy.RightWalkingBoundY = xmlReader.ReadElementContentAsFloat();
+                    xmlReader.ReadEndElement();
+                }
+                else
+                {
+                    enemy.LeftWalkingBoundX = 0;
+                    enemy.LeftWalkingBoundY = 0;
+                    enemy.RightWalkingBoundX = 0;
+                    enemy.RightWalkingBoundY = 0;
+                    xmlReader.ReadEndElement();
+                }
 
                 enemies.Add(enemy);
             }

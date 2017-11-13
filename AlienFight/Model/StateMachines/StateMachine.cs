@@ -8,6 +8,8 @@ namespace AlienFight.Model
 {
     public abstract class StateMachine<MachineStatesEnum>
     {
+        protected static readonly float EPSILON = 0.01f;
+
         protected MachineStatesEnum _machineState;
         protected Dictionary<MachineStatesEnum, List<int>> _objectStates;
         protected float _timeInState;

@@ -4,7 +4,6 @@ namespace AlienFight.Model
 {
     public class PlayerStateMachine : StateMachine<PlayerStateType>
     {
-        private static readonly float EPSILON = 0.01f;
         private static readonly float SUBSTATE_PERIOD = 0.05f;
         private static readonly int HURT_PERIOD_MULT = 10;
 
@@ -17,7 +16,7 @@ namespace AlienFight.Model
         public override void ChangeState(GameObject parPlayer, float[ ] parFreeSpace, float[ ] parMove, float parDeltaSeconds)
         {
             _timeInState += parDeltaSeconds;
-            PlayerStateType possibleState = FindPossibleState((PlayerObject)parPlayer, parFreeSpace, parMove, parDeltaSeconds);
+            PlayerStateType possibleState = FindPossibleState((PlayerObject)parPlayer, parFreeSpace, parMove);
             if (_machineState == possibleState)
             {
                 ProcessInSameState(parPlayer);
@@ -28,7 +27,7 @@ namespace AlienFight.Model
             }
         }
 
-        private PlayerStateType FindPossibleState(PlayerObject parPlayer, float[ ] parFreeSpace, float[ ] parMove, float parDeltaSeconds)
+        private PlayerStateType FindPossibleState(PlayerObject parPlayer, float[ ] parFreeSpace, float[ ] parMove)
         {
             if (parFreeSpace[3] > EPSILON)
             {

@@ -22,6 +22,7 @@ namespace AlienFight.View
         private TextureBrush _backgroundBrush;
         private int _cellSize;
         private int _cellsCapacity = 15;
+        private float _drawingCorrection = 0;
 
         public FormMain()
         {
@@ -37,6 +38,7 @@ namespace AlienFight.View
             _spritesContainer = ResourceLoader.LoadSprites();
             _backgroundBrush = new TextureBrush(_spritesContainer.Background);
             _cellSize = this.Width / _cellsCapacity;
+            _drawingCorrection = _cellSize / 150f;
         }
 
         public void ViewLevel(GameLevel parLevel)
@@ -71,10 +73,10 @@ namespace AlienFight.View
                 Image sprite = _spritesContainer.GetSprite(parObject, parObject.FlippedY);
                 _bufGraphics.Graphics.DrawImage(
                     sprite,
-                    parObject.X * _cellSize - parCameraX * _cellSize - 0.5f,
-                    this.Height - (parObject.Y * _cellSize + parObject.SizeY * _cellSize - parCameraY * _cellSize) - 0.5f,
-                    parObject.SizeX * _cellSize + 1,
-                    parObject.SizeY * _cellSize + 1);
+                    parObject.X * _cellSize - parCameraX * _cellSize - _drawingCorrection,
+                    this.Height - (parObject.Y * _cellSize + parObject.SizeY * _cellSize - parCameraY * _cellSize) - _drawingCorrection,
+                    parObject.SizeX * _cellSize + _drawingCorrection * 2,
+                    parObject.SizeY * _cellSize + _drawingCorrection * 2);
             }
         }
 
@@ -135,7 +137,7 @@ namespace AlienFight.View
 #endif
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
+        {   
             Environment.Exit(0);
         }
     }

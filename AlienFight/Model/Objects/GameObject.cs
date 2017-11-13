@@ -1,6 +1,6 @@
 ﻿namespace AlienFight.Model
 {
-    public class GameObject
+    public abstract class GameObject
     {
         public float X { get; set; }
         public float Y { get; set; }

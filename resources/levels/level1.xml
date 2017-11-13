@@ -81,6 +81,15 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
+        <object>
+            <type>Stone</type>
+            <x>1</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
 
         <!-- левая стена -->
         <object>
@@ -119,12 +128,39 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
+        <object>
+            <type>Stone</type>
+            <x>0</x>
+            <y>5</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>0</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>0</x>
+            <y>7</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
 
         <!-- пол -->
         <object>
             <type>Stone</type>
             <x>1</x>
-            <y>1</y>
+            <y>2</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>3</state>
@@ -195,6 +231,33 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
+        <object>
+            <type>Stone</type>
+            <x>6</x>
+            <y>5</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>6</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>6</x>
+            <y>7</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
     </levelObjects>
     <enemies>
         <enemy>
@@ -207,8 +270,6 @@
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBound>0</leftWalkingBound>
-            <rightWalkingBound>0</rightWalkingBound>
         </enemy>
         <enemy>
             <!-- X / Y = 70 / 35 = 2 -->
@@ -220,8 +281,6 @@
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBound>0</leftWalkingBound>
-            <rightWalkingBound>0</rightWalkingBound>
         </enemy>
         <!-- X / Y = 57 / 34 = 1.68 -->
         <enemy>
@@ -233,8 +292,10 @@
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBound>0</leftWalkingBound>
-            <rightWalkingBound>0</rightWalkingBound>
+            <leftWalkingBoundX>2</leftWalkingBoundX>
+            <leftWalkingBoundY>0</leftWalkingBoundY>
+            <rightWalkingBoundX>3.5</rightWalkingBoundX>
+            <rightWalkingBoundY>0</rightWalkingBoundY>
         </enemy>
         <enemy>
             <!-- X / Y = 88 / 44 = 2 -->
@@ -246,34 +307,38 @@
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBound>0</leftWalkingBound>
-            <rightWalkingBound>0</rightWalkingBound>
+            <leftWalkingBoundX>0</leftWalkingBoundX>
+            <leftWalkingBoundY>0</leftWalkingBoundY>
+            <rightWalkingBoundX>0</rightWalkingBoundX>
+            <rightWalkingBoundY>0</rightWalkingBoundY>
         </enemy>
         <enemy>
             <!-- X / Y = 53 / 75 = 0.71 -->
             <type>Ghost</type>
             <x>5</x>
-            <y>2.05</y>
+            <y>6</y>
             <sizeX>0.35</sizeX>
             <sizeY>0.5</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBound>0</leftWalkingBound>
-            <rightWalkingBound>0</rightWalkingBound>
+            <leftWalkingBoundX>0</leftWalkingBoundX>
+            <leftWalkingBoundY>0</leftWalkingBoundY>
+            <rightWalkingBoundX>0</rightWalkingBoundX>
+            <rightWalkingBoundY>0</rightWalkingBoundY>
         </enemy>
     </enemies>
     <player>
         <!-- X / Y = 72 / 97 = 0.74 -->
         <type>Green</type>
-        <x>2</x>
+        <x>1.5</x>
         <y>2.05</y>
         <sizeX>0.37</sizeX>
         <sizeY>0.5</sizeY>
         <sizeYstandart>0.5</sizeYstandart>
         <sizeYsmall>0.37</sizeYsmall>
         <state>0</state>
-        <flippedY>true</flippedY>
+        <flippedY>false</flippedY>
         <health>100</health>
         <healthMax>100</healthMax>
         <energyMax>100</energyMax>

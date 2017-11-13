@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using AlienFight.Model;
+﻿using AlienFight.Model;
 using AlienFight.View;
 
 namespace AlienFight.Controller
@@ -19,7 +17,13 @@ namespace AlienFight.Controller
         {
             Level = LevelLoader.Load(parLevelID);
             Level.PlayerLogics.Start();
-            // для логик игрока и врагов запустить обработку в отд. потоках
+            foreach (ILogic elLogic in Level.EnemyLogics)
+            {
+                if (elLogic != null)
+                {
+                    elLogic.Start();
+                }
+            }
         }
 
         protected void EndLevel(bool parWin, bool parExit)
