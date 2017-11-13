@@ -53,8 +53,11 @@
     <Compile Include="Model\Logic\EnemyLogicFactory.cs" />
     <Compile Include="Model\Logic\ILogic.cs" />
     <Compile Include="Model\Logic\BaseLogic.cs" />
+    <Compile Include="Model\Logic\BatLogic.cs" />
     <Compile Include="Model\Logic\SlimeLogic.cs" />
     <Compile Include="Model\Logic\PlayerCommand.cs" />
+    <Compile Include="Model\StateMachines\BatStateType.cs" />
+    <Compile Include="Model\StateMachines\BatStateMachine.cs" />
     <Compile Include="Model\StateMachines\SlimeStateType.cs" />
     <Compile Include="Model\StateMachines\SlimeStateMachine.cs" />
     <Compile Include="Model\StateMachines\PlayerStateType.cs" />

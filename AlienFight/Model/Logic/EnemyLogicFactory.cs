@@ -11,6 +11,7 @@
                     logic = new SlimeLogic(parLevel, parObject);
                     break;
                 case EnemyObjectType.Bat:
+                    logic = new BatLogic(parLevel, parObject);
                     break;
                 case EnemyObjectType.Ghost:
                     break;

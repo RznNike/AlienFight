@@ -193,6 +193,69 @@
             <state>3</state>
             <flippedY>false</flippedY>
         </object>
+        <object>
+            <type>Stone</type>
+            <x>7</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>8</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>9</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>10</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>11</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>12</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>13</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
 
         <!-- правая стена -->
         <object>
@@ -204,15 +267,7 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        <object>
-            <type>Stone</type>
-            <x>6</x>
-            <y>2</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
+
         <object>
             <type>Stone</type>
             <x>6</x>
@@ -300,17 +355,17 @@
         <enemy>
             <!-- X / Y = 88 / 44 = 2 -->
             <type>Bat</type>
-            <x>3</x>
-            <y>3</y>
+            <x>3.5</x>
+            <y>4</y>
             <sizeX>0.5</sizeX>
             <sizeY>0.25</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBoundX>0</leftWalkingBoundX>
-            <leftWalkingBoundY>0</leftWalkingBoundY>
-            <rightWalkingBoundX>0</rightWalkingBoundX>
-            <rightWalkingBoundY>0</rightWalkingBoundY>
+            <leftWalkingBoundX>3.5</leftWalkingBoundX>
+            <leftWalkingBoundY>4</leftWalkingBoundY>
+            <rightWalkingBoundX>5</rightWalkingBoundX>
+            <rightWalkingBoundY>5</rightWalkingBoundY>
         </enemy>
         <enemy>
             <!-- X / Y = 53 / 75 = 0.71 -->
@@ -330,7 +385,7 @@
     </enemies>
     <player>
         <!-- X / Y = 72 / 97 = 0.74 -->
-        <type>Green</type>
+        <type>Pink</type>
         <x>1.5</x>
         <y>2.05</y>
         <sizeX>0.37</sizeX>
