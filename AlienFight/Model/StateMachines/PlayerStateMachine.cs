@@ -81,6 +81,10 @@ namespace AlienFight.Model
                 _machineState = parState;
                 parPlayer.State = _objectStates[parState][0];
             }
+            else
+            {
+                parPlayer.State = _objectStates[PlayerStateType.Hurt][0];
+            }
         }
     }
 }

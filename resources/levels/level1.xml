@@ -392,6 +392,7 @@
         <enemy>
             <!-- X / Y = 70 / 35 = 2 -->
             <type>Spikes</type>
+            <damage>34</damage>
             <x>4</x>
             <y>1</y>
             <sizeX>0.5</sizeX>
@@ -403,6 +404,7 @@
         <enemy>
             <!-- X / Y = 70 / 35 = 2 -->
             <type>Spikes</type>
+            <damage>34</damage>
             <x>4.5</x>
             <y>1</y>
             <sizeX>0.5</sizeX>
@@ -414,6 +416,7 @@
         <!-- X / Y = 57 / 34 = 1.68 -->
         <enemy>
             <type>Slime</type>
+            <damage>20</damage>
             <x>3</x>
             <y>2.05</y>
             <sizeX>0.35</sizeX>
@@ -429,6 +432,7 @@
         <enemy>
             <!-- X / Y = 88 / 44 = 2 -->
             <type>Bat</type>
+            <damage>10</damage>
             <x>3.5</x>
             <y>4</y>
             <sizeX>0.5</sizeX>
@@ -444,6 +448,7 @@
         <enemy>
             <!-- X / Y = 53 / 75 = 0.71 -->
             <type>Ghost</type>
+            <damage>50</damage>
             <x>5</x>
             <y>6</y>
             <sizeX>0.35</sizeX>

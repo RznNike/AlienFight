@@ -9,7 +9,8 @@ namespace AlienFight.Model
         private static readonly float HORISONTAL_SPEED = MAX_SPEED / 3;
         private static readonly float JUMP_SPEED = MAX_SPEED / 1.5f;
         private static readonly int MAX_JUMPS = 2;
-        protected static readonly int THREAD_SLEEP_MS = 5;
+        private static readonly float HURT_COOLDOWN_TIME = 1f;
+        private static readonly int THREAD_SLEEP_MS = 5;
 
         public PlayerObject Player { get { return (PlayerObject)Object; } set { Object = value; } }
         private List<PlayerCommand> _activeCommands;
@@ -47,6 +48,7 @@ namespace AlienFight.Model
             bool jumpActive = false;
 
             DateTime timer = DateTime.UtcNow;
+            float hurtCooldown = 0;
 
             while (!_stopThread)
             {
@@ -54,7 +56,7 @@ namespace AlienFight.Model
                 DateTime newTimer = DateTime.UtcNow;
                 float deltaSeconds = (float)(newTimer - timer).TotalSeconds;
                 timer = newTimer;
-                speed = FindSpeed(speed, freeSpace, deltaSeconds, ref jumpsCount, ref jumpActive);
+                speed = FindSpeed(speed, freeSpace, deltaSeconds, ref jumpsCount, ref jumpActive, ref hurtCooldown);
                 move = FindMove(speed, freeSpace, deltaSeconds);
                 MoveObject(move);
                 FlipObject(move);
@@ -68,7 +70,8 @@ namespace AlienFight.Model
             float[ ] parFreeSpace,
             float parDeltaSeconds,
             ref int refJumpsCount,
-            ref bool refJumpActive)
+            ref bool refJumpActive,
+            ref float hurtCooldown)
         {
             float[ ] speed = new float[2] { 0, 0 };
 
@@ -107,6 +110,20 @@ namespace AlienFight.Model
                 speed[1] = 0;
             }
 
+            // Обработка получения урона
+            if (hurtCooldown > EPSILON)
+            {
+                hurtCooldown -= parDeltaSeconds;
+            }
+            else
+            {
+                if (IsEnemyAttacked())
+                {
+                    speed[1] = JUMP_SPEED / 1.5f;
+                    hurtCooldown = HURT_COOLDOWN_TIME;
+                }
+            }
+
             // Сброс счетчика прыжков, если игрок на земле
             if (parFreeSpace[3] < EPSILON)
             {
@@ -135,6 +152,21 @@ namespace AlienFight.Model
             }
 
             return speed;
+        }
+
+        private bool IsEnemyAttacked()
+        {
+            foreach (EnemyObject elEnemy in Level.Enemies)
+            {
+                if (IsIntersected(Player.X, Player.X + Player.SizeX, elEnemy.X, elEnemy.X + elEnemy.SizeX)
+                    && IsIntersected(Player.Y, Player.Y + Player.SizeY, elEnemy.Y, elEnemy.Y + elEnemy.SizeY))
+                {
+                    Player.Health -= elEnemy.Damage;
+                    _stateMachine.SetState(PlayerStateType.Hurt);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

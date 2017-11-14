@@ -89,6 +89,8 @@ namespace AlienFight.Model
                 EnemyObject enemy = new EnemyObject();
                 xmlReader.ReadToDescendant("type");
                 enemy.Type = (EnemyObjectType)Enum.Parse(typeof(EnemyObjectType), xmlReader.ReadElementContentAsString());
+                xmlReader.ReadToNextSibling("damage");
+                enemy.Damage = xmlReader.ReadElementContentAsInt();
                 xmlReader.ReadToNextSibling("x");
                 enemy.X = xmlReader.ReadElementContentAsFloat();
                 xmlReader.ReadToNextSibling("y");

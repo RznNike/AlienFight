@@ -59,7 +59,7 @@ namespace AlienFight.View
             {
                 DrawGameObject(parLevel.Player, parLevel, cameraX, cameraY);
             }
-            ViewCanvas();
+            ViewCanvas(parLevel);
         }
 
         private void DrawBackground()
@@ -94,10 +94,10 @@ namespace AlienFight.View
                     || ((parObject.Y + parObject.SizeY) > downBound));
         }
 
-        private void ViewCanvas()
+        private void ViewCanvas(GameModel parLevel)
         {
 #if FPSMETER
-            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.White, 0, 0);
+            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}, HP: {parLevel.Player.Health}", this.Font, Brushes.White, 0, 0);
 #endif
             _bufGraphics.Render(_formGraphics);
 #if FPSMETER

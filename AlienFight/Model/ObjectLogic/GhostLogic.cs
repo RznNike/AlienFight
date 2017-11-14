@@ -7,8 +7,8 @@ namespace AlienFight.Model
     public class GhostLogic : BaseObjectLogic<GhostStateMachine, GhostStateType>
     {
         private static readonly float HORISONTAL_SPEED = MAX_SPEED / 5;
-        private static readonly int THREAD_SLEEP_MS = 10;
         private static readonly float ATTACK_COOLDOWN_TIME = 1f;
+        private static readonly int THREAD_SLEEP_MS = 10;
 
         public EnemyObject Enemy { get { return (EnemyObject)Object; } set { Object = value; } }
 
