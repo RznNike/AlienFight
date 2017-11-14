@@ -3,14 +3,14 @@ using System.Threading;
 
 namespace AlienFight.Model
 {
-    public class BatLogic : BaseLogic<BatStateMachine, BatStateType>
+    public class SlimeLogic : BaseObjectLogic<SlimeStateMachine, SlimeStateType>
     {
-        private static readonly float MOVE_SPEED = MAX_SPEED / 10;
-        private static readonly int THREAD_SLEEP_MS = 15;
+        private static readonly float HORISONTAL_SPEED = MAX_SPEED / 20;
+        private static readonly int THREAD_SLEEP_MS = 25;
 
         public EnemyObject Enemy { get { return (EnemyObject)Object; } set { Object = value; } }
 
-        public BatLogic(GameLevel parLevel, EnemyObject parEnemy) : base(parLevel)
+        public SlimeLogic(GameModel parLevel, EnemyObject parEnemy) : base(parLevel)
         {
             Enemy = parEnemy;
         }
@@ -23,7 +23,6 @@ namespace AlienFight.Model
             float[ ] speed = new float[2] { 0, 0 };
             float[ ] move = new float[2] { 0, 0 };
             float targetX = Enemy.LeftWalkingBoundX;
-            float targetY = Enemy.LeftWalkingBoundY;
 
             DateTime timer = DateTime.UtcNow;
 
@@ -33,7 +32,7 @@ namespace AlienFight.Model
                 DateTime newTimer = DateTime.UtcNow;
                 float deltaSeconds = (float)(newTimer - timer).TotalSeconds;
                 timer = newTimer;
-                speed = FindSpeed(speed, freeSpace, deltaSeconds, ref targetX, ref targetY);
+                speed = FindSpeed(speed, freeSpace, deltaSeconds, ref targetX);
                 move = FindMove(speed, freeSpace, deltaSeconds);
                 MoveObject(move);
                 FlipObject(move);
@@ -46,64 +45,57 @@ namespace AlienFight.Model
             float[ ] parSpeed,
             float[ ] parFreeSpace,
             float parDeltaSeconds,
-            ref float refTargetX,
-            ref float refTargetY)
+            ref float refTargetX)
         {
             float[ ] speed = new float[2] { 0, 0 };
-
-            float dX = Math.Abs(Enemy.X - refTargetX);
-            float dY = Math.Abs(Enemy.Y - refTargetY);
-            float speedMultiplier;
-            float path = (float)Math.Sqrt(dX * dX + dY * dY);
-            if (path > MOVE_SPEED * parDeltaSeconds)
+            
+            // Обработка движений по горизонтали
+            if (Math.Abs(Enemy.X - refTargetX) < EPSILON)
             {
-                speedMultiplier = MOVE_SPEED / path;
-            }
-            else
-            {
-                speedMultiplier = EPSILON * 2 / path;
-            }
-
-            // Обработка движений
-            if ((dX < EPSILON) && (dY < EPSILON))
-            {
-                if ((Math.Abs(Enemy.LeftWalkingBoundX - refTargetX) < EPSILON) && (Math.Abs(Enemy.LeftWalkingBoundY - refTargetY) < EPSILON))
+                if (Math.Abs(Enemy.LeftWalkingBoundX - refTargetX) < EPSILON)
                 {
                     refTargetX = Enemy.RightWalkingBoundX;
-                    refTargetY = Enemy.RightWalkingBoundY;
                 }
                 else
                 {
                     refTargetX = Enemy.LeftWalkingBoundX;
-                    refTargetY = Enemy.LeftWalkingBoundY;
                 }
             }
-
-            // Нахождение скорости
-            if (dX > EPSILON)
+            else
             {
-                if (Enemy.X < refTargetX)
+                if ((parFreeSpace[0] < EPSILON) && (Math.Abs(Enemy.LeftWalkingBoundX - refTargetX) < EPSILON))
                 {
-                    speed[0] = dX * speedMultiplier;
+                    refTargetX = Enemy.RightWalkingBoundX;
                 }
-                else
+                else if((parFreeSpace[2] < EPSILON) && (Math.Abs(Enemy.RightWalkingBoundX - refTargetX) < EPSILON))
                 {
-                    speed[0] = -dX * speedMultiplier;
+                    refTargetX = Enemy.LeftWalkingBoundX;
                 }
             }
-
-            if (dY > EPSILON)
+            
+            if (Enemy.X < refTargetX)
             {
-                if (Enemy.Y < refTargetY)
+                speed[0] = HORISONTAL_SPEED;
+            }
+            else
+            {
+                speed[0] = -HORISONTAL_SPEED;
+            }
+            
+            // Обработка движений по вертикали
+            if (((parSpeed[1] > EPSILON) && (parFreeSpace[1] > EPSILON))
+                || (parFreeSpace[3] > EPSILON))
+            {
+                speed[1] = parSpeed[1] - G * parDeltaSeconds;
+                if (speed[1] < -MAX_SPEED)
                 {
-                    speed[1] = dY * speedMultiplier;
-                }
-                else
-                {
-                    speed[1] = -dY * speedMultiplier;
+                    speed[1] = -MAX_SPEED;
                 }
             }
-
+            if ((parSpeed[1] > EPSILON) && (parFreeSpace[1] < EPSILON))
+            {
+                speed[1] = 0;
+            }
             return speed;
         }
     }

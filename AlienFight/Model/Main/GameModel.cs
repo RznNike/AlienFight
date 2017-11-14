@@ -2,12 +2,13 @@
 
 namespace AlienFight.Model
 {
-    public class GameLevel
+    public class GameModel
     {
-        public int LevelID { get; set; }
-        public List<LevelObject> LevelObjects { get; set; }
+        public int ModelID { get; set; }
+        public List<LevelObject> ModelObjects { get; set; }
         public List<EnemyObject> Enemies { get; set; }
         public PlayerObject Player { get; set; }
+        public List<UIObject> MenuItems { get; set; }
         public List<ILogic> EnemyLogics { get; set; }
         public PlayerLogic PlayerLogics { get; set; }
         public int SizeX { get; set; }

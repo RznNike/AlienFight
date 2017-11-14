@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace AlienFight.Model
 {
-    public class PlayerLogic : BaseLogic<PlayerStateMachine, PlayerStateType>
+    public class PlayerLogic : BaseObjectLogic<PlayerStateMachine, PlayerStateType>
     {
         private static readonly float HORISONTAL_SPEED = MAX_SPEED / 3;
         private static readonly float JUMP_SPEED = MAX_SPEED / 1.5f;
@@ -14,7 +14,7 @@ namespace AlienFight.Model
         public PlayerObject Player { get { return (PlayerObject)Object; } set { Object = value; } }
         private List<PlayerCommand> _activeCommands;
 
-        public PlayerLogic(GameLevel parLevel) : base(parLevel)
+        public PlayerLogic(GameModel parLevel) : base(parLevel)
         {
             Player = parLevel.Player;
             _activeCommands = new List<PlayerCommand>();

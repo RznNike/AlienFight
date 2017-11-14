@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace AlienFight.Model
 {
-    public class GhostLogic : BaseLogic<GhostStateMachine, GhostStateType>
+    public class GhostLogic : BaseObjectLogic<GhostStateMachine, GhostStateType>
     {
         private static readonly float HORISONTAL_SPEED = MAX_SPEED / 5;
         private static readonly int THREAD_SLEEP_MS = 10;
@@ -12,7 +12,7 @@ namespace AlienFight.Model
 
         public EnemyObject Enemy { get { return (EnemyObject)Object; } set { Object = value; } }
 
-        public GhostLogic(GameLevel parLevel, EnemyObject parEnemy) : base(parLevel)
+        public GhostLogic(GameModel parLevel, EnemyObject parEnemy) : base(parLevel)
         {
             Enemy = parEnemy;
         }
@@ -87,7 +87,7 @@ namespace AlienFight.Model
             float upBound = Enemy.Y + Enemy.SizeY;
             if (IsIntersected(downBound, upBound, Level.Player.Y, Level.Player.Y + Level.Player.SizeY))
             {
-                int barriersCount = (from elObject in Level.LevelObjects
+                int barriersCount = (from elObject in Level.ModelObjects
                                      where IsIntersected(downBound, upBound, elObject.Y, elObject.Y + elObject.SizeY)
                                            && IsBetween(elObject.X, Enemy.X, Level.Player.X)
                                      select elObject).Count();

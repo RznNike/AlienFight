@@ -7,15 +7,15 @@ namespace AlienFight.Model
 {
     public class LevelLoader
     {
-        public static GameLevel Load(int parLevelID)
+        public static GameModel Load(int parLevelID)
         {
             string path = $"resources/levels/level{parLevelID}.xml";
-            GameLevel level = new GameLevel();
+            GameModel level = new GameModel();
             Stream fileStream = File.OpenRead(path);
             XmlReader xmlReader = XmlReader.Create(fileStream);
 
             ParseLevelProperties(level, xmlReader);
-            level.LevelObjects = ParseLevelObjects(xmlReader);
+            level.ModelObjects = ParseLevelObjects(xmlReader);
             level.Enemies = ParseEnemies(xmlReader);
             level.Player = ParsePlayer(xmlReader);
             level.PlayerLogics = new PlayerLogic(level);
@@ -34,11 +34,11 @@ namespace AlienFight.Model
             return level;
         }
 
-        private static void ParseLevelProperties(GameLevel level, XmlReader xmlReader)
+        private static void ParseLevelProperties(GameModel level, XmlReader xmlReader)
         {
             xmlReader.ReadToFollowing("settings");
             xmlReader.ReadToDescendant("levelID");
-            level.LevelID = xmlReader.ReadElementContentAsInt();
+            level.ModelID = xmlReader.ReadElementContentAsInt();
             xmlReader.ReadToNextSibling("sizeX");
             level.SizeX = xmlReader.ReadElementContentAsInt();
             xmlReader.ReadToNextSibling("sizeY");

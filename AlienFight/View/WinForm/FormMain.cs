@@ -39,14 +39,15 @@ namespace AlienFight.View
             _backgroundBrush = new TextureBrush(_spritesContainer.Background);
             _cellSize = this.Width / _cellsCapacity;
             _drawingCorrection = _cellSize / 150f;
+            Cursor.Hide();
         }
 
-        public void ViewLevel(GameLevel parLevel)
+        public void ViewModel(GameModel parLevel)
         {
             DrawBackground();
             float cameraX = parLevel.CameraX;
             float cameraY = parLevel.CameraY;
-            foreach (GameObject levelElement in parLevel.LevelObjects)
+            foreach (GameObject levelElement in parLevel.ModelObjects)
             {
                 DrawGameObject(levelElement, parLevel, cameraX, cameraY);
             }
@@ -66,7 +67,7 @@ namespace AlienFight.View
             _bufGraphics.Graphics.FillRectangle(_backgroundBrush, 0, 0, this.Width, this.Height);
         }
 
-        private void DrawGameObject(GameObject parObject, GameLevel parLevel, float parCameraX, float parCameraY)
+        private void DrawGameObject(GameObject parObject, GameModel parLevel, float parCameraX, float parCameraY)
         {
             if (IsVisible(parObject, parLevel))
             {
@@ -80,7 +81,7 @@ namespace AlienFight.View
             }
         }
 
-        private bool IsVisible(GameObject parObject, GameLevel parLevel)
+        private bool IsVisible(GameObject parObject, GameModel parLevel)
         {
             double leftBound = parLevel.CameraX;
             double rightBound = parLevel.CameraX + this.Width / _cellSize;

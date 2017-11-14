@@ -6,18 +6,18 @@ namespace AlienFight.Controller
     public abstract class GameController
     {
         protected IViewable View { get; set; }
-        protected GameLevel Level { get; set; }
+        protected GameModel Model { get; set; }
         protected SaveFile Save { get; set; }
 
         public GameController()
         {
         }
 
-        protected void LoadLevel(int parLevelID)
+        protected void LoadModel(int parModelID)
         {
-            Level = LevelLoader.Load(parLevelID);
-            Level.PlayerLogics.Start();
-            foreach (ILogic elLogic in Level.EnemyLogics)
+            Model = LevelLoader.Load(parModelID);
+            Model.PlayerLogics.Start();
+            foreach (ILogic elLogic in Model.EnemyLogics)
             {
                 if (elLogic != null)
                 {
@@ -26,33 +26,13 @@ namespace AlienFight.Controller
             }
         }
 
-        protected void EndLevel(bool parWin, bool parExit)
-        {
-            if (parWin)
-            {
-                Save.UpdateLevelsList(Level.LevelID);
-                if (!parExit)
-                {
-                    LoadLevel(Level.LevelID + 1);
-                }
-            }
-            else if (!parExit)
-            {
-                LoadLevel(Level.LevelID);
-            }
-            if (parExit)
-            {
-                LoadLevel(0);
-            }
-        }
-
         protected void SendViewCommand()
         {
             while (true)
             {
-                if ((View != null) && (Level != null))
+                if ((View != null) && (Model != null))
                 {
-                    View.ViewLevel(Level);
+                    View.ViewModel(Model);
                 }
             }
         }

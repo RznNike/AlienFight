@@ -2,7 +2,7 @@
 {
     public static class EnemyLogicFactory
     {
-        public static ILogic CreateLogic(GameLevel parLevel, EnemyObject parObject)
+        public static ILogic CreateLogic(GameModel parLevel, EnemyObject parObject)
         {
             ILogic logic = null;
             switch (parObject.Type)

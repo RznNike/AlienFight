@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AlienFight.Model
 {
-    public abstract class BaseLogic<StateMachineType, StateType>
+    public abstract class BaseObjectLogic<StateMachineType, StateType>
         : ILogic
         where StateMachineType : StateMachine<StateType>, new()
     {
@@ -13,13 +13,13 @@ namespace AlienFight.Model
         protected static readonly float MAX_SPEED = 9.0f;
         protected static readonly float LOOKUP_DIST = 1.5f;
 
-        public GameLevel Level { get; set; }
+        public GameModel Level { get; set; }
         public GameObject Object { get; set; }
         protected StateMachineType _stateMachine;
         protected bool _stopThread;
         private Thread _logicThread;
 
-        public BaseLogic(GameLevel parLevel)
+        public BaseObjectLogic(GameModel parLevel)
         {
             Level = parLevel;
             _stateMachine = new StateMachineType();
@@ -70,7 +70,7 @@ namespace AlienFight.Model
             float rightBound = Object.X + Object.SizeX + LOOKUP_DIST;
             float downBound = Object.Y - LOOKUP_DIST;
             float upBound = Object.Y + Object.SizeY + LOOKUP_DIST;
-            LevelObject[ ] objects = (from elObject in Level.LevelObjects
+            LevelObject[ ] objects = (from elObject in Level.ModelObjects
                                       where IsIntersected(leftBound, rightBound, elObject.X, elObject.X + elObject.SizeX)
                                             || IsIntersected(downBound, upBound, elObject.Y, elObject.Y + elObject.SizeY)
                                       select elObject).ToArray();
