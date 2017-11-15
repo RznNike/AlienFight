@@ -11,6 +11,7 @@ namespace AlienFight.Model
         {
             string path = $"resources/levels/level{parLevelID}.xml";
             GameModel level = new GameModel();
+            level.Type = GameModelType.Level;
             Stream fileStream = File.OpenRead(path);
             XmlReader xmlReader = XmlReader.Create(fileStream);
 
@@ -27,6 +28,8 @@ namespace AlienFight.Model
                     level.EnemyLogics.Add(EnemyLogicFactory.CreateLogic(level, elEnemy));
                 }
             }
+            level.UIItems = new List<UIObject>();
+            level.ModelLogic = new LevelLogic(level);
 
             fileStream.Close();
             xmlReader.Close();

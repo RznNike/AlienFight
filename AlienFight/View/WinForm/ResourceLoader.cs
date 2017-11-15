@@ -14,9 +14,9 @@ namespace AlienFight.View
             Dictionary<int, List<Image>> levelObjectSprites = LoadSpritesForEnum(typeof(LevelObjectType));
             Dictionary<int, List<Image>> enemySprites = LoadSpritesForEnum(typeof(EnemyObjectType));
             Dictionary<int, List<Image>> playerSprites = LoadSpritesForEnum(typeof(PlayerObjectType));
-            Image background = Image.FromFile("resources/sprites/levels/background.png");
+            Dictionary<int, Image> backgrounds = LoadBackgrounds("resources/sprites/levels/backgrounds");
 
-            return new SpritesContainer(levelObjectSprites, enemySprites, playerSprites, background);
+            return new SpritesContainer(levelObjectSprites, enemySprites, playerSprites, backgrounds);
         }
 
         private static Dictionary<int, List<Image>> LoadSpritesForEnum(Type parEnumType)
@@ -61,6 +61,19 @@ namespace AlienFight.View
             }
 
             return sprites;
+        }
+
+        private static Dictionary<int, Image> LoadBackgrounds(string parPath)
+        {
+            Dictionary<int, Image> result = new Dictionary<int, Image>();
+            List<string> files = new List<string>(Directory.EnumerateFiles(parPath));
+            files.Sort();
+            for (int i = 0; i < files.Count; i++)
+            {
+                result.Add(i, Image.FromFile(files[i]));
+            }
+
+            return result;
         }
     }
 }

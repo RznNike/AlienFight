@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlienFight.Model
+﻿namespace AlienFight.Model
 {
     public class MenuLogic : BaseModelLogic
     {
+        public MenuLogic(GameModel parModel) : base(parModel)
+        {
+        }
     }
 }

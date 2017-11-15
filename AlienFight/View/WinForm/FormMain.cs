@@ -19,7 +19,7 @@ namespace AlienFight.View
         private BufferedGraphicsContext _bufGraphicsContext;
         private BufferedGraphics _bufGraphics;
         private SpritesContainer _spritesContainer;
-        private TextureBrush _backgroundBrush;
+        private TextureBrush[] _backgroundBrushes;
         private int _cellSize;
         private int _cellsCapacity = 15;
         private float _drawingCorrection = 0;
@@ -36,40 +36,58 @@ namespace AlienFight.View
             _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
             _formGraphics = this.CreateGraphics();
             _spritesContainer = ResourceLoader.LoadSprites();
-            _backgroundBrush = new TextureBrush(_spritesContainer.Background);
+            _backgroundBrushes = new TextureBrush[2];
+            _backgroundBrushes[0] = new TextureBrush(_spritesContainer.GetBackground((GameModelType)0));
+            _backgroundBrushes[1] = new TextureBrush(_spritesContainer.GetBackground((GameModelType)1));
             _cellSize = this.Width / _cellsCapacity;
             _drawingCorrection = _cellSize / 150f;
             Cursor.Hide();
         }
 
-        public void ViewModel(GameModel parLevel)
+        public void ViewModel(GameModel parModel)
         {
-            DrawBackground();
-            float cameraX = parLevel.CameraX;
-            float cameraY = parLevel.CameraY;
-            foreach (GameObject levelElement in parLevel.ModelObjects)
-            {
-                DrawGameObject(levelElement, parLevel, cameraX, cameraY);
-            }
-            foreach (GameObject enemy in parLevel.Enemies)
-            {
-                DrawGameObject(enemy, parLevel, cameraX, cameraY);
-            }
-            if (parLevel.Player != null)
-            {
-                DrawGameObject(parLevel.Player, parLevel, cameraX, cameraY);
-            }
-            ViewCanvas(parLevel);
+            DrawBackground(parModel.Type);
+            DrawLevel(parModel);
+            DrawUI(parModel);
+            ViewCanvas(parModel);
         }
 
-        private void DrawBackground()
+        private void DrawBackground(GameModelType parModelType)
         {
-            _bufGraphics.Graphics.FillRectangle(_backgroundBrush, 0, 0, this.Width, this.Height);
+            _bufGraphics.Graphics.FillRectangle(_backgroundBrushes[(int)parModelType], 0, 0, this.Width, this.Height);
         }
 
-        private void DrawGameObject(GameObject parObject, GameModel parLevel, float parCameraX, float parCameraY)
+        private void DrawLevel(GameModel parModel)
         {
-            if (IsVisible(parObject, parLevel))
+            float cameraX = parModel.CameraX;
+            float cameraY = parModel.CameraY;
+            foreach (GameObject elLevelElement in parModel.ModelObjects)
+            {
+                DrawGameObject(elLevelElement, parModel, cameraX, cameraY);
+            }
+            foreach (GameObject elEnemy in parModel.Enemies)
+            {
+                DrawGameObject(elEnemy, parModel, cameraX, cameraY);
+            }
+            if (parModel.Player != null)
+            {
+                DrawGameObject(parModel.Player, parModel, cameraX, cameraY);
+            }
+        }
+
+        private void DrawUI(GameModel parModel)
+        {
+            float cameraX = parModel.CameraX;
+            float cameraY = parModel.CameraY;
+            foreach (GameObject elUI in parModel.UIItems)
+            {
+                DrawGameObject(elUI, parModel, cameraX, cameraY);
+            }
+        }
+
+        private void DrawGameObject(GameObject parObject, GameModel parModel, float parCameraX, float parCameraY)
+        {
+            if (IsVisible(parObject, parModel))
             {
                 Image sprite = _spritesContainer.GetSprite(parObject, parObject.FlippedY);
                 _bufGraphics.Graphics.DrawImage(
@@ -81,12 +99,12 @@ namespace AlienFight.View
             }
         }
 
-        private bool IsVisible(GameObject parObject, GameModel parLevel)
+        private bool IsVisible(GameObject parObject, GameModel parModel)
         {
-            double leftBound = parLevel.CameraX;
-            double rightBound = parLevel.CameraX + this.Width / _cellSize;
-            double downBound = parLevel.CameraY;
-            double upBound = parLevel.CameraY + this.Height / _cellSize;
+            double leftBound = parModel.CameraX;
+            double rightBound = parModel.CameraX + this.Width / _cellSize;
+            double downBound = parModel.CameraY;
+            double upBound = parModel.CameraY + this.Height / _cellSize;
 
             return ((parObject.X < rightBound)
                     || ((parObject.X + parObject.SizeX) > leftBound))
@@ -94,10 +112,10 @@ namespace AlienFight.View
                     || ((parObject.Y + parObject.SizeY) > downBound));
         }
 
-        private void ViewCanvas(GameModel parLevel)
+        private void ViewCanvas(GameModel parModel)
         {
 #if FPSMETER
-            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}, HP: {parLevel.Player.Health}", this.Font, Brushes.White, 0, 0);
+            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}, HP: {parModel.Player.Health}", this.Font, Brushes.White, 0, 0);
 #endif
             _bufGraphics.Render(_formGraphics);
 #if FPSMETER

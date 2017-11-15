@@ -16,14 +16,7 @@ namespace AlienFight.Controller
         protected void LoadModel(int parModelID)
         {
             Model = LevelLoader.Load(parModelID);
-            Model.PlayerLogics.Start();
-            foreach (ILogic elLogic in Model.EnemyLogics)
-            {
-                if (elLogic != null)
-                {
-                    elLogic.Start();
-                }
-            }
+            Model.ModelLogic.Start();
         }
 
         protected void SendViewCommand()

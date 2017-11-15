@@ -12,6 +12,12 @@
         Resume,
         BackToMain,
         Repeat,
-        Next
+        Next,
+
+        OK,
+        Cancel,
+
+        Health,
+        Timer
     }
 }

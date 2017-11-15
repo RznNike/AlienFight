@@ -9,19 +9,18 @@ namespace AlienFight.View
         private Dictionary<int, List<Image>> _levelObjectSprites;
         private Dictionary<int, List<Image>> _enemySprites;
         private Dictionary<int, List<Image>> _playerSprites;
-
-        public Image Background { get; private set; }
+        private Dictionary<int, Image> _backgrounds;
 
         public SpritesContainer(
             Dictionary<int, List<Image>> parLevelObjectSprites,
             Dictionary<int, List<Image>> parEnemySprites,
             Dictionary<int, List<Image>> parPlayerSprites,
-            Image parBackground)
+            Dictionary<int, Image> parBackgrounds)
         {
             _levelObjectSprites = parLevelObjectSprites;
             _enemySprites = parEnemySprites;
             _playerSprites = parPlayerSprites;
-            Background = parBackground;
+            _backgrounds = parBackgrounds;
         }
 
         public Image GetSprite(GameObject parObject, bool parFlipped)
@@ -39,6 +38,11 @@ namespace AlienFight.View
             {
                 return _playerSprites[(int)((PlayerObject)parObject).Type * sign][parObject.State];
             }
+        }
+
+        public Image GetBackground(GameModelType parType)
+        {
+            return _backgrounds[(int)parType];
         }
     }
 }
