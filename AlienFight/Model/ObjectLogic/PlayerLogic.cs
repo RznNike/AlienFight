@@ -13,15 +13,15 @@ namespace AlienFight.Model
         private static readonly int THREAD_SLEEP_MS = 5;
 
         public PlayerObject Player { get { return (PlayerObject)Object; } set { Object = value; } }
-        private List<PlayerCommand> _activeCommands;
+        private List<ModelCommand> _activeCommands;
 
         public PlayerLogic(GameModel parLevel) : base(parLevel)
         {
             Player = parLevel.Player;
-            _activeCommands = new List<PlayerCommand>();
+            _activeCommands = new List<ModelCommand>();
         }
 
-        public void ReceiveCommand(PlayerCommand parCommand, bool parBeginCommand)
+        public void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand)
         {
             if (parBeginCommand)
             {
@@ -76,7 +76,7 @@ namespace AlienFight.Model
             float[ ] speed = new float[2] { 0, 0 };
 
             // Обработка приседания
-            if ((parFreeSpace[3] < EPSILON) && _activeCommands.Contains(PlayerCommand.Down))
+            if ((parFreeSpace[3] < EPSILON) && _activeCommands.Contains(ModelCommand.Down))
             {
                 Player.SizeY = Player.SizeYsmall;
                 return speed;
@@ -84,8 +84,8 @@ namespace AlienFight.Model
             Player.SizeY = Player.SizeYstandart;
 
             // Обработка движений по горизонтали
-            int leftCommandPosition = _activeCommands.FindIndex(element => element == PlayerCommand.Left);
-            int rightCommandPosition = _activeCommands.FindIndex(element => element == PlayerCommand.Right);
+            int leftCommandPosition = _activeCommands.FindIndex(element => element == ModelCommand.Left);
+            int rightCommandPosition = _activeCommands.FindIndex(element => element == ModelCommand.Right);
             if ((leftCommandPosition >= 0) && (leftCommandPosition >rightCommandPosition) && (parFreeSpace[0] > EPSILON))
             {
                 speed[0] = -HORISONTAL_SPEED;
@@ -137,7 +137,7 @@ namespace AlienFight.Model
             }
 
             // Обработка попытки прыжка
-            if (!refJumpActive && _activeCommands.Contains(PlayerCommand.Up) && (refJumpsCount < MAX_JUMPS))
+            if (!refJumpActive && _activeCommands.Contains(ModelCommand.Up) && (refJumpsCount < MAX_JUMPS))
             {
                 refJumpsCount++;
                 refJumpActive = true;
@@ -146,7 +146,7 @@ namespace AlienFight.Model
                     speed[1] = JUMP_SPEED;
                 }
             }
-            if (!_activeCommands.Contains(PlayerCommand.Up))
+            if (!_activeCommands.Contains(ModelCommand.Up))
             {
                 refJumpActive = false;
             }
@@ -162,6 +162,10 @@ namespace AlienFight.Model
                     && IsIntersected(Player.Y, Player.Y + Player.SizeY, elEnemy.Y, elEnemy.Y + elEnemy.SizeY))
                 {
                     Player.Health -= elEnemy.Damage;
+                    if (Player.Health < 0)
+                    {
+                        Player.Health = 0;
+                    }
                     _stateMachine.SetState(PlayerStateType.Hurt);
                     return true;
                 }

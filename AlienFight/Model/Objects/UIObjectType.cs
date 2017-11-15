@@ -2,22 +2,23 @@
 {
     public enum UIObjectType
     {
-        //[Custom("resources/sprites/levels/stone")]
-        NewGame = 1,
-        LoadGame,
-        ChooseLevel,
+        New_game = 1,
+        Load_game,
+        Choose_level,
         Records,
         Exit,
-
+        
         Resume,
-        BackToMain,
+        Back_to_menu,
         Repeat,
         Next,
-
+        
         OK,
         Cancel,
-
+        
+        [Custom("resources/sprites/ui/health")]
         Health,
+        [Custom("resources/sprites/ui/timer")]
         Timer
     }
 }

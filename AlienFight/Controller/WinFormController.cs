@@ -14,7 +14,8 @@ namespace AlienFight.Controller
             ((Form)View).Show();
             ((Form)View).KeyDown += KeyDown;
             ((Form)View).KeyUp += KeyUp;
-            LoadModel(1);
+            //LoadLevel(1);
+            LoadMenu();
             Thread framesSender = new Thread(SendViewCommand);
             framesSender.Start();
             //Save = SaveFile.GetInstance();
@@ -34,21 +35,21 @@ namespace AlienFight.Controller
 
         private void SendCommandToPlayer(KeyEventArgs e, bool parBeginCommand)
         {
-            if (e.KeyCode == Keys.Left)
+            if ((e.KeyCode == Keys.Left) || (e.KeyCode == Keys.A))
             {
-                Model.PlayerLogics.ReceiveCommand(PlayerCommand.Left, parBeginCommand);
+                Model.ModelLogic.ReceiveCommand(ModelCommand.Left, parBeginCommand);
             }
-            else if (e.KeyCode == Keys.Right)
+            else if ((e.KeyCode == Keys.Right) || (e.KeyCode == Keys.D))
             {
-                Model.PlayerLogics.ReceiveCommand(PlayerCommand.Right, parBeginCommand);
+                Model.ModelLogic.ReceiveCommand(ModelCommand.Right, parBeginCommand);
             }
-            else if ((e.KeyCode == Keys.Up) || (e.KeyCode == Keys.Space))
+            else if ((e.KeyCode == Keys.Up) || (e.KeyCode == Keys.W) || (e.KeyCode == Keys.Space))
             {
-                Model.PlayerLogics.ReceiveCommand(PlayerCommand.Up, parBeginCommand);
+                Model.ModelLogic.ReceiveCommand(ModelCommand.Up, parBeginCommand);
             }
-            else if ((e.KeyCode == Keys.Down) || (e.KeyCode == Keys.ControlKey))
+            else if ((e.KeyCode == Keys.Down) || (e.KeyCode == Keys.S) || (e.KeyCode == Keys.ControlKey))
             {
-                Model.PlayerLogics.ReceiveCommand(PlayerCommand.Down, parBeginCommand);
+                Model.ModelLogic.ReceiveCommand(ModelCommand.Down, parBeginCommand);
             }
         }
     }

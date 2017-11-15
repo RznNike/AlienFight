@@ -13,10 +13,15 @@ namespace AlienFight.Controller
         {
         }
 
-        protected void LoadModel(int parModelID)
+        protected void LoadLevel(int parModelID)
         {
             Model = LevelLoader.Load(parModelID);
-            Model.ModelLogic.Start();
+            ((LevelLogic)Model.ModelLogic).Start();
+        }
+
+        protected void LoadMenu()
+        {
+            Model = MenuLoader.Load();
         }
 
         protected void SendViewCommand()

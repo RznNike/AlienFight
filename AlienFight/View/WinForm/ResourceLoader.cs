@@ -4,6 +4,7 @@ using AlienFight.Model;
 using System.IO;
 using System;
 using System.Linq;
+using System.Drawing.Text;
 
 namespace AlienFight.View
 {
@@ -11,12 +12,34 @@ namespace AlienFight.View
     {
         public static SpritesContainer LoadSprites()
         {
+            Dictionary<int, Image> backgrounds = LoadBackgrounds("resources/sprites/levels/backgrounds");
             Dictionary<int, List<Image>> levelObjectSprites = LoadSpritesForEnum(typeof(LevelObjectType));
             Dictionary<int, List<Image>> enemySprites = LoadSpritesForEnum(typeof(EnemyObjectType));
             Dictionary<int, List<Image>> playerSprites = LoadSpritesForEnum(typeof(PlayerObjectType));
-            Dictionary<int, Image> backgrounds = LoadBackgrounds("resources/sprites/levels/backgrounds");
+            Dictionary<int, List<Image>> UISprites = LoadUISprites();
 
-            return new SpritesContainer(levelObjectSprites, enemySprites, playerSprites, backgrounds);
+            return new SpritesContainer(backgrounds, levelObjectSprites, enemySprites, playerSprites, UISprites);
+        }
+
+        public static PrivateFontCollection LoadFontCollection()
+        {
+            PrivateFontCollection fontCollection = new PrivateFontCollection();
+            fontCollection.AddFontFile("resources/fonts/04b_30.otf");
+
+            return fontCollection;
+        }
+
+        private static Dictionary<int, Image> LoadBackgrounds(string parPath)
+        {
+            Dictionary<int, Image> result = new Dictionary<int, Image>();
+            List<string> files = new List<string>(Directory.EnumerateFiles(parPath));
+            files.Sort();
+            for (int i = 0; i < files.Count; i++)
+            {
+                result.Add(i, Image.FromFile(files[i]));
+            }
+
+            return result;
         }
 
         private static Dictionary<int, List<Image>> LoadSpritesForEnum(Type parEnumType)
@@ -63,17 +86,19 @@ namespace AlienFight.View
             return sprites;
         }
 
-        private static Dictionary<int, Image> LoadBackgrounds(string parPath)
+        private static Dictionary<int, List<Image>> LoadUISprites()
         {
-            Dictionary<int, Image> result = new Dictionary<int, Image>();
-            List<string> files = new List<string>(Directory.EnumerateFiles(parPath));
-            files.Sort();
-            for (int i = 0; i < files.Count; i++)
-            {
-                result.Add(i, Image.FromFile(files[i]));
-            }
+            Dictionary<int, List<Image>> sprites = new Dictionary<int, List<Image>>();
 
-            return result;
+            string path = (string)CustomAttribute.GetValue(typeof(UIObjectType), UIObjectType.Health.ToString());
+            List<Image> list = LoadSpritesFromFolder(path);
+            sprites.Add(1, list);
+
+            path = (string)CustomAttribute.GetValue(typeof(UIObjectType), UIObjectType.Timer.ToString());
+            list = LoadSpritesFromFolder(path);
+            sprites.Add(2, list);
+
+            return sprites;
         }
     }
 }

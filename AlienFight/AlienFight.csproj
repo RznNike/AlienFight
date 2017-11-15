@@ -60,7 +60,7 @@
     <Compile Include="Model\ObjectLogic\BatLogic.cs" />
     <Compile Include="Model\ObjectLogic\GhostLogic.cs" />
     <Compile Include="Model\ObjectLogic\SlimeLogic.cs" />
-    <Compile Include="Model\ObjectLogic\PlayerCommand.cs" />
+    <Compile Include="Model\ObjectLogic\ModelCommand.cs" />
     <Compile Include="Model\Objects\UIObjectType.cs" />
     <Compile Include="Model\Objects\UIObject.cs" />
     <Compile Include="Model\StateMachines\BatStateType.cs" />
@@ -79,6 +79,7 @@
     <Compile Include="Model\Objects\EnemyObjectType.cs" />
     <Compile Include="Model\Objects\PlayerObject.cs" />
     <Compile Include="Model\Objects\LevelObjectType.cs" />
+    <Compile Include="Model\Utility\MenuLoader.cs" />
     <Compile Include="Model\Utility\LevelLoader.cs" />
     <Compile Include="Model\ObjectLogic\PlayerLogic.cs" />
     <Compile Include="Model\Objects\EnemyObject.cs" />

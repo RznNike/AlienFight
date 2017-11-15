@@ -2,23 +2,15 @@
 {
     public abstract class BaseModelLogic
     {
-        private GameModel _model;
+        protected GameModel _model;
+        public string MenuHeader { get; protected set; }
 
         public BaseModelLogic(GameModel parModel)
         {
             _model = parModel;
         }
 
-        public void Start()
-        {
-            _model.PlayerLogics.Start();
-            foreach (ILogic elLogic in _model.EnemyLogics)
-            {
-                if (elLogic != null)
-                {
-                    elLogic.Start();
-                }
-            }
-        }
+        public abstract void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand);
+        public abstract void HandleCommand(ModelCommand parCommand);
     }
 }

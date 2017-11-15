@@ -1,10 +1,12 @@
 ﻿namespace AlienFight.Model
 {
-    public enum PlayerCommand
+    public enum ModelCommand
     {
         Left,
         Right,
         Up,
-        Down
+        Down,
+        OK,
+        Escape
     }
 }

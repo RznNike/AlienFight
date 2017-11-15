@@ -6,11 +6,13 @@ using System.Windows.Forms;
 
 using AlienFight.Model;
 using System.Threading;
+using System.Drawing.Text;
 
 namespace AlienFight.View
 {
     public partial class FormMain : Form, IViewable
     {
+        private static readonly float FONT_MULTIPLIER = 1f / 50;
 #if FPSMETER
         private int[ ] _counter;
         private DateTime _time;
@@ -23,6 +25,8 @@ namespace AlienFight.View
         private int _cellSize;
         private int _cellsCapacity = 15;
         private float _drawingCorrection = 0;
+        private PrivateFontCollection _fontCollection;
+        private Font _headerFont;
 
         public FormMain()
         {
@@ -42,6 +46,9 @@ namespace AlienFight.View
             _cellSize = this.Width / _cellsCapacity;
             _drawingCorrection = _cellSize / 150f;
             Cursor.Hide();
+            _fontCollection = ResourceLoader.LoadFontCollection();
+            this.Font = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER, FontStyle.Regular, GraphicsUnit.Point, 0);
+            _headerFont = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER * 2, FontStyle.Regular, GraphicsUnit.Point, 0);
         }
 
         public void ViewModel(GameModel parModel)
@@ -75,21 +82,11 @@ namespace AlienFight.View
             }
         }
 
-        private void DrawUI(GameModel parModel)
-        {
-            float cameraX = parModel.CameraX;
-            float cameraY = parModel.CameraY;
-            foreach (GameObject elUI in parModel.UIItems)
-            {
-                DrawGameObject(elUI, parModel, cameraX, cameraY);
-            }
-        }
-
         private void DrawGameObject(GameObject parObject, GameModel parModel, float parCameraX, float parCameraY)
         {
             if (IsVisible(parObject, parModel))
             {
-                Image sprite = _spritesContainer.GetSprite(parObject, parObject.FlippedY);
+                Image sprite = _spritesContainer.GetLevelSprite(parObject, parObject.FlippedY);
                 _bufGraphics.Graphics.DrawImage(
                     sprite,
                     parObject.X * _cellSize - parCameraX * _cellSize - _drawingCorrection,
@@ -112,10 +109,56 @@ namespace AlienFight.View
                     || ((parObject.Y + parObject.SizeY) > downBound));
         }
 
+        private void DrawUI(GameModel parModel)
+        {
+            string header = parModel.ModelLogic.MenuHeader;
+            if (!header.Equals(""))
+            {
+                int offsetX = (int)(this.Width / 2f - header.Length * _headerFont.Size * 0.5);
+                _bufGraphics.Graphics.DrawString(parModel.ModelLogic.MenuHeader, _headerFont, Brushes.LightBlue, offsetX, this.Height / 15f);
+            }
+            foreach (UIObject elUIObject in parModel.UIItems)
+            {
+                switch (elUIObject.Type)
+                {
+                    case UIObjectType.Health:
+                        // вывести ХП в левом нижнем углу
+                        break;
+                    case UIObjectType.Timer:
+                        // вывести таймер сверху в центре
+                        break;
+                    default:
+                        DrawUIObject(elUIObject);
+                        break;
+                }
+            }
+        }
+
+        private void DrawUIObject(UIObject parObject)
+        {
+            string text = parObject.Type.ToString().Replace('_', ' ');
+            int offsetX = (int)(this.Width / 2f - text.Length * this.Font.Size * 0.5);
+            int offsetY = (int)((parObject.X + 1) * this.Height / 7f);
+            Brush brush = null;
+            if (parObject.State == 0)
+            {
+                brush = Brushes.LightGreen;
+            }
+            else
+            {
+                brush = Brushes.White;
+            }
+            _bufGraphics.Graphics.DrawString(text, this.Font, brush, offsetX, offsetY);
+        }
+
         private void ViewCanvas(GameModel parModel)
         {
 #if FPSMETER
-            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}, HP: {parModel.Player.Health}", this.Font, Brushes.White, 0, 0);
+            _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.White, 0, 0);
+            if (parModel.Player != null)
+            {
+                _bufGraphics.Graphics.DrawString($"HP: {parModel.Player.Health}", this.Font, Brushes.White, 0, 30);
+            }
 #endif
             _bufGraphics.Render(_formGraphics);
 #if FPSMETER
@@ -129,6 +172,10 @@ namespace AlienFight.View
             _bufGraphicsContext.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
             _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
             _cellSize = this.Width / _cellsCapacity;
+            if (_fontCollection != null)
+            {
+                this.Font = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER, FontStyle.Regular, GraphicsUnit.Point, 0);
+            }
 
             Thread delayedGC = new Thread(GCcollectWithDelay);
             delayedGC.Start(500);
