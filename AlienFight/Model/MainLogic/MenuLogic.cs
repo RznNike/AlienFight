@@ -4,6 +4,8 @@ namespace AlienFight.Model
 {
     public class MenuLogic : BaseModelLogic
     {
+        public dCloseApplication CloseApplication { get; set; }
+
         public MenuLogic(GameModel parModel) : base(parModel)
         {
             _model.UIItems = new List<UIObject>();
@@ -11,14 +13,14 @@ namespace AlienFight.Model
             {
                 UIObject item = new UIObject()
                 {
-                    X = (int)i,
                     Type = i,
                     State = 0
                 };
                 _model.UIItems.Add(item);
             }
             _model.UIItems[0].State = 1;
-            MenuHeader = "AlienFight";
+            MenuHeader = "Alien Fight";
+            _currentMenu = UIObjectType.OK;
         }
 
         public override void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand)
@@ -31,7 +33,41 @@ namespace AlienFight.Model
 
         public override void HandleCommand(ModelCommand parCommand)
         {
+            switch (parCommand)
+            {
+                case ModelCommand.Up:
+                    SelectPrevMenuItem();
+                    break;
+                case ModelCommand.Down:
+                    SelectNextMenuItem();
+                    break;
+                case ModelCommand.OK:
+                    AcceptAction();
+                    break;
+                case ModelCommand.Escape:
+                    CancelAction();
+                    break;
+            }
+        }
 
+        protected override void AcceptAction()
+        {
+            if ((_model.UIItems != null) && (_model.UIItems.Count > 0))
+            {
+                switch (_model.UIItems[_selectedMenuItem].Type)
+                {
+                    case UIObjectType.New_game:
+                        LoadAnotherModel?.Invoke(GameModelType.Level);
+                        break;
+                    case UIObjectType.Exit:
+                        CloseApplication?.Invoke();
+                        break;
+                }
+            }
+        }
+
+        protected override void CancelAction()
+        {
         }
     }
 }

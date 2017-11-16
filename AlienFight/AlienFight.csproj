@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\WinFormController.cs" />
+    <Compile Include="Model\MainLogic\Delegates.cs" />
     <Compile Include="Model\MainLogic\MenuLogic.cs" />
     <Compile Include="Model\MainLogic\LevelLogic.cs" />
     <Compile Include="Model\MainLogic\BaseModelLogic.cs" />

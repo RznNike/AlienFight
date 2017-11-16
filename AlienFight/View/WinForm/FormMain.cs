@@ -1,4 +1,4 @@
-﻿#define FPSMETER
+﻿//#define FPSMETER
 
 using System;
 using System.Drawing;
@@ -12,11 +12,9 @@ namespace AlienFight.View
 {
     public partial class FormMain : Form, IViewable
     {
-        private static readonly float FONT_MULTIPLIER = 1f / 50;
-#if FPSMETER
-        private int[ ] _counter;
-        private DateTime _time;
-#endif
+        private static readonly float FONT_MULTIPLIER = 1f / 40;
+        private static readonly float MENU_CAPACITY = 5;
+        private static readonly float MENU_OFFSET_Y = 250;
         private Graphics _formGraphics;
         private BufferedGraphicsContext _bufGraphicsContext;
         private BufferedGraphics _bufGraphics;
@@ -27,14 +25,15 @@ namespace AlienFight.View
         private float _drawingCorrection = 0;
         private PrivateFontCollection _fontCollection;
         private Font _headerFont;
+#if FPSMETER
+        private int[ ] _counter;
+        private DateTime _time;
+#endif
 
         public FormMain()
         {
             InitializeComponent();
-#if FPSMETER
-            _counter = new int[4];
-            _time = DateTime.UtcNow;
-#endif
+
             _bufGraphicsContext = BufferedGraphicsManager.Current;
             _bufGraphicsContext.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
             _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
@@ -49,6 +48,10 @@ namespace AlienFight.View
             _fontCollection = ResourceLoader.LoadFontCollection();
             this.Font = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER, FontStyle.Regular, GraphicsUnit.Point, 0);
             _headerFont = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER * 2, FontStyle.Regular, GraphicsUnit.Point, 0);
+#if FPSMETER
+            _counter = new int[4];
+            _time = DateTime.UtcNow;
+#endif
         }
 
         public void ViewModel(GameModel parModel)
@@ -56,7 +59,7 @@ namespace AlienFight.View
             DrawBackground(parModel.Type);
             DrawLevel(parModel);
             DrawUI(parModel);
-            ViewCanvas(parModel);
+            ViewCanvas();
         }
 
         private void DrawBackground(GameModelType parModelType)
@@ -114,56 +117,61 @@ namespace AlienFight.View
             string header = parModel.ModelLogic.MenuHeader;
             if (!header.Equals(""))
             {
-                int offsetX = (int)(this.Width / 2f - header.Length * _headerFont.Size * 0.5);
+                int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString(header, _headerFont).Width) / 2);
                 _bufGraphics.Graphics.DrawString(parModel.ModelLogic.MenuHeader, _headerFont, Brushes.LightBlue, offsetX, this.Height / 15f);
             }
-            foreach (UIObject elUIObject in parModel.UIItems)
+            // предусмотреть вывод меню > 5 пунктов
+            for (int i = 0; i < parModel.UIItems.Count; i++)
             {
-                switch (elUIObject.Type)
+                Image sprite = null;
+                switch (parModel.UIItems[i].Type)
                 {
                     case UIObjectType.Health:
-                        // вывести ХП в левом нижнем углу
+                        sprite = _spritesContainer.GetUISprite(parModel.UIItems[i]);
+                        _bufGraphics.Graphics.DrawImage(sprite, _cellSize / 5f, this.Height - _cellSize * 0.7f, _cellSize / 2f, _cellSize / 2f);
+                        _bufGraphics.Graphics.DrawString(
+                            parModel.Player.Health.ToString(), this.Font, Brushes.Crimson, _cellSize / 1.5f, this.Height - _cellSize * 0.67f);
                         break;
                     case UIObjectType.Timer:
-                        // вывести таймер сверху в центре
+                        sprite = _spritesContainer.GetUISprite(parModel.UIItems[i]);
+                        TimeSpan time = ((LevelLogic)parModel.ModelLogic).LevelTimer;
+                        string timeString = $"{time.Minutes:D2}:{time.Seconds:D2}:{(time.Milliseconds / 100):D1}";
+                        int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString("00:00:0", this.Font).Width) / 2);
+                        _bufGraphics.Graphics.DrawImage(sprite, offsetX - _cellSize / 2f, _cellSize / 5f, _cellSize / 2f, _cellSize / 2f);
+                        _bufGraphics.Graphics.DrawString(
+                            timeString, this.Font, Brushes.White, offsetX, _cellSize / 5f);
                         break;
                     default:
-                        DrawUIObject(elUIObject);
+                        DrawUIObject(parModel.UIItems[i], i);
                         break;
                 }
             }
         }
 
-        private void DrawUIObject(UIObject parObject)
+        private void DrawUIObject(UIObject parObject, int parRowNumber)
         {
             string text = parObject.Type.ToString().Replace('_', ' ');
-            int offsetX = (int)(this.Width / 2f - text.Length * this.Font.Size * 0.5);
-            int offsetY = (int)((parObject.X + 1) * this.Height / 7f);
+            int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString(text, this.Font).Width) / 2);
+            int offsetY = (int)(MENU_OFFSET_Y + parRowNumber * (this.Height - MENU_OFFSET_Y) / MENU_CAPACITY);
             Brush brush = null;
             if (parObject.State == 0)
             {
-                brush = Brushes.LightGreen;
+                brush = Brushes.White;
             }
             else
             {
-                brush = Brushes.White;
+                brush = Brushes.GreenYellow;
             }
             _bufGraphics.Graphics.DrawString(text, this.Font, brush, offsetX, offsetY);
         }
 
-        private void ViewCanvas(GameModel parModel)
+        private void ViewCanvas()
         {
 #if FPSMETER
             _bufGraphics.Graphics.DrawString($"FPS: {_counter[0] + _counter[1] + _counter[2]}", this.Font, Brushes.White, 0, 0);
-            if (parModel.Player != null)
-            {
-                _bufGraphics.Graphics.DrawString($"HP: {parModel.Player.Health}", this.Font, Brushes.White, 0, 30);
-            }
-#endif
-            _bufGraphics.Render(_formGraphics);
-#if FPSMETER
             FormMain_Paint();
 #endif
+            _bufGraphics.Render(_formGraphics);
         }
 
         private void FormMain_SizeChanged(object sender, EventArgs e)

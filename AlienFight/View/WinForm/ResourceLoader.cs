@@ -16,7 +16,7 @@ namespace AlienFight.View
             Dictionary<int, List<Image>> levelObjectSprites = LoadSpritesForEnum(typeof(LevelObjectType));
             Dictionary<int, List<Image>> enemySprites = LoadSpritesForEnum(typeof(EnemyObjectType));
             Dictionary<int, List<Image>> playerSprites = LoadSpritesForEnum(typeof(PlayerObjectType));
-            Dictionary<int, List<Image>> UISprites = LoadUISprites();
+            Dictionary<int, Image> UISprites = LoadUISprites();
 
             return new SpritesContainer(backgrounds, levelObjectSprites, enemySprites, playerSprites, UISprites);
         }
@@ -86,17 +86,17 @@ namespace AlienFight.View
             return sprites;
         }
 
-        private static Dictionary<int, List<Image>> LoadUISprites()
+        private static Dictionary<int, Image> LoadUISprites()
         {
-            Dictionary<int, List<Image>> sprites = new Dictionary<int, List<Image>>();
+            Dictionary<int, Image> sprites = new Dictionary<int, Image>();
 
             string path = (string)CustomAttribute.GetValue(typeof(UIObjectType), UIObjectType.Health.ToString());
-            List<Image> list = LoadSpritesFromFolder(path);
-            sprites.Add(1, list);
+            Image sprite = LoadSpritesFromFolder(path)[0];
+            sprites.Add((int)UIObjectType.Health, sprite);
 
             path = (string)CustomAttribute.GetValue(typeof(UIObjectType), UIObjectType.Timer.ToString());
-            list = LoadSpritesFromFolder(path);
-            sprites.Add(2, list);
+            sprite = LoadSpritesFromFolder(path)[0];
+            sprites.Add((int)UIObjectType.Timer, sprite);
 
             return sprites;
         }

@@ -14,11 +14,8 @@ namespace AlienFight.Controller
             ((Form)View).Show();
             ((Form)View).KeyDown += KeyDown;
             ((Form)View).KeyUp += KeyUp;
-            //LoadLevel(1);
-            LoadMenu();
-            Thread framesSender = new Thread(SendViewCommand);
+            Thread framesSender = new Thread(SendModelToView);
             framesSender.Start();
-            //Save = SaveFile.GetInstance();
         }
 
         public void KeyDown(object sender, KeyEventArgs e)
@@ -50,6 +47,14 @@ namespace AlienFight.Controller
             else if ((e.KeyCode == Keys.Down) || (e.KeyCode == Keys.S) || (e.KeyCode == Keys.ControlKey))
             {
                 Model.ModelLogic.ReceiveCommand(ModelCommand.Down, parBeginCommand);
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                Model.ModelLogic.ReceiveCommand(ModelCommand.OK, parBeginCommand);
+            }
+            else if ((e.KeyCode == Keys.Escape) || (e.KeyCode == Keys.Back))
+            {
+                Model.ModelLogic.ReceiveCommand(ModelCommand.Escape, parBeginCommand);
             }
         }
     }
