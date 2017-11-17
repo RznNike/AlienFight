@@ -2,7 +2,7 @@
 
 namespace AlienExplorer.Model
 {
-    public class PlayerStateMachine : StateMachine<PlayerStateType>
+    public class PlayerStateMachine : ObjectStateMachine<PlayerStateType>
     {
         private static readonly float SUBSTATE_PERIOD = 0.05f;
         private static readonly int HURT_PERIOD_MULT = 10;

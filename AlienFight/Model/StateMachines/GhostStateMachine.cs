@@ -2,7 +2,7 @@
 
 namespace AlienExplorer.Model
 {
-    public class GhostStateMachine : StateMachine<GhostStateType>
+    public class GhostStateMachine : ObjectStateMachine<GhostStateType>
     {
         private static readonly float SUBSTATE_PERIOD = float.PositiveInfinity; // нет анимации
 

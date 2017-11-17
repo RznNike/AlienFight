@@ -6,7 +6,7 @@ namespace AlienExplorer.Model
 {
     public abstract class BaseObjectLogic<StateMachineType, StateType>
         : ILogic
-        where StateMachineType : StateMachine<StateType>, new()
+        where StateMachineType : ObjectStateMachine<StateType>, new()
     {
         protected static readonly float EPSILON = 0.01f;
         protected static readonly float G = 15.0f;

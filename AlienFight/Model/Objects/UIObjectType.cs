@@ -19,6 +19,8 @@
         [Custom("resources/sprites/ui/health")]
         Health,
         [Custom("resources/sprites/ui/timer")]
-        Timer
+        Timer,
+
+        Text
     }
 }

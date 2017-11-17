@@ -3,6 +3,7 @@
     public abstract class BaseModelLogic
     {
         protected GameModel _model;
+        protected ModelStateMachine _stateMachine;
         protected UIObjectType _currentMenu;
         public int SelectedMenuItem { get; protected set; }
         public string MenuHeader { get; protected set; }

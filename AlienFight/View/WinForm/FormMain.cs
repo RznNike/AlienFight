@@ -127,7 +127,7 @@ namespace AlienExplorer.View
             uiList = GetVisibleMenuRange(parModel, ref offset, ref drawUpArrow, ref drawDownArrow);
             if (drawUpArrow)
             {
-                DrawUIObject("⯅", 0);
+                DrawUIObject(new UIObject() { Type = UIObjectType.Text, Text = "⯅" }, 0);
             }
             for (int i = 0; i < uiList.Count; i++)
             {
@@ -143,7 +143,7 @@ namespace AlienExplorer.View
                     case UIObjectType.Timer:
                         sprite = _spritesContainer.GetUISprite(uiList[i]);
                         TimeSpan time = ((LevelLogic)parModel.ModelLogic).LevelTimer;
-                        string timeString = $"{time.Minutes:D2}:{time.Seconds:D2}:{(time.Milliseconds / 100):D1}";
+                        string timeString = $"{time.Minutes:D2}:{time.Seconds:D2}.{(time.Milliseconds / 100):D1}";
                         int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString("00:00:0", this.Font).Width) / 2);
                         _bufGraphics.Graphics.DrawImage(sprite, offsetX - _cellSize / 2f, _cellSize / 5f, _cellSize / 2f, _cellSize / 2f);
                         _bufGraphics.Graphics.DrawString(
@@ -156,7 +156,7 @@ namespace AlienExplorer.View
             }
             if (drawDownArrow)
             {
-                DrawUIObject("⯆", MENU_CAPACITY - 1);
+                DrawUIObject(new UIObject() { Type = UIObjectType.Text, Text = "⯆" }, MENU_CAPACITY - 1);
             }
         }
 
@@ -204,21 +204,21 @@ namespace AlienExplorer.View
             return result;
         }
 
-        private void DrawUIObject(object parObject, int parRowNumber)
+        private void DrawUIObject(UIObject parObject, int parRowNumber)
         {
             string text = "";
             Brush brush = Brushes.White;
-            if (parObject.GetType() == typeof(UIObject))
+            if (parObject.State == 1)
             {
-                text = ((UIObject)parObject).Type.ToString().Replace('_', ' ');
-                if (((UIObject)parObject).State == 1)
-                {
-                    brush = Brushes.GreenYellow;
-                }
+                brush = Brushes.GreenYellow;
+            }
+            if (parObject.Type == UIObjectType.Text)
+            {
+                text = parObject.Text;
             }
             else
             {
-                text = (string)parObject;
+                text = parObject.Type.ToString().Replace('_', ' ');
             }
             int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString(text, this.Font).Width) / 2);
             int offsetY = (int)(this.Height * MENU_OFFSET_Y + parRowNumber * (this.Height * (1 - MENU_OFFSET_Y)) / MENU_CAPACITY);

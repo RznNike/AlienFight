@@ -2,7 +2,7 @@
 
 namespace AlienExplorer.Model
 {
-    public class BatStateMachine : StateMachine<BatStateType>
+    public class BatStateMachine : ObjectStateMachine<BatStateType>
     {
         private static readonly float SUBSTATE_PERIOD = 0.15f;
 

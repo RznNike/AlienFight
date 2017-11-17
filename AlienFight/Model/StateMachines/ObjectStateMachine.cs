@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace AlienExplorer.Model
 {
-    public abstract class StateMachine<MachineStatesEnum>
+    public abstract class ObjectStateMachine<MachineStatesEnum>
     {
         protected static readonly float EPSILON = 0.01f;
 
@@ -14,7 +14,7 @@ namespace AlienExplorer.Model
         protected Dictionary<MachineStatesEnum, List<int>> _objectStates;
         protected float _timeInState;
 
-        public StateMachine()
+        public ObjectStateMachine()
         {
             _objectStates = new Dictionary<MachineStatesEnum, List<int>>();
             Type enumType = typeof(MachineStatesEnum);

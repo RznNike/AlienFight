@@ -2,7 +2,7 @@
 
 namespace AlienExplorer.Model
 {
-    public class SlimeStateMachine : StateMachine<SlimeStateType>
+    public class SlimeStateMachine : ObjectStateMachine<SlimeStateType>
     {
         private static readonly float SUBSTATE_PERIOD = 0.35f;
 

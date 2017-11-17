@@ -54,6 +54,8 @@
     <Compile Include="Model\MainLogic\MenuLogic.cs" />
     <Compile Include="Model\MainLogic\LevelLogic.cs" />
     <Compile Include="Model\MainLogic\BaseModelLogic.cs" />
+    <Compile Include="Model\MainLogic\StateMachines\MainMenuStateMachine.cs" />
+    <Compile Include="Model\MainLogic\StateMachines\ModelStateMachine.cs" />
     <Compile Include="Model\Main\GameModelType.cs" />
     <Compile Include="Model\ObjectLogic\EnemyLogicFactory.cs" />
     <Compile Include="Model\ObjectLogic\ILogic.cs" />
@@ -72,7 +74,7 @@
     <Compile Include="Model\StateMachines\SlimeStateMachine.cs" />
     <Compile Include="Model\StateMachines\PlayerStateType.cs" />
     <Compile Include="Model\StateMachines\PlayerStateMachine.cs" />
-    <Compile Include="Model\StateMachines\StateMachine.cs" />
+    <Compile Include="Model\StateMachines\ObjectStateMachine.cs" />
     <Compile Include="Model\Utility\CustomAttribute.cs" />
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Model\Objects\LevelObject.cs" />
