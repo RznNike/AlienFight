@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
 
-using AlienFight.View;
-using AlienFight.Model;
+using AlienExplorer.View;
+using AlienExplorer.Model;
 
-namespace AlienFight.Controller
+namespace AlienExplorer.Controller
 {
     public class WinFormController : GameController
     {

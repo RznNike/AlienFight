@@ -3,13 +3,12 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-
-using AlienFight.Model;
 using System.Threading;
 using System.Drawing.Text;
 using System.Collections.Generic;
+using AlienExplorer.Model;
 
-namespace AlienFight.View
+namespace AlienExplorer.View
 {
     public partial class FormMain : Form, IViewable
     {

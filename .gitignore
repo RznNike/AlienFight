@@ -260,5 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 
-AlienFight.exe
-AlienFight.exe.config
+AlienExplorer\.exe
+AlienExplorer\.exe\.config

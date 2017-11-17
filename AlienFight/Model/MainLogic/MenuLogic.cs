@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class MenuLogic : BaseModelLogic
     {
@@ -19,7 +19,7 @@ namespace AlienFight.Model
                 _model.UIItems.Add(item);
             }
             _model.UIItems[0].State = 1;
-            MenuHeader = "Alien Fight";
+            MenuHeader = "Alien Explorer";
             _currentMenu = UIObjectType.OK;
         }
 

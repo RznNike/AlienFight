@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlienFight", "AlienFight\AlienFight.csproj", "{9DBA96F1-33F8-4D54-86CF-D93DD77E278C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlienExplorer", "AlienFight\AlienExplorer.csproj", "{9DBA96F1-33F8-4D54-86CF-D93DD77E278C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10CC0F83-F55F-486E-9AEC-5E4127CC0108}
 	EndGlobalSection
 EndGlobal

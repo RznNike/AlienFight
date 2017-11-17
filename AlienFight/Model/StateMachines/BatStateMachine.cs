@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class BatStateMachine : StateMachine<BatStateType>
     {

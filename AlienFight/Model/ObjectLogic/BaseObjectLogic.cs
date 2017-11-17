@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Linq;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public abstract class BaseObjectLogic<StateMachineType, StateType>
         : ILogic

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class SlimeLogic : BaseObjectLogic<SlimeStateMachine, SlimeStateType>
     {

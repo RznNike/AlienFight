@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AlienFight.Controller;
-using AlienFight.View;
+using AlienExplorer.Controller;
+using AlienExplorer.View;
 
-namespace AlienFight
+namespace AlienExplorer
 {
     static class Program
     {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class GameModel
     {
-        public int ModelID { get; set; }
+        public int LevelID { get; set; }
         public GameModelType Type { get; set; }
         public BaseModelLogic ModelLogic { get; set; }
         public List<LevelObject> ModelObjects { get; set; }

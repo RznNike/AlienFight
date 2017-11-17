@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class MenuLoader
     {

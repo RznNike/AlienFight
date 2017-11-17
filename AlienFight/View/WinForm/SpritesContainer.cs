@@ -1,8 +1,8 @@
 using System.Drawing;
-using AlienFight.Model;
 using System.Collections.Generic;
+using AlienExplorer.Model;
 
-namespace AlienFight.View
+namespace AlienExplorer.View
 {
     public class SpritesContainer
     {

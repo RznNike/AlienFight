@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class CustomAttribute : Attribute

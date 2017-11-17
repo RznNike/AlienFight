@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class LevelLoader
     {
@@ -11,6 +11,7 @@ namespace AlienFight.Model
         {
             string path = $"resources/levels/level{parLevelID}.xml";
             GameModel level = new GameModel();
+            level.LevelID = parLevelID;
             level.Type = GameModelType.Level;
             Stream fileStream = File.OpenRead(path);
             XmlReader xmlReader = XmlReader.Create(fileStream);
@@ -40,9 +41,7 @@ namespace AlienFight.Model
         private static void ParseLevelProperties(GameModel level, XmlReader xmlReader)
         {
             xmlReader.ReadToFollowing("settings");
-            xmlReader.ReadToDescendant("levelID");
-            level.ModelID = xmlReader.ReadElementContentAsInt();
-            xmlReader.ReadToNextSibling("sizeX");
+            xmlReader.ReadToDescendant("sizeX");
             level.SizeX = xmlReader.ReadElementContentAsInt();
             xmlReader.ReadToNextSibling("sizeY");
             level.SizeY = xmlReader.ReadElementContentAsInt();

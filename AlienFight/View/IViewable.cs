@@ -1,6 +1,6 @@
-﻿using AlienFight.Model;
+﻿using AlienExplorer.Model;
 
-namespace AlienFight.View
+namespace AlienExplorer.View
 {
     public interface IViewable
     {

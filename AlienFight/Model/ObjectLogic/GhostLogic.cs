@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class GhostLogic : BaseObjectLogic<GhostStateMachine, GhostStateType>
     {

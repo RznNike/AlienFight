@@ -1,9 +1,9 @@
 ﻿using System;
-using AlienFight.Model;
-using AlienFight.View;
 using System.Threading;
+using AlienExplorer.Model;
+using AlienExplorer.View;
 
-namespace AlienFight.Controller
+namespace AlienExplorer.Controller
 {
     public abstract class GameController
     {

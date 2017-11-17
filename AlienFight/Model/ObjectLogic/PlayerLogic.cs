@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class PlayerLogic : BaseObjectLogic<PlayerStateMachine, PlayerStateType>
     {

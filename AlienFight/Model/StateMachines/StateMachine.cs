@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public abstract class StateMachine<MachineStatesEnum>
     {

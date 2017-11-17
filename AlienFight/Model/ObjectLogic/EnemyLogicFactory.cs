@@ -1,4 +1,4 @@
-﻿namespace AlienFight.Model
+﻿namespace AlienExplorer.Model
 {
     public static class EnemyLogicFactory
     {

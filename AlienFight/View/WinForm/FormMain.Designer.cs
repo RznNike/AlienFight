@@ -1,4 +1,4 @@
-﻿namespace AlienFight.View
+﻿namespace AlienExplorer.View
 {
     partial class FormMain
     {
@@ -41,7 +41,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AlienFight";
+            this.Text = "Alien Explorer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.SizeChanged += new System.EventHandler(this.FormMain_SizeChanged);

@@ -1,18 +1,20 @@
 ﻿using System;
 
-namespace AlienFight.Model
+namespace AlienExplorer.Model
 {
     public class SaveFile
     {
-        // СИНГЛТОН!!!!!
+        private static SaveFile _instance;
+
+        private SaveFile() { }
+
         public static SaveFile GetInstance()
         {
-            throw new NotImplementedException();
-        }
-
-        internal void UpdateLevelsList(int parLevelID)
-        {
-            throw new NotImplementedException();
+            if (_instance == null)
+            {
+                _instance = new SaveFile();
+            }
+            return _instance;
         }
     }
 }

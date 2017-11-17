@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using AlienFight.Model;
 using System.IO;
 using System;
 using System.Linq;
 using System.Drawing.Text;
+using AlienExplorer.Model;
 
-namespace AlienFight.View
+namespace AlienExplorer.View
 {
     public static class ResourceLoader
     {
