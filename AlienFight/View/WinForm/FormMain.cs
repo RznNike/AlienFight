@@ -7,14 +7,15 @@ using System.Windows.Forms;
 using AlienFight.Model;
 using System.Threading;
 using System.Drawing.Text;
+using System.Collections.Generic;
 
 namespace AlienFight.View
 {
     public partial class FormMain : Form, IViewable
     {
         private static readonly float FONT_MULTIPLIER = 1f / 40;
-        private static readonly float MENU_CAPACITY = 5;
-        private static readonly float MENU_OFFSET_Y = 250;
+        private static readonly int MENU_CAPACITY = 7;
+        private static readonly float MENU_OFFSET_Y = 0.35f;
         private Graphics _formGraphics;
         private BufferedGraphicsContext _bufGraphicsContext;
         private BufferedGraphics _bufGraphics;
@@ -120,20 +121,28 @@ namespace AlienFight.View
                 int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString(header, _headerFont).Width) / 2);
                 _bufGraphics.Graphics.DrawString(parModel.ModelLogic.MenuHeader, _headerFont, Brushes.LightBlue, offsetX, this.Height / 15f);
             }
-            // предусмотреть вывод меню > 5 пунктов
-            for (int i = 0; i < parModel.UIItems.Count; i++)
+            List<UIObject> uiList = null;
+            int offset = 0;
+            bool drawUpArrow = false;
+            bool drawDownArrow = false;
+            uiList = GetVisibleMenuRange(parModel, ref offset, ref drawUpArrow, ref drawDownArrow);
+            if (drawUpArrow)
+            {
+                DrawUIObject("⯅", 0);
+            }
+            for (int i = 0; i < uiList.Count; i++)
             {
                 Image sprite = null;
-                switch (parModel.UIItems[i].Type)
+                switch (uiList[i].Type)
                 {
                     case UIObjectType.Health:
-                        sprite = _spritesContainer.GetUISprite(parModel.UIItems[i]);
+                        sprite = _spritesContainer.GetUISprite(uiList[i]);
                         _bufGraphics.Graphics.DrawImage(sprite, _cellSize / 5f, this.Height - _cellSize * 0.7f, _cellSize / 2f, _cellSize / 2f);
                         _bufGraphics.Graphics.DrawString(
                             parModel.Player.Health.ToString(), this.Font, Brushes.Crimson, _cellSize / 1.5f, this.Height - _cellSize * 0.67f);
                         break;
                     case UIObjectType.Timer:
-                        sprite = _spritesContainer.GetUISprite(parModel.UIItems[i]);
+                        sprite = _spritesContainer.GetUISprite(uiList[i]);
                         TimeSpan time = ((LevelLogic)parModel.ModelLogic).LevelTimer;
                         string timeString = $"{time.Minutes:D2}:{time.Seconds:D2}:{(time.Milliseconds / 100):D1}";
                         int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString("00:00:0", this.Font).Width) / 2);
@@ -142,26 +151,78 @@ namespace AlienFight.View
                             timeString, this.Font, Brushes.White, offsetX, _cellSize / 5f);
                         break;
                     default:
-                        DrawUIObject(parModel.UIItems[i], i);
+                        DrawUIObject(uiList[i], i + offset);
                         break;
                 }
             }
+            if (drawDownArrow)
+            {
+                DrawUIObject("⯆", MENU_CAPACITY - 1);
+            }
         }
 
-        private void DrawUIObject(UIObject parObject, int parRowNumber)
+        private List<UIObject> GetVisibleMenuRange(
+            GameModel parModel,
+            ref int refOffset,
+            ref bool refDrawUpArrow,
+            ref bool refDrawDownArrow)
         {
-            string text = parObject.Type.ToString().Replace('_', ' ');
-            int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString(text, this.Font).Width) / 2);
-            int offsetY = (int)(MENU_OFFSET_Y + parRowNumber * (this.Height - MENU_OFFSET_Y) / MENU_CAPACITY);
-            Brush brush = null;
-            if (parObject.State == 0)
+            List<UIObject> result = null;
+
+            if (parModel.UIItems.Count <= MENU_CAPACITY)
             {
-                brush = Brushes.White;
+                result = parModel.UIItems;
             }
             else
             {
-                brush = Brushes.GreenYellow;
+                int selected = parModel.ModelLogic.SelectedMenuItem;
+                int indexFrom = 0;
+                int count = MENU_CAPACITY;
+
+                int itemsBelow = parModel.UIItems.Count - selected - 1;
+                if (itemsBelow > (MENU_CAPACITY - 1) / 2)
+                {
+                    refDrawDownArrow = true;
+                    count--;
+                }
+                if (selected > (MENU_CAPACITY / 2))
+                {
+                    refDrawUpArrow = true;
+                    count--;
+                    refOffset = 1;
+                    if (refDrawDownArrow)
+                    {
+                        indexFrom = selected + 1 - MENU_CAPACITY / 2;
+                    }
+                    else
+                    {
+                        indexFrom = selected + 2 - MENU_CAPACITY + itemsBelow;
+                    }
+                }
+                result = parModel.UIItems.GetRange(indexFrom, count);
             }
+
+            return result;
+        }
+
+        private void DrawUIObject(object parObject, int parRowNumber)
+        {
+            string text = "";
+            Brush brush = Brushes.White;
+            if (parObject.GetType() == typeof(UIObject))
+            {
+                text = ((UIObject)parObject).Type.ToString().Replace('_', ' ');
+                if (((UIObject)parObject).State == 1)
+                {
+                    brush = Brushes.GreenYellow;
+                }
+            }
+            else
+            {
+                text = (string)parObject;
+            }
+            int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString(text, this.Font).Width) / 2);
+            int offsetY = (int)(this.Height * MENU_OFFSET_Y + parRowNumber * (this.Height * (1 - MENU_OFFSET_Y)) / MENU_CAPACITY);
             _bufGraphics.Graphics.DrawString(text, this.Font, brush, offsetX, offsetY);
         }
 

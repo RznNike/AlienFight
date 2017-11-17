@@ -3,8 +3,8 @@
     public abstract class BaseModelLogic
     {
         protected GameModel _model;
-        protected int _selectedMenuItem;
         protected UIObjectType _currentMenu;
+        public int SelectedMenuItem { get; protected set; }
         public string MenuHeader { get; protected set; }
 
         public dLoadAnotherModel LoadAnotherModel { get; set; }
@@ -12,7 +12,7 @@
         public BaseModelLogic(GameModel parModel)
         {
             _model = parModel;
-            _selectedMenuItem = 0;
+            SelectedMenuItem = 0;
         }
 
         public abstract void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand);
@@ -31,13 +31,13 @@
         {
             if ((_model.UIItems != null) && (_model.UIItems.Count > 0))
             {
-                int newSelection = _selectedMenuItem - 1;
+                int newSelection = SelectedMenuItem - 1;
                 if (newSelection < 0)
                 {
                     newSelection = _model.UIItems.Count - 1;
                 }
-                _selectedMenuItem = newSelection;
-                SelectMenuItem(_selectedMenuItem);
+                SelectedMenuItem = newSelection;
+                SelectMenuItem(SelectedMenuItem);
             }
         }
 
@@ -45,13 +45,13 @@
         {
             if ((_model.UIItems != null) && (_model.UIItems.Count > 0))
             {
-                int newSelection = _selectedMenuItem + 1;
+                int newSelection = SelectedMenuItem + 1;
                 if (newSelection >= _model.UIItems.Count)
                 {
                     newSelection = 0;
                 }
-                _selectedMenuItem = newSelection;
-                SelectMenuItem(_selectedMenuItem);
+                SelectedMenuItem = newSelection;
+                SelectMenuItem(SelectedMenuItem);
             }
         }
 

@@ -54,7 +54,7 @@ namespace AlienFight.Model
         {
             if ((_model.UIItems != null) && (_model.UIItems.Count > 0))
             {
-                switch (_model.UIItems[_selectedMenuItem].Type)
+                switch (_model.UIItems[SelectedMenuItem].Type)
                 {
                     case UIObjectType.New_game:
                         LoadAnotherModel?.Invoke(GameModelType.Level);
