@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
+using System.Linq;
 
 namespace AlienExplorer.Model
 {
     public class LevelLoader
     {
+        public static readonly string LEVELS_FOLDER = "resources/levels";
+
         public static GameModel Load(int parLevelID)
         {
-            string path = $"resources/levels/level{parLevelID}.xml";
-            GameModel level = new GameModel();
-            level.LevelID = parLevelID;
-            level.Type = GameModelType.Level;
+            string path = $"{LEVELS_FOLDER}/level{parLevelID}.xml";
+            GameModel level = new GameModel
+            {
+                LevelID = parLevelID,
+                Type = GameModelType.Level
+            };
             Stream fileStream = File.OpenRead(path);
             XmlReader xmlReader = XmlReader.Create(fileStream);
 
@@ -36,6 +42,24 @@ namespace AlienExplorer.Model
             xmlReader.Close();
 
             return level;
+        }
+
+        public static List<int> CheckAvailableLevels()
+        {
+            List<int> result = new List<int>();
+            string[ ] fileNames = Directory.GetFiles(LEVELS_FOLDER);
+            if (fileNames.Length == 0)
+            {
+                throw new FileNotFoundException();
+            }
+            foreach (string elFileName in fileNames)
+            {
+                string[ ] numbersInFileName = Regex.Split(elFileName, "[^0-9]+");
+                int id = int.Parse(numbersInFileName.Where(x => !x.Equals("")).Last());
+                result.Add(id);
+            }
+
+            return result;
         }
 
         private static void ParseLevelProperties(GameModel level, XmlReader xmlReader)

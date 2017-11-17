@@ -18,9 +18,16 @@ namespace AlienExplorer.Controller
 
         protected void LoadLevel(int parModelID)
         {
-            Model = LevelLoader.Load(parModelID);
-            ((LevelLogic)Model.ModelLogic).Start();
-            Model.ModelLogic.LoadAnotherModel += LoadAnotherModel;
+            try
+            {
+                Model = LevelLoader.Load(parModelID);
+                ((LevelLogic)Model.ModelLogic).Start();
+                Model.ModelLogic.LoadAnotherModel += LoadAnotherModel;
+            }
+            catch
+            {
+                LoadMenu();
+            }
         }
 
         protected void LoadMenu()
