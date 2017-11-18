@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Linq;
 
 namespace AlienExplorer.Model
 {
     public class LevelLogic : BaseModelLogic
     {
         public TimeSpan LevelTimer { get; private set; }
+        public bool ShadowLevel { get; private set; }
+        private GameModel _model;
         private bool _stopThread;
+        private Thread _timerTick;
 
         public LevelLogic(GameModel parModel) : base(parModel)
         {
-            _model.UIItems = new List<UIObject>();
-            for (UIObjectType i = UIObjectType.Health; i <= UIObjectType.Timer; i++)
-            {
-                UIObject item = new UIObject()
-                {
-                    Type = i,
-                    State = 0
-                };
-                _model.UIItems.Add(item);
-            }
-            MenuHeader = "";
-            _currentMenu = UIObjectType.OK;
+            _stateMachine = new LevelMenuStateMachine(parModel);
+            ShadowLevel = false;
+            MenuHeader = _stateMachine.MenuHeader;
+            _model = parModel;
             LevelTimer = new TimeSpan(0);
         }
 
@@ -38,11 +34,60 @@ namespace AlienExplorer.Model
             }
 
             _stopThread = false;
-            Thread timerTick = new Thread(TimerTick)
+            _timerTick = new Thread(TimerTick)
             {
                 IsBackground = true
             };
-            timerTick.Start();
+            _timerTick.Start();
+        }
+
+        public void Stop()
+        {
+            _stopThread = true;
+            if (_timerTick != null)
+            {
+                _timerTick.Resume();
+            }
+            _model.PlayerLogics.Stop();
+            foreach (ILogic elLogic in _model.EnemyLogics)
+            {
+                if (elLogic != null)
+                {
+                    elLogic.Stop();
+                }
+            }
+        }
+
+        public void Pause()
+        {
+            if (_timerTick != null)
+            {
+                _timerTick.Suspend();
+            }
+            _model.PlayerLogics.Pause();
+            foreach (ILogic elLogic in _model.EnemyLogics)
+            {
+                if (elLogic != null)
+                {
+                    elLogic.Pause();
+                }
+            }
+        }
+
+        public void Resume()
+        {
+            if (_timerTick != null)
+            {
+                _timerTick.Resume();
+            }
+            _model.PlayerLogics.Resume();
+            foreach (ILogic elLogic in _model.EnemyLogics)
+            {
+                if (elLogic != null)
+                {
+                    elLogic.Resume();
+                }
+            }
         }
 
         private void TimerTick()
@@ -64,39 +109,50 @@ namespace AlienExplorer.Model
                 HandleCommand(parCommand);
             }
             PlayerLogic logic = _model.PlayerLogics;
-            if ((logic != null)
-                && ((int)parCommand <= 3))
+            if ((_stateMachine.MenuHeader.Equals(""))
+                && (logic != null)
+                && (parCommand <= ModelCommand.Down))
             {
                 logic.ReceiveCommand(parCommand, parBeginCommand);
             }
         }
 
-        public override void HandleCommand(ModelCommand parCommand)
+        protected override void HandleCommand(ModelCommand parCommand)
         {
-            switch (parCommand)
+            _stateMachine.ChangeState(parCommand);
+            SelectedMenuItem = _stateMachine.SelectedMenuItem;
+            MenuHeader = _stateMachine.MenuHeader;
+            switch (_stateMachine.CurrentCommand)
             {
-                /*case ModelCommand.Up:
-                    SelectPrevMenuItem();
+                case ModelStateMachineCommand.Pause:
+                    this.Pause();
                     break;
-                case ModelCommand.Down:
-                    SelectNextMenuItem();
-                    break;*/
-                case ModelCommand.OK:
-                    AcceptAction();
+                case ModelStateMachineCommand.Resume:
+                    this.Resume();
                     break;
-                case ModelCommand.Escape:
-                    CancelAction();
+                case ModelStateMachineCommand.LoadMenu:
+                    this.Stop();
+                    LoadAnotherModel?.Invoke(GameModelType.Menu);
+                    break;
+                case ModelStateMachineCommand.LoadLevel:
+                    this.Stop();
+                    LoadAnotherModel?.Invoke(GameModelType.Level, _model.LevelID);
+                    break;
+                case ModelStateMachineCommand.LoadNextLevel:
+                    this.Stop();
+                    try
+                    {
+                        List<int> levels = LevelLoader.CheckAvailableLevels().OrderBy(x => x).ToList();
+                        int currentNumber = levels.FindIndex(x => x == _model.LevelID);
+                        int nextLevelID = levels[currentNumber + 1];
+                        LoadAnotherModel?.Invoke(GameModelType.Level, nextLevelID);
+                    }
+                    catch
+                    {
+                        LoadAnotherModel?.Invoke(GameModelType.Menu);
+                    }
                     break;
             }
-        }
-
-        protected override void AcceptAction()
-        {
-        }
-
-        protected override void CancelAction()
-        {
-            LoadAnotherModel(GameModelType.Menu);
         }
     }
 }

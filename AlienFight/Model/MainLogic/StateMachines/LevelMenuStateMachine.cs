@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace AlienExplorer.Model
 {
-    public class MainMenuStateMachine : ModelStateMachine
+    public class LevelMenuStateMachine : ModelStateMachine
     {
-        public MainMenuStateMachine(GameModel parModel, int parSelectedMenuItem = 0) : base(parModel, parSelectedMenuItem)
+        public LevelMenuStateMachine(GameModel parModel, int parSelectedMenuItem = 0) : base(parModel, parSelectedMenuItem)
         {
             InitializeMainMenu();
         }
@@ -125,7 +125,7 @@ namespace AlienExplorer.Model
             }
             _model.UIItems[0].State = 1;
             SelectedMenuItem = 0;
-            MenuHeader = "Alien Explorer";
+            MenuHeader = "";
             _currentMenu = UIObjectType.OK;
             CurrentCommand = ModelStateMachineCommand.None;
         }

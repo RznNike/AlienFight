@@ -69,6 +69,9 @@ namespace AlienExplorer.Model
         private SaveFile()
         {
             _levelsMD5 = new Dictionary<int, string>();
+            int firstLevel = LevelLoader.CheckAvailableLevels().Min();
+            _levelToLoad = firstLevel;
+            _openedLevel = firstLevel;
             this.FilesVerificationRequired += FilesVerificationRequiredHandler;
             this.SaveInfoChanged += SaveInfoChangedHandler;
         }
@@ -118,7 +121,7 @@ namespace AlienExplorer.Model
             {
                 string[ ] numbersInFileName = Regex.Split(elFileName, "[^0-9]+");
                 int id = int.Parse(numbersInFileName.Where(x => !x.Equals("")).Last());
-                string md5 = CalculateMD5($"{LevelLoader.LEVELS_FOLDER}/{elFileName}");
+                string md5 = CalculateMD5(elFileName);
                 newLevelsMD5.Add(id, md5);
             }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 
 namespace AlienExplorer.Model
 {
@@ -8,19 +8,8 @@ namespace AlienExplorer.Model
 
         public MenuLogic(GameModel parModel) : base(parModel)
         {
-            _model.UIItems = new List<UIObject>();
-            for (UIObjectType i = UIObjectType.New_game; i <= UIObjectType.Exit; i++)
-            {
-                UIObject item = new UIObject()
-                {
-                    Type = i,
-                    State = 0
-                };
-                _model.UIItems.Add(item);
-            }
-            _model.UIItems[0].State = 1;
-            MenuHeader = "Alien Explorer";
-            _currentMenu = UIObjectType.OK;
+            _stateMachine = new MainMenuStateMachine(parModel);
+            MenuHeader = _stateMachine.MenuHeader;
         }
 
         public override void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand)
@@ -31,43 +20,31 @@ namespace AlienExplorer.Model
             }
         }
 
-        public override void HandleCommand(ModelCommand parCommand)
+        protected override void HandleCommand(ModelCommand parCommand)
         {
-            switch (parCommand)
+            _stateMachine.ChangeState(parCommand);
+            SelectedMenuItem = _stateMachine.SelectedMenuItem;
+            MenuHeader = _stateMachine.MenuHeader;
+            switch (_stateMachine.CurrentCommand)
             {
-                case ModelCommand.Up:
-                    SelectPrevMenuItem();
+                case ModelStateMachineCommand.LoadMenu:
+                    LoadAnotherModel?.Invoke(GameModelType.Menu);
                     break;
-                case ModelCommand.Down:
-                    SelectNextMenuItem();
+                case ModelStateMachineCommand.LoadLevel:
+                    LoadAnotherModel?.Invoke(GameModelType.Level, _stateMachine.SelectedMenuItem);
                     break;
-                case ModelCommand.OK:
-                    AcceptAction();
+                case ModelStateMachineCommand.LoadFirstLevel:
+                    int firstLevelID = LevelLoader.CheckAvailableLevels().Min();
+                    LoadAnotherModel?.Invoke(GameModelType.Level, firstLevelID);
                     break;
-                case ModelCommand.Escape:
-                    CancelAction();
+                case ModelStateMachineCommand.LoadLastLevel:
+                    int lastLevelID = SaveFile.GetInstance().LevelToLoad;
+                    LoadAnotherModel?.Invoke(GameModelType.Level, lastLevelID);
+                    break;
+                case ModelStateMachineCommand.Exit:
+                    CloseApplication?.Invoke();
                     break;
             }
-        }
-
-        protected override void AcceptAction()
-        {
-            if ((_model.UIItems != null) && (_model.UIItems.Count > 0))
-            {
-                switch (_model.UIItems[SelectedMenuItem].Type)
-                {
-                    case UIObjectType.New_game:
-                        LoadAnotherModel?.Invoke(GameModelType.Level);
-                        break;
-                    case UIObjectType.Exit:
-                        CloseApplication?.Invoke();
-                        break;
-                }
-            }
-        }
-
-        protected override void CancelAction()
-        {
         }
     }
 }
