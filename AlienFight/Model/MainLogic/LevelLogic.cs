@@ -8,7 +8,6 @@ namespace AlienExplorer.Model
     public class LevelLogic : BaseModelLogic
     {
         public TimeSpan LevelTimer { get; private set; }
-        public bool ShadowLevel { get; private set; }
         private GameModel _model;
         private bool _stopThread;
         private Thread _timerTick;
@@ -16,8 +15,8 @@ namespace AlienExplorer.Model
         public LevelLogic(GameModel parModel) : base(parModel)
         {
             _stateMachine = new LevelMenuStateMachine(parModel);
-            ShadowLevel = false;
             MenuHeader = _stateMachine.MenuHeader;
+            ShadowLevel = _stateMachine.ShadowLevel;
             _model = parModel;
             LevelTimer = new TimeSpan(0);
         }
@@ -122,6 +121,7 @@ namespace AlienExplorer.Model
             _stateMachine.ChangeState(parCommand);
             SelectedMenuItem = _stateMachine.SelectedMenuItem;
             MenuHeader = _stateMachine.MenuHeader;
+            ShadowLevel = _stateMachine.ShadowLevel;
             switch (_stateMachine.CurrentCommand)
             {
                 case ModelStateMachineCommand.Pause:

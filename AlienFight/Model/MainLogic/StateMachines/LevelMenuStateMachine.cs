@@ -1,78 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace AlienExplorer.Model
 {
     public class LevelMenuStateMachine : ModelStateMachine
     {
+        private bool _menuDisplayed;
         public LevelMenuStateMachine(GameModel parModel, int parSelectedMenuItem = 0) : base(parModel, parSelectedMenuItem)
         {
-            InitializeMainMenu();
+            InitializeLevelUI();
+            CurrentCommand = ModelStateMachineCommand.None;
+            _menuDisplayed = false;
         }
 
         public override void ChangeState(ModelCommand parCommand)
         {
             if ((_model.UIItems != null) && (_model.UIItems.Count > 0))
             {
-                switch (parCommand)
+                if (_menuDisplayed)
                 {
-                    case ModelCommand.Up:
-                        SelectPrevMenuItem();
-                        break;
-                    case ModelCommand.Down:
-                        SelectNextMenuItem();
-                        break;
-                    case ModelCommand.OK:
-                        AcceptAction();
-                        break;
-                    case ModelCommand.Escape:
-                        CancelAction();
-                        break;
+                    switch (parCommand)
+                    {
+                        case ModelCommand.Up:
+                            SelectPrevMenuItem();
+                            break;
+                        case ModelCommand.Down:
+                            SelectNextMenuItem();
+                            break;
+                        case ModelCommand.OK:
+                            AcceptAction();
+                            break;
+                    }
                 }
+                else
+                {
+                    CurrentCommand = ModelStateMachineCommand.None;
+                }
+                if (parCommand == ModelCommand.Escape)
+                {
+                    CancelAction();
+                }
+            }
+        }
+
+        public void EnterToMenu(UIObjectType parType)
+        {
+            switch (parType)
+            {
+                case UIObjectType.OK:
+                    InitializeLevelUI();
+                    break;
+                case UIObjectType.Resume:
+                    InitializePauseMenu();
+                    break;
+                case UIObjectType.Next:
+                    InitializeWinMenu();
+                    break;
+                case UIObjectType.Restart:
+                    InitializeLoseMenu();
+                    break;
             }
         }
 
         protected override void AcceptAction()
         {
-            switch (_currentMenu)
+            UIObjectType selectedItem = _model.UIItems[SelectedMenuItem].Type;
+            switch (selectedItem)
             {
-                case UIObjectType.OK:
-                    EnterToMenu(_model.UIItems[SelectedMenuItem].Type);
+                case UIObjectType.Resume:
+                    EnterToMenu(UIObjectType.OK);
                     break;
-                case UIObjectType.New_game:
-                    if (_model.UIItems[SelectedMenuItem].Type == UIObjectType.OK)
-                    {
-                        CurrentCommand = ModelStateMachineCommand.LoadFirstLevel;
-                    }
-                    else
-                    {
-                        EnterToMenu(UIObjectType.OK);
-                    }
-                    break;
-                case UIObjectType.Load_game:
-                    if (_model.UIItems[SelectedMenuItem].Type == UIObjectType.OK)
-                    {
-                        CurrentCommand = ModelStateMachineCommand.LoadLastLevel;
-                    }
-                    else
-                    {
-                        EnterToMenu(UIObjectType.OK);
-                    }
-                    break;
-                case UIObjectType.Choose_level:
+                case UIObjectType.Restart:
                     CurrentCommand = ModelStateMachineCommand.LoadLevel;
-                    SelectedMenuItem = _model.UIItems[SelectedMenuItem].ID;
                     break;
-                case UIObjectType.Exit:
-                    if (_model.UIItems[SelectedMenuItem].Type == UIObjectType.OK)
-                    {
-                        CurrentCommand = ModelStateMachineCommand.Exit;
-                    }
-                    else
-                    {
-                        EnterToMenu(UIObjectType.OK);
-                    }
+                case UIObjectType.Next:
+                    CurrentCommand = ModelStateMachineCommand.LoadNextLevel;
+                    break;
+                case UIObjectType.Back_to_menu:
+                    CurrentCommand = ModelStateMachineCommand.LoadMenu;
                     break;
             }
         }
@@ -82,136 +87,88 @@ namespace AlienExplorer.Model
             switch (_currentMenu)
             {
                 case UIObjectType.OK:
-                    EnterToMenu(UIObjectType.Exit);
+                    EnterToMenu(UIObjectType.Resume);
                     break;
-                default:
+                case UIObjectType.Resume:
                     EnterToMenu(UIObjectType.OK);
                     break;
-            }
-        }
-
-        private void EnterToMenu(UIObjectType parType)
-        {
-            switch (parType)
-            {
-                case UIObjectType.OK:
-                    InitializeMainMenu();
-                    break;
-                case UIObjectType.New_game:
-                case UIObjectType.Load_game:
-                case UIObjectType.Exit:
-                    InitializeConfirmationMenu(parType);
-                    break;
-                case UIObjectType.Choose_level:
-                    InitializeChooseLevelMenu();
-                    break;
-                case UIObjectType.Records:
-                    InitializeRecordsMenu();
+                default:
+                    CurrentCommand = ModelStateMachineCommand.LoadMenu;
                     break;
             }
         }
 
-        private void InitializeMainMenu()
+        private void InitializeLevelUI()
         {
             _model.UIItems = new List<UIObject>();
-            for (UIObjectType i = UIObjectType.New_game; i <= UIObjectType.Exit; i++)
+            for (UIObjectType i = UIObjectType.Health; i <= UIObjectType.Timer; i++)
             {
                 UIObject item = new UIObject()
                 {
-                    Type = i,
-                    State = 0
+                    Type = i
                 };
                 _model.UIItems.Add(item);
             }
-            _model.UIItems[0].State = 1;
-            SelectedMenuItem = 0;
             MenuHeader = "";
             _currentMenu = UIObjectType.OK;
-            CurrentCommand = ModelStateMachineCommand.None;
+            CurrentCommand = ModelStateMachineCommand.Resume;
+            _menuDisplayed = false;
+            ShadowLevel = false;
         }
 
-        private void InitializeConfirmationMenu(UIObjectType parType)
+        private void InitializePauseMenu()
         {
-            string caption = "";
             _model.UIItems = new List<UIObject>();
-            switch (parType)
-            {
-                case UIObjectType.New_game:
-                    caption = "Progress will be lost. Continue?";
-                    _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = caption, ID = -1 });
-                    MenuHeader = "New game";
-                    break;
-                case UIObjectType.Load_game:
-                    caption = "Load last played level?";
-                    _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = caption, ID = -1 });
-                    MenuHeader = "Load game";
-                    break;
-                case UIObjectType.Exit:
-                    caption = "Close game?";
-                    _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = caption, ID = -1 });
-                    MenuHeader = "Exit";
-                    break;
-            }
-            for (UIObjectType i = UIObjectType.OK; i <= UIObjectType.Cancel; i++)
-            {
-                UIObject item = new UIObject()
-                {
-                    Type = i,
-                    State = 0
-                };
-                _model.UIItems.Add(item);
-            }
-            _model.UIItems[2].State = 1;
-            _currentMenu = parType;
-            SelectedMenuItem = 2;
-            CurrentCommand = ModelStateMachineCommand.None;
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = "GAME PAUSED", ID = -1 });
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Resume, State = 1 });
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Restart, State = 0 });
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 });
+            SelectedMenuItem = 1;
+            MenuHeader = $"Level {_model.LevelID}";
+            _currentMenu = UIObjectType.Resume;
+            CurrentCommand = ModelStateMachineCommand.Pause;
+            _menuDisplayed = true;
+            ShadowLevel = true;
         }
 
-        private void InitializeChooseLevelMenu()
+        private void InitializeWinMenu()
         {
-            int maxLevel = SaveFile.GetInstance().OpenedLevel;
-            List<int> levelIDs = LevelLoader.CheckAvailableLevels().OrderBy(x => x).TakeWhile(x => x <= maxLevel).ToList();
-
             _model.UIItems = new List<UIObject>();
-            foreach (int elLevelID in levelIDs)
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = "YOU WIN!", ID = -1 });
+            int currentProgress = SaveFile.GetInstance().LevelToLoad;
+            int lastLevel = LevelLoader.CheckAvailableLevels().OrderBy(x => x).Last();
+            if (lastLevel != currentProgress)
             {
-                UIObject item = new UIObject()
-                {
-                    Type = UIObjectType.Text,
-                    State = 0,
-                    Text = $"Level {elLevelID}",
-                    ID = elLevelID
-                };
-                _model.UIItems.Add(item);
+                _model.UIItems.Add(new UIObject() { Type = UIObjectType.Next, State = 1 });
+                _model.UIItems.Add(new UIObject() { Type = UIObjectType.Restart, State = 0 });
+                _model.UIItems.Add(new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 });
+                SelectedMenuItem = 1;
             }
-            _model.UIItems[0].State = 1;
-            SelectedMenuItem = 0;
-            MenuHeader = "Choose level";
-            _currentMenu = UIObjectType.Choose_level;
-            CurrentCommand = ModelStateMachineCommand.None;
+            else
+            {
+                _model.UIItems.Add(new UIObject() { Type = UIObjectType.Restart, State = 0 });
+                _model.UIItems.Add(new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 });
+                SelectedMenuItem = 2;
+            }
+            MenuHeader = $"Level {_model.LevelID}";
+            _currentMenu = UIObjectType.Next;
+            CurrentCommand = ModelStateMachineCommand.Pause;
+            _menuDisplayed = true;
+            ShadowLevel = true;
         }
 
-        private void InitializeRecordsMenu()
+        private void InitializeLoseMenu()
         {
-            Dictionary<int, TimeSpan> records = SaveFile.GetInstance().Records;
-
             _model.UIItems = new List<UIObject>();
-            foreach (int elKey in records.Keys)
-            {
-                TimeSpan time = records[elKey];
-                UIObject item = new UIObject()
-                {
-                    Type = UIObjectType.Text,
-                    State = 0,
-                    Text = $"Level {elKey}: {time.Minutes:D2}:{time.Seconds:D2}.{(time.Milliseconds / 100):D1}"
-                };
-                _model.UIItems.Add(item);
-            }
-            _model.UIItems[0].State = 1;
-            SelectedMenuItem = 0;
-            MenuHeader = "Records";
-            _currentMenu = UIObjectType.Records;
-            CurrentCommand = ModelStateMachineCommand.None;
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = "YOU LOSE...", ID = -1 });
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Restart, State = 1 });
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 });
+            SelectedMenuItem = 1;
+            MenuHeader = $"Level {_model.LevelID}";
+            _currentMenu = UIObjectType.Next;
+            CurrentCommand = ModelStateMachineCommand.Pause;
+            _menuDisplayed = true;
+            ShadowLevel = true;
         }
     }
 }

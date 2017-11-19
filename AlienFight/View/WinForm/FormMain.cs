@@ -75,6 +75,10 @@ namespace AlienExplorer.View
             {
                 DrawGameObject(elLevelElement, parModel, cameraX, cameraY);
             }
+            foreach (GameObject elDoor in parModel.Doors)
+            {
+                DrawGameObject(elDoor, parModel, cameraX, cameraY);
+            }
             foreach (GameObject elEnemy in parModel.Enemies)
             {
                 DrawGameObject(elEnemy, parModel, cameraX, cameraY);
@@ -114,6 +118,10 @@ namespace AlienExplorer.View
 
         private void DrawUI(GameModel parModel)
         {
+            if (parModel.ModelLogic.ShadowLevel)
+            {
+                _bufGraphics.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.FromArgb(31, 68, 82))), 0, 0, this.Width, this.Height);
+            }
             string header = parModel.ModelLogic.MenuHeader;
             if (!header.Equals(""))
             {

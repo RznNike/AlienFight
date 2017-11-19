@@ -5,6 +5,7 @@
         protected ModelStateMachine _stateMachine;
         public int SelectedMenuItem { get; protected set; }
         public string MenuHeader { get; protected set; }
+        public bool ShadowLevel { get; protected set; }
 
         public dLoadAnotherModel LoadAnotherModel { get; set; }
 

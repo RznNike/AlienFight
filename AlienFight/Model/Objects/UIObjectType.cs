@@ -10,7 +10,7 @@
         
         Resume,
         Back_to_menu,
-        Repeat,
+        Restart,
         Next,
         
         OK,

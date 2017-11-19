@@ -8,6 +8,7 @@ namespace AlienExplorer.Model
         public GameModelType Type { get; set; }
         public BaseModelLogic ModelLogic { get; set; }
         public List<LevelObject> ModelObjects { get; set; }
+        public List<LevelObject> Doors { get; set; }
         public List<EnemyObject> Enemies { get; set; }
         public PlayerObject Player { get; set; }
         public List<UIObject> UIItems { get; set; }

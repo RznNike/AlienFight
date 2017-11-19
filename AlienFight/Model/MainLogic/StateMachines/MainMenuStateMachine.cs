@@ -35,10 +35,27 @@ namespace AlienExplorer.Model
 
         protected override void AcceptAction()
         {
+            UIObjectType selectedItem = _model.UIItems[SelectedMenuItem].Type;
             switch (_currentMenu)
             {
                 case UIObjectType.OK:
-                    EnterToMenu(_model.UIItems[SelectedMenuItem].Type);
+                    if (selectedItem != UIObjectType.New_game)
+                    {
+                        EnterToMenu(selectedItem);
+                    }
+                    else
+                    {
+                        int currentProgress = SaveFile.GetInstance().LevelToLoad;
+                        int firstLevel = LevelLoader.CheckAvailableLevels().OrderBy(x => x).First();
+                        if (firstLevel != currentProgress)
+                        {
+                            EnterToMenu(selectedItem);
+                        }
+                        else
+                        {
+                            CurrentCommand = ModelStateMachineCommand.LoadFirstLevel;
+                        }
+                    }
                     break;
                 case UIObjectType.New_game:
                     if (_model.UIItems[SelectedMenuItem].Type == UIObjectType.OK)
@@ -138,20 +155,18 @@ namespace AlienExplorer.Model
             {
                 case UIObjectType.New_game:
                     caption = "Progress will be lost. Continue?";
-                    _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = caption, ID = -1 });
                     MenuHeader = "New game";
                     break;
                 case UIObjectType.Load_game:
                     caption = "Load last played level?";
-                    _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = caption, ID = -1 });
                     MenuHeader = "Load game";
                     break;
                 case UIObjectType.Exit:
                     caption = "Close game?";
-                    _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = caption, ID = -1 });
                     MenuHeader = "Exit";
                     break;
             }
+            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = caption, ID = -1 });
             for (UIObjectType i = UIObjectType.OK; i <= UIObjectType.Cancel; i++)
             {
                 UIObject item = new UIObject()

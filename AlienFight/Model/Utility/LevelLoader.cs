@@ -25,6 +25,7 @@ namespace AlienExplorer.Model
             ParseLevelProperties(level, xmlReader);
             level.ModelObjects = ParseLevelObjects(xmlReader);
             level.Enemies = ParseEnemies(xmlReader);
+            level.Doors = ParseDoors(xmlReader);
             level.Player = ParsePlayer(xmlReader);
             level.PlayerLogics = new PlayerLogic(level);
             level.EnemyLogics = new List<ILogic>();
@@ -103,6 +104,36 @@ namespace AlienExplorer.Model
             }
 
             return levelObjects;
+        }
+
+        private static List<LevelObject> ParseDoors(XmlReader xmlReader)
+        {
+            List<LevelObject> doors = new List<LevelObject>();
+            xmlReader.ReadToFollowing("doors");
+            xmlReader.Read();
+            while (xmlReader.ReadToNextSibling("object"))
+            {
+                LevelObject door = new LevelObject();
+                xmlReader.ReadToDescendant("type");
+                door.Type = (LevelObjectType)Enum.Parse(typeof(LevelObjectType), xmlReader.ReadElementContentAsString());
+                xmlReader.ReadToNextSibling("x");
+                door.X = xmlReader.ReadElementContentAsFloat();
+                xmlReader.ReadToNextSibling("y");
+                door.Y = xmlReader.ReadElementContentAsFloat();
+                xmlReader.ReadToNextSibling("sizeX");
+                door.SizeX = xmlReader.ReadElementContentAsFloat();
+                xmlReader.ReadToNextSibling("sizeY");
+                door.SizeY = xmlReader.ReadElementContentAsFloat();
+                xmlReader.ReadToNextSibling("state");
+                door.State = xmlReader.ReadElementContentAsInt();
+                xmlReader.ReadToNextSibling("flippedY");
+                door.FlippedY = xmlReader.ReadElementContentAsBoolean();
+                xmlReader.ReadEndElement();
+
+                doors.Add(door);
+            }
+
+            return doors;
         }
 
         private static List<EnemyObject> ParseEnemies(XmlReader xmlReader)

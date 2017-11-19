@@ -458,11 +458,33 @@
             <isMoving>false</isMoving>
         </enemy>
     </enemies>
+    <doors>
+        <object>
+            <!-- X / Y = 70 / 110 = 0.64 -->
+            <type>Door</type>
+            <x>12</x>
+            <y>2</y>
+            <sizeX>0.64</sizeX>
+            <sizeY>1</sizeY>
+            <state>1</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <!-- X / Y = 70 / 110 = 0.64 -->
+            <type>Door</type>
+            <x>1</x>
+            <y>3</y>
+            <sizeX>0.64</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+    </doors>
     <player>
         <!-- X / Y = 72 / 97 = 0.74 -->
         <type>Pink</type>
-        <x>1.5</x>
-        <y>2.05</y>
+        <x>1.2</x>
+        <y>3.05</y>
         <sizeX>0.37</sizeX>
         <sizeY>0.5</sizeY>
         <sizeYstandart>0.5</sizeYstandart>

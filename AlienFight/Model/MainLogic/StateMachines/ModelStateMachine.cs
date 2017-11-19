@@ -8,12 +8,14 @@
         public ModelStateMachineCommand CurrentCommand { get; protected set; }
         public int SelectedMenuItem { get; protected set; }
         public string MenuHeader { get; protected set; }
+        public bool ShadowLevel { get; protected set; }
 
         public ModelStateMachine(GameModel parModel, int parSelectedMenuItem = 1)
         {
             _model = parModel;
             CurrentCommand = ModelStateMachineCommand.None;
             SelectedMenuItem = parSelectedMenuItem;
+            ShadowLevel = false;
         }
 
         public abstract void ChangeState(ModelCommand parCommand);
