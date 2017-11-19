@@ -9,6 +9,8 @@ namespace AlienExplorer.Model
     {
         private static readonly int THREAD_SLEEP_MS = 5;
         private static readonly float PLAYER_TO_DOOR_WIN_OFFSET = 0.4f;
+        private static readonly float CAMERA_STABLE_RANGE_X = 0.1f;
+        private static readonly float CAMERA_STABLE_RANGE_Y = 0.15f;
 
         public TimeSpan LevelTimer { get; private set; }
         private DateTime _timer;
@@ -237,6 +239,61 @@ namespace AlienExplorer.Model
 
         private void MoveCamera()
         {
+            float dX = _model.CameraX + _model.CameraSizeX * (0.5f - CAMERA_STABLE_RANGE_X) - _model.Player.X;
+            if (dX > 0)
+            {
+                if (dX < _model.CameraX)
+                {
+                    _model.CameraX -= dX;
+                }
+                else
+                {
+                    _model.CameraX = 0;
+                }
+            }
+            else
+            {
+                dX = _model.Player.X + _model.Player.SizeX - _model.CameraX - _model.CameraSizeX * (0.5f + CAMERA_STABLE_RANGE_X);
+                if (dX > 0)
+                {
+                    if (dX < (_model.SizeX - (_model.CameraX + _model.CameraSizeX)))
+                    {
+                        _model.CameraX += dX;
+                    }
+                    else
+                    {
+                        _model.CameraX = _model.SizeX - _model.CameraSizeX;
+                    }
+                }
+            }
+
+            float dY = _model.CameraY + _model.CameraSizeY * (0.5f - CAMERA_STABLE_RANGE_Y) - _model.Player.Y;
+            if (dY > 0)
+            {
+                if (dY < _model.CameraY)
+                {
+                    _model.CameraY -= dY;
+                }
+                else
+                {
+                    _model.CameraY = 0;
+                }
+            }
+            else
+            {
+                dY = _model.Player.Y + _model.Player.SizeY - _model.CameraY - _model.CameraSizeY * (0.5f + CAMERA_STABLE_RANGE_Y);
+                if (dY > 0)
+                {
+                    if (dY < (_model.SizeY - (_model.CameraY + _model.CameraSizeY)))
+                    {
+                        _model.CameraY += dY;
+                    }
+                    else
+                    {
+                        _model.CameraY = _model.SizeY - _model.CameraSizeY;
+                    }
+                }
+            }
         }
     }
 }

@@ -8,9 +8,10 @@ namespace AlienExplorer.Controller
 {
     public class WinFormController : GameController
     {
-        public WinFormController()
+        public WinFormController() : base()
         {
             View = new FormMain();
+            View.SetCameraSize += Model.SetCameraSize;
             ((Form)View).Show();
             ((Form)View).KeyDown += KeyDown;
             ((Form)View).KeyUp += KeyUp;

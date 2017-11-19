@@ -18,5 +18,13 @@ namespace AlienExplorer.Model
         public int SizeY { get; set; }
         public float CameraX { get; set; }
         public float CameraY { get; set; }
+        public float CameraSizeX { get; private set; }
+        public float CameraSizeY { get; private set; }
+
+        public void SetCameraSize(float parSizeX, float parSizeY)
+        {
+            CameraSizeX = parSizeX;
+            CameraSizeY = parSizeY;
+        }
     }
 }

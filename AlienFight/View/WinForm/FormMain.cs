@@ -30,6 +30,8 @@ namespace AlienExplorer.View
         private DateTime _time;
 #endif
 
+        public dSetCameraSize SetCameraSize { get; set; }
+
         public FormMain()
         {
             InitializeComponent();
@@ -48,10 +50,16 @@ namespace AlienExplorer.View
             _fontCollection = ResourceLoader.LoadFontCollection();
             this.Font = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER, FontStyle.Regular, GraphicsUnit.Point, 0);
             _headerFont = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER * 2, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SendCameraSizeToModel();
 #if FPSMETER
             _counter = new int[4];
             _time = DateTime.UtcNow;
 #endif
+        }
+
+        public void SendCameraSizeToModel()
+        {
+            SetCameraSize?.Invoke(this.Width * 1.0f / _cellSize, this.Height * 1.0f / _cellSize);
         }
 
         public void ViewModel(GameModel parModel)
@@ -252,6 +260,7 @@ namespace AlienExplorer.View
             {
                 this.Font = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER, FontStyle.Regular, GraphicsUnit.Point, 0);
             }
+            SendCameraSizeToModel();
 
             Thread delayedGC = new Thread(GCcollectWithDelay);
             delayedGC.Start(500);
