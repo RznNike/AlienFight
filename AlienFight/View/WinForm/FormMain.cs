@@ -1,4 +1,4 @@
-﻿//#define FPSMETER
+﻿#define FPSMETER
 
 using System;
 using System.Drawing;

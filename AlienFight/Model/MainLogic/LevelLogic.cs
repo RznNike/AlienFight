@@ -7,6 +7,9 @@ namespace AlienExplorer.Model
 {
     public class LevelLogic : BaseModelLogic
     {
+        private static readonly int THREAD_SLEEP_MS = 5;
+        private static readonly float PLAYER_TO_DOOR_WIN_OFFSET = 0.4f;
+
         public TimeSpan LevelTimer { get; private set; }
         private DateTime _timer;
         private GameModel _model;
@@ -25,7 +28,13 @@ namespace AlienExplorer.Model
 
         public void Start()
         {
-            mutex.ReleaseMutex();
+            try
+            {
+                mutex.ReleaseMutex();
+            }
+            catch
+            {
+            }
             _model.PlayerLogics.Start();
             foreach (ILogic elLogic in _model.EnemyLogics)
             {
@@ -36,11 +45,11 @@ namespace AlienExplorer.Model
             }
 
             _stopThread = false;
-            Thread timerTickThread = new Thread(TimerTick)
+            Thread logicThread = new Thread(IterativeAction)
             {
                 IsBackground = true
             };
-            timerTickThread.Start();
+            logicThread.Start();
         }
 
         public void Stop()
@@ -54,7 +63,13 @@ namespace AlienExplorer.Model
                     elLogic.Stop();
                 }
             }
-            mutex.ReleaseMutex();
+            try
+            {
+                mutex.ReleaseMutex();
+            }
+            catch
+            {
+            }
         }
 
         public void Pause()
@@ -73,20 +88,12 @@ namespace AlienExplorer.Model
                     elLogic.Resume();
                 }
             }
-            mutex.ReleaseMutex();
-        }
-
-        private void TimerTick()
-        {
-            _timer = DateTime.UtcNow;
-            while (!_stopThread)
+            try
             {
-                mutex.WaitOne();
                 mutex.ReleaseMutex();
-                DateTime newTime = DateTime.UtcNow;
-                LevelTimer += newTime - _timer;
-                _timer = newTime;
-                Thread.Sleep(50);
+            }
+            catch
+            {
             }
         }
 
@@ -142,6 +149,94 @@ namespace AlienExplorer.Model
                     }
                     break;
             }
+        }
+
+        private void IterativeAction()
+        {
+            _timer = DateTime.UtcNow;
+
+            while (!_stopThread)
+            {
+                mutex.WaitOne();
+                mutex.ReleaseMutex();
+                DateTime newTime = DateTime.UtcNow;
+                LevelTimer += newTime - _timer;
+                _timer = newTime;
+
+                _stopThread = CheckPlayerHP() || CheckPlayerPosition();
+                if (!_stopThread)
+                {
+                    MoveCamera();
+                    Thread.Sleep(THREAD_SLEEP_MS);
+                }
+            }
+        }
+
+        private bool CheckPlayerHP()
+        {
+            bool stopThread = false;
+            if (_model.Player.Health == 0)
+            {
+                this.Stop();
+                ((LevelMenuStateMachine)_stateMachine).EnterToMenu(UIObjectType.Restart);
+                SelectedMenuItem = _stateMachine.SelectedMenuItem;
+                MenuHeader = _stateMachine.MenuHeader;
+                ShadowLevel = _stateMachine.ShadowLevel;
+                stopThread = true;
+            }
+
+            return stopThread;
+        }
+
+        private bool CheckPlayerPosition()
+        {
+            bool stopThread = false;
+            if (IsPlayerInGoalPoint())
+            {
+                this.Stop();
+                ((LevelMenuStateMachine)_stateMachine).EnterToMenu(UIObjectType.Next);
+                SelectedMenuItem = _stateMachine.SelectedMenuItem;
+                MenuHeader = _stateMachine.MenuHeader;
+                ShadowLevel = _stateMachine.ShadowLevel;
+                if (_model.Player.Health == _model.Player.HealthMax)
+                {
+                    SaveFile.GetInstance().CheckAndSetRecord(_model.LevelID, LevelTimer);
+                }
+                stopThread = true;
+            }
+
+            return stopThread;
+        }
+
+        private bool IsPlayerInGoalPoint()
+        {
+            bool result = false;
+            foreach (LevelObject elDoor in _model.Doors)
+            {
+                if (elDoor.State == 1)
+                {
+                    result |= IsIntersected(_model.Player.X + _model.Player.SizeX * PLAYER_TO_DOOR_WIN_OFFSET,
+                            _model.Player.X + _model.Player.SizeX * (1 - PLAYER_TO_DOOR_WIN_OFFSET),
+                            elDoor.X,
+                            elDoor.X + elDoor.SizeX)
+                        && IsIntersected(_model.Player.Y + _model.Player.SizeY * PLAYER_TO_DOOR_WIN_OFFSET,
+                            _model.Player.Y + _model.Player.SizeY * (1 - PLAYER_TO_DOOR_WIN_OFFSET),
+                            elDoor.Y,
+                            elDoor.Y + elDoor.SizeY);
+                }
+            }
+
+            return result;
+        }
+
+        private bool IsIntersected(float parMin1, float parMax1, float parMin2, float parMax2)
+        {
+            return ((parMax2 >= parMin1) && (parMax2 <= parMax1))
+                || ((parMax2 > parMax1) && (parMin2 <= parMax1));
+        }
+
+        private void MoveCamera()
+        {
         }
     }
 }

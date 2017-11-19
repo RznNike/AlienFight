@@ -115,11 +115,13 @@ namespace AlienExplorer.Model
 
         private void InitializePauseMenu()
         {
-            _model.UIItems = new List<UIObject>();
-            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = "GAME PAUSED", ID = -1 });
-            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Resume, State = 1 });
-            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Restart, State = 0 });
-            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 });
+            _model.UIItems = new List<UIObject>
+            {
+                new UIObject() { Type = UIObjectType.Text, State = 0, Text = "GAME PAUSED", ID = -1 },
+                new UIObject() { Type = UIObjectType.Resume, State = 1 },
+                new UIObject() { Type = UIObjectType.Restart, State = 0 },
+                new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 }
+            };
             SelectedMenuItem = 1;
             MenuHeader = $"Level {_model.LevelID}";
             _currentMenu = UIObjectType.Resume;
@@ -130,8 +132,10 @@ namespace AlienExplorer.Model
 
         private void InitializeWinMenu()
         {
-            _model.UIItems = new List<UIObject>();
-            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = "YOU WIN!", ID = -1 });
+            _model.UIItems = new List<UIObject>
+            {
+                new UIObject() { Type = UIObjectType.Text, State = 0, Text = "YOU WIN!", ID = -1 }
+            };
             int currentProgress = SaveFile.GetInstance().LevelToLoad;
             int lastLevel = LevelLoader.CheckAvailableLevels().OrderBy(x => x).Last();
             if (lastLevel != currentProgress)
@@ -144,7 +148,7 @@ namespace AlienExplorer.Model
             else
             {
                 _model.UIItems.Add(new UIObject() { Type = UIObjectType.Restart, State = 0 });
-                _model.UIItems.Add(new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 });
+                _model.UIItems.Add(new UIObject() { Type = UIObjectType.Back_to_menu, State = 1 });
                 SelectedMenuItem = 2;
             }
             MenuHeader = $"Level {_model.LevelID}";
@@ -156,10 +160,12 @@ namespace AlienExplorer.Model
 
         private void InitializeLoseMenu()
         {
-            _model.UIItems = new List<UIObject>();
-            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Text, State = 0, Text = "YOU LOSE...", ID = -1 });
-            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Restart, State = 1 });
-            _model.UIItems.Add(new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 });
+            _model.UIItems = new List<UIObject>
+            {
+                new UIObject() { Type = UIObjectType.Text, State = 0, Text = "YOU LOSE...", ID = -1 },
+                new UIObject() { Type = UIObjectType.Restart, State = 1 },
+                new UIObject() { Type = UIObjectType.Back_to_menu, State = 0 }
+            };
             SelectedMenuItem = 1;
             MenuHeader = $"Level {_model.LevelID}";
             _currentMenu = UIObjectType.Next;

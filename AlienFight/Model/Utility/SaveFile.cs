@@ -85,10 +85,18 @@ namespace AlienExplorer.Model
             return _instance;
         }
 
-        public void SetRecord(int parLevelNumber, TimeSpan parRecord)
+        public void CheckAndSetRecord(int parLevelNumber, TimeSpan parRecord)
         {
-            _records.Add(parLevelNumber, parRecord);
-            SaveInfoChanged?.Invoke(null, null);
+            if (!_records.Keys.Contains(parLevelNumber))
+            {
+                _records.Add(parLevelNumber, parRecord);
+                SaveInfoChanged?.Invoke(null, null);
+            }
+            else if (_records[parLevelNumber] > parRecord)
+            {
+                _records[parLevelNumber] = parRecord;
+                SaveInfoChanged?.Invoke(null, null);
+            }
         }
 
         private static SaveFile LoadFile()
