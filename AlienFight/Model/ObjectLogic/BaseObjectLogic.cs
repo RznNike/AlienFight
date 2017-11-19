@@ -17,7 +17,7 @@ namespace AlienExplorer.Model
         public GameObject Object { get; set; }
         protected StateMachineType _stateMachine;
         protected bool _stopThread;
-        private Thread _logicThread;
+        protected DateTime _timer;
 
         public BaseObjectLogic(GameModel parLevel)
         {
@@ -28,36 +28,25 @@ namespace AlienExplorer.Model
         public void Start()
         {
             _stopThread = false;
-            _logicThread = new Thread(IterativeAction)
+            Thread logicThread = new Thread(IterativeAction)
             {
                 IsBackground = true
             };
-            _logicThread.Start();
+            logicThread.Start();
         }
 
         public void Stop()
         {
             _stopThread = true;
-            if (_logicThread != null)
-            {
-                _logicThread.Resume();
-            }
         }
 
         public void Pause()
         {
-            if (_logicThread != null)
-            {
-                _logicThread.Suspend();
-            }
         }
 
-        public void Resume()
+        public virtual void Resume()
         {
-            if (_logicThread != null)
-            {
-                _logicThread.Resume();
-            }
+            _timer = DateTime.UtcNow;
         }
 
         protected abstract void IterativeAction();

@@ -19,7 +19,7 @@ namespace AlienExplorer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            WinFormController controller = new WinFormController();
+            GameController controller = new WinFormController();
             Application.Run();
         }
     }

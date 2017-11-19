@@ -25,15 +25,18 @@ namespace AlienExplorer.Model
             float[ ] speed = new float[2] { 0, 0 };
             float[ ] move = new float[2] { 0, 0 };
 
-            DateTime timer = DateTime.UtcNow;
+            _timer = DateTime.UtcNow;
             float attackCooldown = 0;
 
+            Mutex mutex = Mutex.OpenExisting("AlienExplorerLogicMutex");
             while (!_stopThread)
             {
+                mutex.WaitOne();
+                mutex.ReleaseMutex();
                 freeSpace = FindFreeSpace();
                 DateTime newTimer = DateTime.UtcNow;
-                float deltaSeconds = (float)(newTimer - timer).TotalSeconds;
-                timer = newTimer;
+                float deltaSeconds = (float)(newTimer - _timer).TotalSeconds;
+                _timer = newTimer;
                 speed = FindSpeed(speed, freeSpace, deltaSeconds, ref attackCooldown);
                 move = FindMove(speed, freeSpace, deltaSeconds);
                 MoveObject(move);

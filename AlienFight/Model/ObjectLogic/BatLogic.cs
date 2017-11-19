@@ -25,14 +25,17 @@ namespace AlienExplorer.Model
             float targetX = Enemy.LeftWalkingBoundX;
             float targetY = Enemy.LeftWalkingBoundY;
 
-            DateTime timer = DateTime.UtcNow;
+            _timer = DateTime.UtcNow;
 
+            Mutex mutex = Mutex.OpenExisting("AlienExplorerLogicMutex");
             while (!_stopThread)
             {
+                mutex.WaitOne();
+                mutex.ReleaseMutex();
                 freeSpace = FindFreeSpace();
                 DateTime newTimer = DateTime.UtcNow;
-                float deltaSeconds = (float)(newTimer - timer).TotalSeconds;
-                timer = newTimer;
+                float deltaSeconds = (float)(newTimer - _timer).TotalSeconds;
+                _timer = newTimer;
                 speed = FindSpeed(speed, freeSpace, deltaSeconds, ref targetX, ref targetY);
                 move = FindMove(speed, freeSpace, deltaSeconds);
                 MoveObject(move);

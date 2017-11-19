@@ -8,9 +8,10 @@ namespace AlienExplorer.Model
     public class LevelLogic : BaseModelLogic
     {
         public TimeSpan LevelTimer { get; private set; }
+        private DateTime _timer;
         private GameModel _model;
         private bool _stopThread;
-        private Thread _timerTick;
+        private Mutex mutex;
 
         public LevelLogic(GameModel parModel) : base(parModel)
         {
@@ -19,10 +20,12 @@ namespace AlienExplorer.Model
             ShadowLevel = _stateMachine.ShadowLevel;
             _model = parModel;
             LevelTimer = new TimeSpan(0);
+            mutex = new Mutex(true, "AlienExplorerLogicMutex");
         }
 
         public void Start()
         {
+            mutex.ReleaseMutex();
             _model.PlayerLogics.Start();
             foreach (ILogic elLogic in _model.EnemyLogics)
             {
@@ -33,20 +36,16 @@ namespace AlienExplorer.Model
             }
 
             _stopThread = false;
-            _timerTick = new Thread(TimerTick)
+            Thread timerTickThread = new Thread(TimerTick)
             {
                 IsBackground = true
             };
-            _timerTick.Start();
+            timerTickThread.Start();
         }
 
         public void Stop()
         {
             _stopThread = true;
-            if (_timerTick != null)
-            {
-                _timerTick.Resume();
-            }
             _model.PlayerLogics.Stop();
             foreach (ILogic elLogic in _model.EnemyLogics)
             {
@@ -55,30 +54,17 @@ namespace AlienExplorer.Model
                     elLogic.Stop();
                 }
             }
+            mutex.ReleaseMutex();
         }
 
         public void Pause()
         {
-            if (_timerTick != null)
-            {
-                _timerTick.Suspend();
-            }
-            _model.PlayerLogics.Pause();
-            foreach (ILogic elLogic in _model.EnemyLogics)
-            {
-                if (elLogic != null)
-                {
-                    elLogic.Pause();
-                }
-            }
+            mutex.WaitOne();
         }
 
         public void Resume()
         {
-            if (_timerTick != null)
-            {
-                _timerTick.Resume();
-            }
+            _timer = DateTime.UtcNow;
             _model.PlayerLogics.Resume();
             foreach (ILogic elLogic in _model.EnemyLogics)
             {
@@ -87,16 +73,19 @@ namespace AlienExplorer.Model
                     elLogic.Resume();
                 }
             }
+            mutex.ReleaseMutex();
         }
 
         private void TimerTick()
         {
-            DateTime lastTime = DateTime.UtcNow;
+            _timer = DateTime.UtcNow;
             while (!_stopThread)
             {
+                mutex.WaitOne();
+                mutex.ReleaseMutex();
                 DateTime newTime = DateTime.UtcNow;
-                LevelTimer += newTime - lastTime;
-                lastTime = newTime;
+                LevelTimer += newTime - _timer;
+                _timer = newTime;
                 Thread.Sleep(50);
             }
         }

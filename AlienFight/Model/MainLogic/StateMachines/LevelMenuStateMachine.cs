@@ -15,6 +15,7 @@ namespace AlienExplorer.Model
 
         public override void ChangeState(ModelCommand parCommand)
         {
+            CurrentCommand = ModelStateMachineCommand.None;
             if ((_model.UIItems != null) && (_model.UIItems.Count > 0))
             {
                 if (_menuDisplayed)
@@ -31,10 +32,6 @@ namespace AlienExplorer.Model
                             AcceptAction();
                             break;
                     }
-                }
-                else
-                {
-                    CurrentCommand = ModelStateMachineCommand.None;
                 }
                 if (parCommand == ModelCommand.Escape)
                 {
