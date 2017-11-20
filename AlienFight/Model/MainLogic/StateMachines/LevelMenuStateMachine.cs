@@ -136,9 +136,9 @@ namespace AlienExplorer.Model
             {
                 new UIObject() { Type = UIObjectType.Text, State = 0, Text = "YOU WIN!", ID = -1 }
             };
-            int currentProgress = SaveFile.GetInstance().LevelToLoad;
+            int currentLevel = _model.LevelID;
             int lastLevel = LevelLoader.CheckAvailableLevels().OrderBy(x => x).Last();
-            if (lastLevel != currentProgress)
+            if (currentLevel < lastLevel)
             {
                 _model.UIItems.Add(new UIObject() { Type = UIObjectType.Next, State = 1 });
                 _model.UIItems.Add(new UIObject() { Type = UIObjectType.Restart, State = 0 });

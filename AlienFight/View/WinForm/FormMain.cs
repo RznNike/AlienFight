@@ -12,6 +12,7 @@ namespace AlienExplorer.View
 {
     public partial class FormMain : Form, IViewable
     {
+        private static readonly int CELLS_CAPACITY_MAX = 15;
         private static readonly float FONT_MULTIPLIER = 1f / 40;
         private static readonly int MENU_CAPACITY = 7;
         private static readonly float MENU_OFFSET_Y = 0.35f;
@@ -21,8 +22,8 @@ namespace AlienExplorer.View
         private SpritesContainer _spritesContainer;
         private TextureBrush[] _backgroundBrushes;
         private int _cellSize;
-        private int _cellsCapacity = 15;
-        private float _drawingCorrection = 0;
+        private int _cellsCapacity = CELLS_CAPACITY_MAX;
+        private float _drawingCorrection;
         private PrivateFontCollection _fontCollection;
         private Font _headerFont;
 #if FPSMETER
@@ -44,8 +45,8 @@ namespace AlienExplorer.View
             _backgroundBrushes = new TextureBrush[2];
             _backgroundBrushes[0] = new TextureBrush(_spritesContainer.GetBackground((GameModelType)0));
             _backgroundBrushes[1] = new TextureBrush(_spritesContainer.GetBackground((GameModelType)1));
-            _cellSize = this.Width / _cellsCapacity;
-            _drawingCorrection = _cellSize / 100f;
+            _cellsCapacity = CELLS_CAPACITY_MAX;
+            FindCellSize();
             Cursor.Hide();
             _fontCollection = ResourceLoader.LoadFontCollection();
             this.Font = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -57,6 +58,26 @@ namespace AlienExplorer.View
 #endif
         }
 
+        private void FindCellsCapacityAndSize(GameModel parModel)
+        {
+            if ((parModel.SizeX > CELLS_CAPACITY_MAX) || (parModel.SizeX <= 0))
+            {
+                _cellsCapacity = CELLS_CAPACITY_MAX;
+            }
+            else
+            {
+                _cellsCapacity = parModel.SizeX;
+            }
+            FindCellSize();
+        }
+
+        private void FindCellSize()
+        {
+            _cellSize = this.Width / _cellsCapacity;
+            _drawingCorrection = _cellSize / 100f;
+            SendCameraSizeToModel();
+        }
+
         public void SendCameraSizeToModel()
         {
             SetCameraSize?.Invoke(this.Width * 1.0f / _cellSize, this.Height * 1.0f / _cellSize);
@@ -64,6 +85,8 @@ namespace AlienExplorer.View
 
         public void ViewModel(GameModel parModel)
         {
+            FindCellsCapacityAndSize(parModel);
+
             DrawBackground(parModel.Type);
             DrawLevel(parModel);
             DrawUI(parModel);
@@ -255,7 +278,7 @@ namespace AlienExplorer.View
             _formGraphics = this.CreateGraphics();
             _bufGraphicsContext.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
             _bufGraphics = _bufGraphicsContext.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
-            _cellSize = this.Width / _cellsCapacity;
+            FindCellSize();
             if (_fontCollection != null)
             {
                 this.Font = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER, FontStyle.Regular, GraphicsUnit.Point, 0);

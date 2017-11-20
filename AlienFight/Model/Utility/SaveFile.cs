@@ -127,10 +127,13 @@ namespace AlienExplorer.Model
             Dictionary<int, string> newLevelsMD5 = new Dictionary<int, string>();
             foreach (string elFileName in fileNames)
             {
-                string[ ] numbersInFileName = Regex.Split(elFileName, "[^0-9]+");
-                int id = int.Parse(numbersInFileName.Where(x => !x.Equals("")).Last());
-                string md5 = CalculateMD5(elFileName);
-                newLevelsMD5.Add(id, md5);
+                List<string> numbersInFileName = Regex.Split(elFileName, "[^0-9]+").Where(x => !x.Equals("")).ToList();
+                if (numbersInFileName.Count > 0)
+                {
+                    int id = int.Parse(numbersInFileName.Last());
+                    string md5 = CalculateMD5(elFileName);
+                    newLevelsMD5.Add(id, md5);
+                }
             }
 
             Dictionary<int, TimeSpan> newRecords = new Dictionary<int, TimeSpan>();

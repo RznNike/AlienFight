@@ -55,9 +55,12 @@ namespace AlienExplorer.Model
             }
             foreach (string elFileName in fileNames)
             {
-                string[ ] numbersInFileName = Regex.Split(elFileName, "[^0-9]+");
-                int id = int.Parse(numbersInFileName.Where(x => !x.Equals("")).Last());
-                result.Add(id);
+                List<string> numbersInFileName = Regex.Split(elFileName, "[^0-9]+").Where(x => !x.Equals("")).ToList();
+                if (numbersInFileName.Count > 0)
+                {
+                    int id = int.Parse(numbersInFileName.Last());
+                    result.Add(id);
+                }
             }
 
             return result;

@@ -211,6 +211,16 @@ namespace AlienExplorer.Model
                 {
                     SaveFile.GetInstance().CheckAndSetRecord(_model.LevelID, LevelTimer);
                 }
+                List<int> nextLevels = LevelLoader.CheckAvailableLevels().OrderBy(x => x).SkipWhile(x => x <= _model.LevelID).ToList();
+                if (nextLevels.Count > 0)
+                {
+                    int nextLevel = nextLevels.First();
+                    SaveFile.GetInstance().LevelToLoad = nextLevel;
+                    if (nextLevel > SaveFile.GetInstance().OpenedLevel)
+                    {
+                        SaveFile.GetInstance().OpenedLevel = nextLevel;
+                    }
+                }
                 stopThread = true;
             }
 
