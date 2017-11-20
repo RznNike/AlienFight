@@ -9,12 +9,16 @@ namespace AlienExplorer.Model
     {
         private static readonly int THREAD_SLEEP_MS = 5;
         private static readonly float PLAYER_TO_DOOR_WIN_OFFSET = 0.4f;
-        private static readonly float CAMERA_STABLE_RANGE_X = 0.1f;
-        private static readonly float CAMERA_STABLE_RANGE_Y = 0.15f;
+        private static readonly float CAMERA_ACTIVATE_RANGE_X = 0.1f;
+        private static readonly float CAMERA_ACTIVATE_RANGE_Y = 0.15f;
+        private static readonly float CAMERA_DEACTIVATE_RANGE_X = 0.03f;
+        private static readonly float CAMERA_DEACTIVATE_RANGE_Y = 0.03f;
 
         public TimeSpan LevelTimer { get; private set; }
         private DateTime _timer;
         private GameModel _model;
+        private bool _cameraMovingX;
+        private bool _cameraMovingY;
         private bool _stopThread;
         private Mutex mutex;
 
@@ -156,19 +160,22 @@ namespace AlienExplorer.Model
         private void IterativeAction()
         {
             _timer = DateTime.UtcNow;
+            DateTime newTime;
+            TimeSpan timerDelta;
 
             while (!_stopThread)
             {
                 mutex.WaitOne();
                 mutex.ReleaseMutex();
-                DateTime newTime = DateTime.UtcNow;
-                LevelTimer += newTime - _timer;
+                newTime = DateTime.UtcNow;
+                timerDelta = newTime - _timer;
+                LevelTimer += timerDelta;
                 _timer = newTime;
 
                 _stopThread = CheckPlayerHP() || CheckPlayerPosition();
                 if (!_stopThread)
                 {
-                    MoveCamera();
+                    MoveCamera((float)timerDelta.TotalSeconds);
                     Thread.Sleep(THREAD_SLEEP_MS);
                 }
             }
@@ -237,62 +244,65 @@ namespace AlienExplorer.Model
                 || ((parMax2 > parMax1) && (parMin2 <= parMax1));
         }
 
-        private void MoveCamera()
+        private void MoveCamera(float parDeltaSeconds)
         {
-            float dX = _model.CameraX + _model.CameraSizeX * (0.5f - CAMERA_STABLE_RANGE_X) - _model.Player.X;
-            if (dX > 0)
+            float dX = (_model.Player.X + _model.Player.SizeX * 0.5f) - (_model.CameraX + _model.CameraSizeX * 0.5f);
+            _cameraMovingX = (_cameraMovingX && (Math.Abs(dX) > (_model.CameraSizeX * CAMERA_DEACTIVATE_RANGE_X)))
+                    || (Math.Abs(dX) > (_model.CameraSizeX * CAMERA_ACTIVATE_RANGE_X));
+            if (_cameraMovingX)
             {
-                if (dX < _model.CameraX)
-                {
-                    _model.CameraX -= dX;
-                }
-                else
-                {
-                    _model.CameraX = 0;
-                }
-            }
-            else
-            {
-                dX = _model.Player.X + _model.Player.SizeX - _model.CameraX - _model.CameraSizeX * (0.5f + CAMERA_STABLE_RANGE_X);
                 if (dX > 0)
                 {
-                    if (dX < (_model.SizeX - (_model.CameraX + _model.CameraSizeX)))
+                    float freeSpace = _model.SizeX - (_model.CameraX + _model.CameraSizeX);
+                    if (dX > freeSpace)
                     {
-                        _model.CameraX += dX;
+                        dX = freeSpace;
                     }
-                    else
-                    {
-                        _model.CameraX = _model.SizeX - _model.CameraSizeX;
-                    }
-                }
-            }
-
-            float dY = _model.CameraY + _model.CameraSizeY * (0.5f - CAMERA_STABLE_RANGE_Y) - _model.Player.Y;
-            if (dY > 0)
-            {
-                if (dY < _model.CameraY)
-                {
-                    _model.CameraY -= dY;
                 }
                 else
                 {
-                    _model.CameraY = 0;
+                    float freeSpace = -_model.CameraX;
+                    if (dX < freeSpace)
+                    {
+                        dX = freeSpace;
+                    }
                 }
+                float moveX = PlayerLogic.HORISONTAL_SPEED * parDeltaSeconds * Math.Sign(dX);
+                if (Math.Abs(moveX) > Math.Abs(dX))
+                {
+                    moveX = dX;
+                }
+                _model.CameraX += moveX;
             }
-            else
+
+            float dY = (_model.Player.Y + _model.Player.SizeY * 0.5f) - (_model.CameraY + _model.CameraSizeY * 0.5f);
+            _cameraMovingY = (_cameraMovingY && (Math.Abs(dY) > (_model.CameraSizeY * CAMERA_DEACTIVATE_RANGE_Y)))
+                    || (Math.Abs(dY) > (_model.CameraSizeY * CAMERA_ACTIVATE_RANGE_Y));
+            if (_cameraMovingY)
             {
-                dY = _model.Player.Y + _model.Player.SizeY - _model.CameraY - _model.CameraSizeY * (0.5f + CAMERA_STABLE_RANGE_Y);
                 if (dY > 0)
                 {
-                    if (dY < (_model.SizeY - (_model.CameraY + _model.CameraSizeY)))
+                    float freeSpace = _model.SizeY - (_model.CameraY + _model.CameraSizeY);
+                    if (dY > freeSpace)
                     {
-                        _model.CameraY += dY;
-                    }
-                    else
-                    {
-                        _model.CameraY = _model.SizeY - _model.CameraSizeY;
+                        dY = freeSpace;
                     }
                 }
+                else
+                {
+                    float freeSpace = -_model.CameraY;
+                    if (dY < freeSpace)
+                    {
+                        dY = freeSpace;
+                    }
+                }
+                float speedY = PlayerLogic.MAX_SPEED * (0.1f + Math.Abs(dY) / _model.CameraSizeY * 3f);
+                float moveY = speedY * parDeltaSeconds * Math.Sign(dY);
+                if (Math.Abs(moveY) > Math.Abs(dY))
+                {
+                    moveY = dY;
+                }
+                _model.CameraY += moveY;
             }
         }
     }

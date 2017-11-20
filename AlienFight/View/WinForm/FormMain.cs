@@ -45,7 +45,7 @@ namespace AlienExplorer.View
             _backgroundBrushes[0] = new TextureBrush(_spritesContainer.GetBackground((GameModelType)0));
             _backgroundBrushes[1] = new TextureBrush(_spritesContainer.GetBackground((GameModelType)1));
             _cellSize = this.Width / _cellsCapacity;
-            _drawingCorrection = _cellSize / 150f;
+            _drawingCorrection = _cellSize / 100f;
             Cursor.Hide();
             _fontCollection = ResourceLoader.LoadFontCollection();
             this.Font = new Font(_fontCollection.Families[0], this.Width * FONT_MULTIPLIER, FontStyle.Regular, GraphicsUnit.Point, 0);

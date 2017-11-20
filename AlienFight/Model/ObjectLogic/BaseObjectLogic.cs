@@ -8,9 +8,9 @@ namespace AlienExplorer.Model
         : ILogic
         where StateMachineType : ObjectStateMachine<StateType>, new()
     {
+        public static readonly float MAX_SPEED = 9.0f;
         protected static readonly float EPSILON = 0.01f;
         protected static readonly float G = 15.0f;
-        protected static readonly float MAX_SPEED = 9.0f;
         protected static readonly float LOOKUP_DIST = 1.5f;
 
         public GameModel Level { get; set; }

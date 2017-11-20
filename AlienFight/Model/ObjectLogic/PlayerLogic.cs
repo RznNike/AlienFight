@@ -6,7 +6,7 @@ namespace AlienExplorer.Model
 {
     public class PlayerLogic : BaseObjectLogic<PlayerStateMachine, PlayerStateType>
     {
-        private static readonly float HORISONTAL_SPEED = MAX_SPEED / 3;
+        public static readonly float HORISONTAL_SPEED = MAX_SPEED / 3;
         private static readonly float JUMP_SPEED = MAX_SPEED / 1.5f;
         private static readonly int MAX_JUMPS = 2;
         private static readonly float HURT_COOLDOWN_TIME = 1f;
