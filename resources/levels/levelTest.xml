@@ -390,24 +390,12 @@
     </levelObjects>
     <enemies>
         <enemy>
-            <!-- X / Y = 70 / 35 = 2 -->
+            <!-- X / Y = 140 / 35 = 4 -->
             <type>Spikes</type>
             <damage>34</damage>
             <x>4</x>
             <y>1</y>
-            <sizeX>0.5</sizeX>
-            <sizeY>0.25</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-            <isMoving>false</isMoving>
-        </enemy>
-        <enemy>
-            <!-- X / Y = 70 / 35 = 2 -->
-            <type>Spikes</type>
-            <damage>34</damage>
-            <x>4.5</x>
-            <y>1</y>
-            <sizeX>0.5</sizeX>
+            <sizeX>1</sizeX>
             <sizeY>0.25</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
