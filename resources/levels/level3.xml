@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <level>
     <settings>
-        <levelID>2</levelID>
-        <sizeX>33</sizeX>
-        <sizeY>11</sizeY>
-        <cameraX>0</cameraX>
-        <cameraY>0</cameraY>
+        <levelID>3</levelID>
+        <sizeX>30</sizeX>
+        <sizeY>13</sizeY>
+        <cameraX>14</cameraX>
+        <cameraY>4</cameraY>
     </settings>
     <levelObjects>
         <!-- Y = 0 -->
@@ -279,135 +279,15 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        <object>
-            <type>Stone</type>
-            <x>30</x>
-            <y>0</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>31</x>
-            <y>0</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>32</x>
-            <y>0</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
         
         <!-- Y = 1 -->
-        <object>
-            <type>Stone</type>
-            <x>0</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>1</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>2</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>3</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>8</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>9</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>10</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>11</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>12</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>13</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        
         <object>
             <type>Stone</type>
             <x>14</x>
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>3</state>
+            <state>0</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -416,7 +296,7 @@
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>3</state>
+            <state>0</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -425,7 +305,7 @@
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>3</state>
+            <state>0</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -434,7 +314,7 @@
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>3</state>
+            <state>0</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -443,7 +323,7 @@
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>3</state>
+            <state>0</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -452,7 +332,7 @@
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>3</state>
+            <state>0</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -461,10 +341,9 @@
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>3</state>
+            <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
         <object>
             <type>Stone</type>
             <x>21</x>
@@ -474,92 +353,9 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
         <object>
             <type>Stone</type>
             <x>22</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>23</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>24</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>25</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>26</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>27</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>28</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>29</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>30</x>
-            <y>1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>31</x>
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -568,7 +364,61 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>32</x>
+            <x>23</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>24</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>25</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>26</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>27</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>28</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>29</x>
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -579,7 +429,7 @@
         <!-- Y = 2 -->
         <object>
             <type>Stone</type>
-            <x>12</x>
+            <x>14</x>
             <y>2</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -588,14 +438,58 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>13</x>
+            <x>15</x>
             <y>2</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>16</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>17</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>18</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>19</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>20</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>21</x>
@@ -605,10 +499,9 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
         <object>
             <type>Stone</type>
-            <x>31</x>
+            <x>22</x>
             <y>2</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -617,7 +510,61 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>32</x>
+            <x>23</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>24</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>25</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>26</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>27</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>28</x>
+            <y>2</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>29</x>
             <y>2</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -628,24 +575,31 @@
         <!-- Y = 3 -->
         <object>
             <type>Stone</type>
-            <x>12</x>
-            <y>3</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>13</x>
+            <x>14</x>
             <y>3</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>15</x>
+            <y>3</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>16</x>
+            <y>3</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>17</x>
@@ -655,17 +609,33 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-
         <object>
             <type>Stone</type>
             <x>18</x>
             <y>3</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>4</state>
+            <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>19</x>
+            <y>3</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>20</x>
+            <y>3</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>21</x>
@@ -684,7 +654,15 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>23</x>
+            <y>3</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>24</x>
@@ -740,53 +718,117 @@
             <flippedY>false</flippedY>
         </object>
         
-        <object>
-            <type>Stone</type>
-            <x>31</x>
-            <y>3</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>32</x>
-            <y>3</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>3</state>
-            <flippedY>false</flippedY>
-        </object>
-        
         <!-- Y = 4 -->
         <object>
             <type>Stone</type>
-            <x>13</x>
+            <x>0</x>
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         
+        <object>
+            <type>Stone</type>
+            <x>1</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>4</state>
+            <flippedY>false</flippedY>
+        </object>
+        
+        <object>
+            <type>Stone</type>
+            <x>6</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>5</state>
+            <flippedY>false</flippedY>
+        </object>
+        
+        <object>
+            <type>Stone</type>
+            <x>10</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>5</state>
+            <flippedY>false</flippedY>
+        </object>
+        
+        <object>
+            <type>Stone</type>
+            <x>14</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>15</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>16</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>17</x>
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>18</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>19</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>20</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>21</x>
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -795,17 +837,25 @@
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>23</x>
+            <y>4</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>24</x>
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -814,7 +864,7 @@
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -823,7 +873,7 @@
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -832,7 +882,7 @@
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         <object>
@@ -841,9 +891,10 @@
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
+        
         <object>
             <type>Stone</type>
             <x>29</x>
@@ -857,110 +908,6 @@
         <!-- Y = 5 -->
         <object>
             <type>Stone</type>
-            <x>12</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>2</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>13</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>17</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-
-        <object>
-            <type>Stone</type>
-            <x>20</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>2</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>21</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>22</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>24</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>25</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>26</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>27</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>28</x>
-            <y>5</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
             <x>29</x>
             <y>5</y>
             <sizeX>1</sizeX>
@@ -972,7 +919,98 @@
         <!-- Y = 6 -->
         <object>
             <type>Stone</type>
-            <x>13</x>
+            <x>15</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        
+        <object>
+            <type>Stone</type>
+            <x>16</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>17</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>18</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>19</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>20</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>21</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>22</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>23</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>24</x>
+            <y>6</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>25</x>
             <y>6</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -982,69 +1020,14 @@
         
         <object>
             <type>Stone</type>
-            <x>17</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>21</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>22</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>24</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>25</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
             <x>26</x>
             <y>6</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>4</state>
             <flippedY>false</flippedY>
         </object>
-        <object>
-            <type>Stone</type>
-            <x>27</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
+        
         <object>
             <type>Stone</type>
             <x>28</x>
@@ -1063,67 +1046,11 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        <object>
-            <type>Stone</type>
-            <x>30</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>31</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>32</x>
-            <y>6</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
         
         <!-- Y = 7 -->
         <object>
             <type>Stone</type>
-            <x>17</x>
-            <y>7</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-
-        <object>
-            <type>Stone</type>
-            <x>18</x>
-            <y>7</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>4</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>21</x>
-            <y>7</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>22</x>
+            <x>15</x>
             <y>7</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -1133,7 +1060,16 @@
         
         <object>
             <type>Stone</type>
-            <x>24</x>
+            <x>28</x>
+            <y>7</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>29</x>
             <y>7</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -1144,7 +1080,25 @@
         <!-- Y = 8 -->
         <object>
             <type>Stone</type>
-            <x>17</x>
+            <x>14</x>
+            <y>8</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>15</x>
+            <y>8</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>16</x>
             <y>8</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -1152,6 +1106,34 @@
             <flippedY>false</flippedY>
         </object>
         
+        <object>
+            <type>Stone</type>
+            <x>18</x>
+            <y>8</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>2</state>
+            <flippedY>false</flippedY>
+        </object>
+        
+        <object>
+            <type>Stone</type>
+            <x>19</x>
+            <y>8</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>20</x>
+            <y>8</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>21</x>
@@ -1170,40 +1152,64 @@
             <state>3</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>23</x>
+            <y>8</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>24</x>
             <y>8</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>25</x>
+            <y>8</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>26</x>
+            <y>8</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>3</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>27</x>
             <y>8</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         
         <object>
             <type>Stone</type>
-            <x>30</x>
+            <x>28</x>
             <y>8</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
         <object>
             <type>Stone</type>
-            <x>32</x>
+            <x>29</x>
             <y>8</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -1214,17 +1220,34 @@
         <!-- Y = 9 -->
         <object>
             <type>Stone</type>
-            <x>17</x>
+            <x>13</x>
             <y>9</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
-        </object> 
-        
+        </object>
         <object>
             <type>Stone</type>
-            <x>24</x>
+            <x>14</x>
+            <y>9</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>15</x>
+            <y>9</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>16</x>
             <y>9</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -1234,43 +1257,69 @@
         
         <object>
             <type>Stone</type>
-            <x>27</x>
+            <x>28</x>
             <y>9</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>30</x>
-            <y>9</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         <object>
             <type>Stone</type>
-            <x>31</x>
+            <x>29</x>
             <y>9</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>32</x>
-            <y>9</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
+            <state>3</state>
             <flippedY>false</flippedY>
         </object>
         
         <!-- Y = 10 -->
+        <object>
+            <type>Stone</type>
+            <x>12</x>
+            <y>10</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>13</x>
+            <y>10</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>14</x>
+            <y>10</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>15</x>
+            <y>10</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>16</x>
+            <y>10</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>17</x>
@@ -1343,7 +1392,15 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
+        <object>
+            <type>Stone</type>
+            <x>25</x>
+            <y>10</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>26</x>
@@ -1352,11 +1409,312 @@
             <sizeY>1</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
-        </object> 
+        </object>
+        
+        <!-- Y = 11 -->
+        <object>
+            <type>Stone</type>
+            <x>11</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>12</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>13</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>14</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>15</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>16</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>17</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>18</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>19</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>20</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>21</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>22</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>23</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>24</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>25</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>26</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        
+        <!-- Y = 12 -->
+        <object>
+            <type>Stone</type>
+            <x>10</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>11</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>12</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>13</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>14</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>15</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>16</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>17</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>18</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>19</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>20</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>21</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>22</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>23</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>24</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>25</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>26</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         <object>
             <type>Stone</type>
             <x>27</x>
-            <y>10</y>
+            <y>12</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1365,27 +1723,16 @@
         <object>
             <type>Stone</type>
             <x>28</x>
-            <y>10</y>
+            <y>12</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        
         <object>
             <type>Stone</type>
-            <x>30</x>
-            <y>10</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        
-        <object>
-            <type>Stone</type>
-            <x>32</x>
-            <y>10</y>
+            <x>29</x>
+            <y>12</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1681,39 +2028,12 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
-        <object>
-            <type>Stone</type>
-            <x>31</x>
-            <y>-1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>32</x>
-            <y>-1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>33</x>
-            <y>-1</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
         
         <!-- Граница верхняя -->
         <object>
             <type>Stone</type>
             <x>-1</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1722,7 +2042,7 @@
         <object>
             <type>Stone</type>
             <x>0</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1731,7 +2051,7 @@
         <object>
             <type>Stone</type>
             <x>1</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1740,7 +2060,7 @@
         <object>
             <type>Stone</type>
             <x>2</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1749,7 +2069,7 @@
         <object>
             <type>Stone</type>
             <x>3</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1758,7 +2078,7 @@
         <object>
             <type>Stone</type>
             <x>4</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1767,7 +2087,7 @@
         <object>
             <type>Stone</type>
             <x>5</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1776,7 +2096,7 @@
         <object>
             <type>Stone</type>
             <x>6</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1785,7 +2105,7 @@
         <object>
             <type>Stone</type>
             <x>7</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1794,7 +2114,7 @@
         <object>
             <type>Stone</type>
             <x>8</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1803,7 +2123,7 @@
         <object>
             <type>Stone</type>
             <x>9</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1812,7 +2132,7 @@
         <object>
             <type>Stone</type>
             <x>10</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1821,7 +2141,7 @@
         <object>
             <type>Stone</type>
             <x>11</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1830,7 +2150,7 @@
         <object>
             <type>Stone</type>
             <x>12</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1839,7 +2159,7 @@
         <object>
             <type>Stone</type>
             <x>13</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1848,7 +2168,7 @@
         <object>
             <type>Stone</type>
             <x>14</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1857,7 +2177,7 @@
         <object>
             <type>Stone</type>
             <x>15</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1866,7 +2186,7 @@
         <object>
             <type>Stone</type>
             <x>16</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1875,7 +2195,7 @@
         <object>
             <type>Stone</type>
             <x>17</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1884,7 +2204,7 @@
         <object>
             <type>Stone</type>
             <x>18</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1893,7 +2213,7 @@
         <object>
             <type>Stone</type>
             <x>19</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1902,7 +2222,7 @@
         <object>
             <type>Stone</type>
             <x>20</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1911,7 +2231,7 @@
         <object>
             <type>Stone</type>
             <x>21</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1920,7 +2240,7 @@
         <object>
             <type>Stone</type>
             <x>22</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1929,7 +2249,7 @@
         <object>
             <type>Stone</type>
             <x>23</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1938,7 +2258,7 @@
         <object>
             <type>Stone</type>
             <x>24</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1947,7 +2267,7 @@
         <object>
             <type>Stone</type>
             <x>25</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1956,7 +2276,7 @@
         <object>
             <type>Stone</type>
             <x>26</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1965,7 +2285,7 @@
         <object>
             <type>Stone</type>
             <x>27</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1974,7 +2294,7 @@
         <object>
             <type>Stone</type>
             <x>28</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1983,7 +2303,7 @@
         <object>
             <type>Stone</type>
             <x>29</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -1992,34 +2312,7 @@
         <object>
             <type>Stone</type>
             <x>30</x>
-            <y>11</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>31</x>
-            <y>11</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>32</x>
-            <y>11</y>
-            <sizeX>1</sizeX>
-            <sizeY>1</sizeY>
-            <state>0</state>
-            <flippedY>false</flippedY>
-        </object>
-        <object>
-            <type>Stone</type>
-            <x>33</x>
-            <y>11</y>
+            <y>13</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -2126,11 +2419,29 @@
             <state>0</state>
             <flippedY>false</flippedY>
         </object>
+        <object>
+            <type>Stone</type>
+            <x>-1</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>-1</x>
+            <y>12</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
         
         <!-- Граница правая -->
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>0</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2139,7 +2450,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>1</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2148,7 +2459,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>2</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2157,7 +2468,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>3</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2166,7 +2477,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>4</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2175,7 +2486,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>5</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2184,7 +2495,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>6</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2193,7 +2504,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>7</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2202,7 +2513,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>8</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2211,7 +2522,7 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>9</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
@@ -2220,8 +2531,26 @@
         </object>
         <object>
             <type>Stone</type>
-            <x>33</x>
+            <x>30</x>
             <y>10</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>30</x>
+            <y>11</y>
+            <sizeX>1</sizeX>
+            <sizeY>1</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+        </object>
+        <object>
+            <type>Stone</type>
+            <x>30</x>
+            <y>12</y>
             <sizeX>1</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -2229,6 +2558,54 @@
         </object>
     </levelObjects>
     <enemies>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>0</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>1</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>2</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>3</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
         <enemy>
             <!-- X / Y = 140 / 35 = 4 -->
             <type>Spikes</type>
@@ -2277,64 +2654,132 @@
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
         </enemy>
-        <!-- X / Y = 57 / 34 = 1.68 -->
         <enemy>
-            <type>Slime</type>
-            <damage>20</damage>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>8</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>9</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>10</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
             <x>11</x>
-            <y>2.02</y>
-            <sizeX>0.35</sizeX>
-            <sizeY>0.21</sizeY>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBoundX>8</leftWalkingBoundX>
-            <leftWalkingBoundY>0</leftWalkingBoundY>
-            <rightWalkingBoundX>12</rightWalkingBoundX>
-            <rightWalkingBoundY>0</rightWalkingBoundY>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>12</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 140 / 35 = 4 -->
+            <type>Spikes</type>
+            <damage>34</damage>
+            <x>13</x>
+            <y>1</y>
+            <sizeX>1</sizeX>
+            <sizeY>0.25</sizeY>
+            <state>0</state>
+            <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
         </enemy>
         <enemy>
             <!-- X / Y = 88 / 44 = 2 -->
             <type>Bat</type>
             <damage>10</damage>
-            <x>16</x>
-            <y>5.5</y>
+            <x>22.5</x>
+            <y>9.45</y>
             <sizeX>0.5</sizeX>
             <sizeY>0.25</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBoundX>14.1</leftWalkingBoundX>
-            <leftWalkingBoundY>5.5</leftWalkingBoundY>
-            <rightWalkingBoundX>16.4</rightWalkingBoundX>
-            <rightWalkingBoundY>5.5</rightWalkingBoundY>
+            <leftWalkingBoundX>22.1</leftWalkingBoundX>
+            <leftWalkingBoundY>9.45</leftWalkingBoundY>
+            <rightWalkingBoundX>25.4</rightWalkingBoundX>
+            <rightWalkingBoundY>9.45</rightWalkingBoundY>
         </enemy>
         <enemy>
             <!-- X / Y = 88 / 44 = 2 -->
             <type>Bat</type>
             <damage>10</damage>
-            <x>14.5</x>
-            <y>3.5</y>
+            <x>21</x>
+            <y>9.45</y>
             <sizeX>0.5</sizeX>
             <sizeY>0.25</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
             <isMoving>false</isMoving>
-            <leftWalkingBoundX>14.1</leftWalkingBoundX>
-            <leftWalkingBoundY>3.5</leftWalkingBoundY>
-            <rightWalkingBoundX>16.4</rightWalkingBoundX>
-            <rightWalkingBoundY>3.5</rightWalkingBoundY>
+            <leftWalkingBoundX>18.1</leftWalkingBoundX>
+            <leftWalkingBoundY>9.45</leftWalkingBoundY>
+            <rightWalkingBoundX>21.4</rightWalkingBoundX>
+            <rightWalkingBoundY>9.45</rightWalkingBoundY>
         </enemy>
         <enemy>
             <!-- X / Y = 53 / 75 = 0.71 -->
             <type>Ghost</type>
             <damage>50</damage>
-            <x>22.2</x>
-            <y>2.2</y>
+            <x>16.2</x>
+            <y>7.2</y>
             <sizeX>0.35</sizeX>
             <sizeY>0.5</sizeY>
             <state>0</state>
             <flippedY>false</flippedY>
+            <isMoving>false</isMoving>
+        </enemy>
+        <enemy>
+            <!-- X / Y = 53 / 75 = 0.71 -->
+            <type>Ghost</type>
+            <damage>50</damage>
+            <x>28.45</x>
+            <y>5.2</y>
+            <sizeX>0.35</sizeX>
+            <sizeY>0.5</sizeY>
+            <state>0</state>
+            <flippedY>true</flippedY>
             <isMoving>false</isMoving>
         </enemy>
     </enemies>
@@ -2342,8 +2787,8 @@
         <object>
             <!-- X / Y = 70 / 110 = 0.64 -->
             <type>Door</type>
-            <x>32.36</x>
-            <y>4</y>
+            <x>0</x>
+            <y>5</y>
             <sizeX>0.64</sizeX>
             <sizeY>1</sizeY>
             <state>1</state>
@@ -2352,8 +2797,8 @@
         <object>
             <!-- X / Y = 70 / 110 = 0.64 -->
             <type>Door</type>
-            <x>0</x>
-            <y>2</y>
+            <x>29.36</x>
+            <y>10</y>
             <sizeX>0.64</sizeX>
             <sizeY>1</sizeY>
             <state>0</state>
@@ -2363,14 +2808,14 @@
     <player>
         <!-- X / Y = 72 / 97 = 0.74 -->
         <type>Green</type>
-        <x>0.3</x>
-        <y>2.02</y>
+        <x>29.4</x>
+        <y>10.02</y>
         <sizeX>0.37</sizeX>
         <sizeY>0.5</sizeY>
         <sizeYstandart>0.5</sizeYstandart>
         <sizeYsmall>0.37</sizeYsmall>
         <state>0</state>
-        <flippedY>false</flippedY>
+        <flippedY>true</flippedY>
         <health>100</health>
         <healthMax>100</healthMax>
         <energyMax>100</energyMax>
