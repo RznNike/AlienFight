@@ -60,15 +60,20 @@ namespace AlienExplorer.View
 
         private void FindCellsCapacityAndSize(GameModel parModel)
         {
+            int newCellsCapacity;
             if (((parModel.SizeX - 1) > CELLS_CAPACITY_MAX) || (parModel.SizeX < 2))
             {
-                _cellsCapacity = CELLS_CAPACITY_MAX;
+                newCellsCapacity = CELLS_CAPACITY_MAX;
             }
             else
             {
-                _cellsCapacity = (parModel.SizeX - 1);
+                newCellsCapacity = (parModel.SizeX - 1);
             }
-            FindCellSize();
+            if (newCellsCapacity != _cellsCapacity)
+            {
+                _cellsCapacity = newCellsCapacity;
+                FindCellSize();
+            }
         }
 
         private void FindCellSize()
