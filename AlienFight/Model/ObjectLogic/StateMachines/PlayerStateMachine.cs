@@ -55,7 +55,7 @@ namespace AlienExplorer.Model
 
         private void ProcessInSameState(GameObject parPlayer)
         {
-            if (_timeInState > SUBSTATE_PERIOD)
+            if (_timeInState >= SUBSTATE_PERIOD)
             {
                 int multiplicity = (int)Math.Floor(_timeInState / SUBSTATE_PERIOD);
                 _timeInState -= SUBSTATE_PERIOD * multiplicity;
@@ -75,7 +75,7 @@ namespace AlienExplorer.Model
         private void ProcessInNewState(GameObject parPlayer, PlayerStateType parState)
         {
             if ((_machineState != PlayerStateType.Hurt)
-                || (_timeInState > SUBSTATE_PERIOD * HURT_PERIOD_MULT))
+                || (_timeInState >= SUBSTATE_PERIOD * HURT_PERIOD_MULT))
             {
                 _timeInState = 0;
                 _machineState = parState;
