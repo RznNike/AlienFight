@@ -18,6 +18,7 @@ namespace AlienExplorer.Model
         protected StateMachineType _stateMachine;
         protected bool _stopThread;
         protected DateTime _timer;
+        protected ManualResetEventSlim _manualResetEventSlim;
 
         public BaseObjectLogic(GameModel parLevel)
         {
@@ -25,8 +26,9 @@ namespace AlienExplorer.Model
             _stateMachine = new StateMachineType();
         }
 
-        public void Start()
+        public void Start(ManualResetEventSlim parManualResetEventSlim)
         {
+            _manualResetEventSlim = parManualResetEventSlim;
             _stopThread = false;
             Thread logicThread = new Thread(IterativeAction)
             {
@@ -38,10 +40,6 @@ namespace AlienExplorer.Model
         public void Stop()
         {
             _stopThread = true;
-        }
-
-        public void Pause()
-        {
         }
 
         public virtual void Resume()

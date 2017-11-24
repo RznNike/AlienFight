@@ -55,12 +55,10 @@ namespace AlienExplorer.Model
 
             _timer = DateTime.UtcNow;
             float hurtCooldown = 0;
-
-            Mutex mutex = Mutex.OpenExisting("AlienExplorerLogicMutex");
+            
             while (!_stopThread)
             {
-                mutex.WaitOne();
-                mutex.ReleaseMutex();
+                _manualResetEventSlim.Wait();
                 freeSpace = FindFreeSpace();
                 DateTime newTimer = DateTime.UtcNow;
                 float deltaSeconds = (float)(newTimer - _timer).TotalSeconds;

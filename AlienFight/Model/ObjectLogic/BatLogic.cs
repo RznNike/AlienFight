@@ -26,12 +26,10 @@ namespace AlienExplorer.Model
             float targetY = Enemy.LeftWalkingBoundY;
 
             _timer = DateTime.UtcNow;
-
-            Mutex mutex = Mutex.OpenExisting("AlienExplorerLogicMutex");
+            
             while (!_stopThread)
             {
-                mutex.WaitOne();
-                mutex.ReleaseMutex();
+                _manualResetEventSlim.Wait();
                 freeSpace = FindFreeSpace();
                 DateTime newTimer = DateTime.UtcNow;
                 float deltaSeconds = (float)(newTimer - _timer).TotalSeconds;

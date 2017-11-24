@@ -1,12 +1,12 @@
-﻿namespace AlienExplorer.Model
+﻿using System.Threading;
+
+namespace AlienExplorer.Model
 {
     public interface ILogic
     {
-        void Start();
+        void Start(ManualResetEventSlim parManualResetEventSlim);
 
         void Stop();
-
-        void Pause();
 
         void Resume();
     }

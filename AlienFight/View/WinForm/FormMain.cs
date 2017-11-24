@@ -162,7 +162,7 @@ namespace AlienExplorer.View
             if (!header.Equals(""))
             {
                 int offsetX = (int)((this.Width - _bufGraphics.Graphics.MeasureString(header, _headerFont).Width) / 2);
-                _bufGraphics.Graphics.DrawString(parModel.ModelLogic.MenuHeader, _headerFont, Brushes.LightBlue, offsetX, this.Height / 15f);
+                _bufGraphics.Graphics.DrawString(header, _headerFont, Brushes.LightBlue, offsetX, this.Height / 15f);
             }
             List<UIObject> uiList = null;
             int offset = 0;

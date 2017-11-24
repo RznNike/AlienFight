@@ -20,7 +20,7 @@ namespace AlienExplorer.Model
         private bool _cameraMovingX;
         private bool _cameraMovingY;
         private bool _stopThread;
-        private Mutex mutex;
+        private ManualResetEventSlim _manualResetEventSlim;
 
         public LevelLogic(GameModel parModel) : base(parModel)
         {
@@ -29,24 +29,19 @@ namespace AlienExplorer.Model
             ShadowLevel = _stateMachine.ShadowLevel;
             _model = parModel;
             LevelTimer = new TimeSpan(0);
-            mutex = new Mutex(true, "AlienExplorerLogicMutex");
+            _manualResetEventSlim = new ManualResetEventSlim(true);
         }
 
         public void Start()
         {
-            try
-            {
-                mutex.ReleaseMutex();
-            }
-            catch
-            {
-            }
-            _model.PlayerLogics.Start();
+            _manualResetEventSlim.Set();
+
+            _model.PlayerLogics.Start(_manualResetEventSlim);
             foreach (ILogic elLogic in _model.EnemyLogics)
             {
                 if (elLogic != null)
                 {
-                    elLogic.Start();
+                    elLogic.Start(_manualResetEventSlim);
                 }
             }
 
@@ -69,18 +64,12 @@ namespace AlienExplorer.Model
                     elLogic.Stop();
                 }
             }
-            try
-            {
-                mutex.ReleaseMutex();
-            }
-            catch
-            {
-            }
+            _manualResetEventSlim.Set();
         }
 
         public void Pause()
         {
-            mutex.WaitOne();
+            _manualResetEventSlim.Reset();
         }
 
         public void Resume()
@@ -94,13 +83,7 @@ namespace AlienExplorer.Model
                     elLogic.Resume();
                 }
             }
-            try
-            {
-                mutex.ReleaseMutex();
-            }
-            catch
-            {
-            }
+            _manualResetEventSlim.Set();
         }
 
         public override void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand)
@@ -165,8 +148,7 @@ namespace AlienExplorer.Model
 
             while (!_stopThread)
             {
-                mutex.WaitOne();
-                mutex.ReleaseMutex();
+                _manualResetEventSlim.Wait();
                 newTime = DateTime.UtcNow;
                 timerDelta = newTime - _timer;
                 LevelTimer += timerDelta;
