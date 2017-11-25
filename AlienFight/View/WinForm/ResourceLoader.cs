@@ -8,8 +8,15 @@ using AlienExplorer.Model;
 
 namespace AlienExplorer.View
 {
+    /// <summary>
+    /// Загрузчик ресурсов.
+    /// </summary>
     public static class ResourceLoader
     {
+        /// <summary>
+        /// Загрузка спрайтов.
+        /// </summary>
+        /// <returns>Хранилище спрайтов.</returns>
         public static SpritesContainer LoadSprites()
         {
             Dictionary<int, Image> backgrounds = LoadBackgrounds("resources/sprites/levels/backgrounds");
@@ -21,6 +28,10 @@ namespace AlienExplorer.View
             return new SpritesContainer(backgrounds, levelObjectSprites, enemySprites, playerSprites, UISprites);
         }
 
+        /// <summary>
+        /// Загрузка коллекции шрифтов.
+        /// </summary>
+        /// <returns>Коллекция шрифтов.</returns>
         public static PrivateFontCollection LoadFontCollection()
         {
             PrivateFontCollection fontCollection = new PrivateFontCollection();
@@ -29,6 +40,11 @@ namespace AlienExplorer.View
             return fontCollection;
         }
 
+        /// <summary>
+        /// Загрузка фонов.
+        /// </summary>
+        /// <param name="parPath">Путь к папке со спрайтами фонов.</param>
+        /// <returns>Словарь спрайтов фонов.</returns>
         private static Dictionary<int, Image> LoadBackgrounds(string parPath)
         {
             Dictionary<int, Image> result = new Dictionary<int, Image>();
@@ -42,6 +58,11 @@ namespace AlienExplorer.View
             return result;
         }
 
+        /// <summary>
+        /// Загрузка спрайтов для перечисления.
+        /// </summary>
+        /// <param name="parEnumType">Тип перечисления.</param>
+        /// <returns>Словарь спрайтов.</returns>
         private static Dictionary<int, List<Image>> LoadSpritesForEnum(Type parEnumType)
         {
             Dictionary<int, List<Image>> sprites = new Dictionary<int, List<Image>>();
@@ -60,6 +81,11 @@ namespace AlienExplorer.View
             return sprites;
         }
 
+        /// <summary>
+        /// Загрузка спрайтов из папки.
+        /// </summary>
+        /// <param name="parPath">Путь к папке.</param>
+        /// <returns>Список спрайтов.</returns>
         private static List<Image> LoadSpritesFromFolder(string parPath)
         {
             List<Image> result = new List<Image>();
@@ -73,6 +99,11 @@ namespace AlienExplorer.View
             return result;
         }
 
+        /// <summary>
+        /// Создание зеркальных копий спрайтов.
+        /// </summary>
+        /// <param name="parOriginalSprites">Оригинальные спрайты.</param>
+        /// <returns>Список зеркальных копий спрайтов.</returns>
         private static List<Image> FlipSprites(List<Image> parOriginalSprites)
         {
             List<Image> sprites = new List<Image>();
@@ -86,6 +117,10 @@ namespace AlienExplorer.View
             return sprites;
         }
 
+        /// <summary>
+        /// Загрузка спрайтов элементов интерфейса.
+        /// </summary>
+        /// <returns>Словарь спрайтов элементов интерфейса.</returns>
         private static Dictionary<int, Image> LoadUISprites()
         {
             Dictionary<int, Image> sprites = new Dictionary<int, Image>();

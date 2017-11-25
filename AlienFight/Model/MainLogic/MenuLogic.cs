@@ -2,16 +2,31 @@
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Логика меню.
+    /// </summary>
     public class MenuLogic : BaseModelLogic
     {
+        /// <summary>
+        /// Ссылка на метод закрытия приложения.
+        /// </summary>
         public dCloseApplication CloseApplication { get; set; }
 
+        /// <summary>
+        /// Инициализирует логику модели.
+        /// </summary>
+        /// <param name="parModel">Модель.</param>
         public MenuLogic(GameModel parModel) : base(parModel)
         {
             _stateMachine = new MainMenuStateMachine(parModel);
             MenuHeader = _stateMachine.MenuHeader;
         }
 
+        /// <summary>
+        /// Получение команды от контроллера.
+        /// </summary>
+        /// <param name="parCommand">Команда.</param>
+        /// <param name="parBeginCommand">Флаг начала команды (true, если начата).</param>
         public override void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand)
         {
             if (parBeginCommand)
@@ -20,6 +35,10 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Обработка команды контроллера внутри логики модели.
+        /// </summary>
+        /// <param name="parCommand">Команда.</param>
         protected override void HandleCommand(ModelCommand parCommand)
         {
             _stateMachine.ChangeState(parCommand);

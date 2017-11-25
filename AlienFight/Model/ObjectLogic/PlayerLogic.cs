@@ -4,23 +4,56 @@ using System.Threading;
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Логика игрока.
+    /// </summary>
     public class PlayerLogic : BaseObjectLogic<PlayerStateMachine, PlayerStateType>
     {
+        /// <summary>
+        /// Скорость перемещения по горизонтали.
+        /// </summary>
         public static readonly float HORISONTAL_SPEED = MAX_SPEED / 3;
+        /// <summary>
+        /// Начальная скорость прыжка.
+        /// </summary>
         private static readonly float JUMP_SPEED = MAX_SPEED / 1.5f;
+        /// <summary>
+        /// Максимальное количество прыжков не касаясь земли.
+        /// </summary>
         private static readonly int MAX_JUMPS = 2;
+        /// <summary>
+        /// Время неуязвимости после получения урона (в секундах).
+        /// </summary>
         private static readonly float HURT_COOLDOWN_TIME = 1f;
+        /// <summary>
+        /// Период задержки для цикла вычислений состояния объекта.
+        /// </summary>
         private static readonly int THREAD_SLEEP_MS = 5;
 
-        public PlayerObject Player { get { return (PlayerObject)Object; } set { Object = value; } }
+        /// <summary>
+        /// Список активных команд.
+        /// </summary>
         private List<ModelCommand> _activeCommands;
+        /// <summary>
+        /// Целевой объект.
+        /// </summary>
+        public PlayerObject Player { get { return (PlayerObject)Object; } set { Object = value; } }
 
+        /// <summary>
+        /// Инициализирует логику объекта.
+        /// </summary>
+        /// <param name="parLevel">Уровень.</param>
         public PlayerLogic(GameModel parLevel) : base(parLevel)
         {
             Player = parLevel.Player;
             _activeCommands = new List<ModelCommand>();
         }
 
+        /// <summary>
+        /// Получение команды.
+        /// </summary>
+        /// <param name="parCommand">Команда.</param>
+        /// <param name="parBeginCommand">Флаг начала команды (true, если начата).</param>
         public void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand)
         {
             if (parBeginCommand)
@@ -36,12 +69,18 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Дополнительные действия при возобновлении работы потокового цикла вычислений после паузы.
+        /// </summary>
         public override void Resume()
         {
             base.Resume();
             _activeCommands.Clear();
         }
 
+        /// <summary>
+        /// Потоковый цикл вычислений.
+        /// </summary>
         protected override void IterativeAction()
         {
             // left, up, right, down
@@ -72,13 +111,23 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Нахождение вектора скорости.
+        /// </summary>
+        /// <param name="parSpeed">Вектор скорости (X, Y) на предыдущем шаге.</param>
+        /// <param name="parFreeSpace">Массив свободных расстояний вокруг объекта (слева, сверху, справа, снизу).</param>
+        /// <param name="parDeltaSeconds">Время, прошедшее с предыдущего шага (в секундах).</param>
+        /// <param name="refJumpsCount">Количество уже совершенных прыжков до касания земли.</param>
+        /// <param name="refJumpActive">Флаг активности прыжка в данный момент.</param>
+        /// <param name="refHurtCooldown">Таймер неуязвимости после получения урона.</param>
+        /// <returns>Вектор скорости (X, Y).</returns>
         private float[ ] FindSpeed(
             float[ ] parSpeed,
             float[ ] parFreeSpace,
             float parDeltaSeconds,
             ref int refJumpsCount,
             ref bool refJumpActive,
-            ref float hurtCooldown)
+            ref float refHurtCooldown)
         {
             float[ ] speed = new float[2] { 0, 0 };
 
@@ -118,16 +167,16 @@ namespace AlienExplorer.Model
             }
 
             // Обработка получения урона
-            if (hurtCooldown > EPSILON)
+            if (refHurtCooldown > EPSILON)
             {
-                hurtCooldown -= parDeltaSeconds;
+                refHurtCooldown -= parDeltaSeconds;
             }
             else
             {
-                if (IsEnemyAttacked())
+                if (IsEnemyAttacks())
                 {
                     speed[1] = JUMP_SPEED / 1.5f;
-                    hurtCooldown = HURT_COOLDOWN_TIME;
+                    refHurtCooldown = HURT_COOLDOWN_TIME;
                 }
             }
 
@@ -161,7 +210,11 @@ namespace AlienExplorer.Model
             return speed;
         }
 
-        private bool IsEnemyAttacked()
+        /// <summary>
+        /// Проверка наличия атаки от врага.
+        /// </summary>
+        /// <returns>True, если атака произошла.</returns>
+        private bool IsEnemyAttacks()
         {
             foreach (EnemyObject elEnemy in Level.Enemies)
             {

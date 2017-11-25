@@ -1,4 +1,4 @@
-﻿#define FPSMETER
+﻿//#define FPSMETER
 
 using System;
 using System.Drawing;
@@ -10,29 +10,86 @@ using AlienExplorer.Model;
 
 namespace AlienExplorer.View
 {
+    /// <summary>
+    /// Вид - форма Windows.
+    /// </summary>
     public partial class FormMain : Form, IViewable
     {
+        /// <summary>
+        /// Максимальная емкость экрана по ширине (в клетках).
+        /// </summary>
         private static readonly int CELLS_CAPACITY_MAX = 15;
+        /// <summary>
+        /// Множитель размера шрифта относительно ширины экрана.
+        /// </summary>
         private static readonly float FONT_MULTIPLIER = 1f / 40;
+        /// <summary>
+        /// Емкость меню (в строках).
+        /// </summary>
         private static readonly int MENU_CAPACITY = 7;
+        /// <summary>
+        /// Смещение меню от верха экрана (доля высоты экрана).
+        /// </summary>
         private static readonly float MENU_OFFSET_Y = 0.35f;
+        /// <summary>
+        /// Объект графики формы.
+        /// </summary>
         private Graphics _formGraphics;
+        /// <summary>
+        /// Контекст буферизированной графики.
+        /// </summary>
         private BufferedGraphicsContext _bufGraphicsContext;
+        /// <summary>
+        /// Объект буферизированной графики.
+        /// </summary>
         private BufferedGraphics _bufGraphics;
+        /// <summary>
+        /// Хранилище спрайтов.
+        /// </summary>
         private SpritesContainer _spritesContainer;
+        /// <summary>
+        /// Текстурные кисти для заливки фона.
+        /// </summary>
         private TextureBrush[] _backgroundBrushes;
+        /// <summary>
+        /// Размер клетки в пикселях.
+        /// </summary>
         private int _cellSize;
+        /// <summary>
+        /// Текущая емкость экрана по ширине (в клетках).
+        /// </summary>
         private int _cellsCapacity = CELLS_CAPACITY_MAX;
+        /// <summary>
+        /// Коррекция размера клетки (в большую сторону) для устранения промежутков между клетками (в пикселях).
+        /// </summary>
         private float _drawingCorrection;
+        /// <summary>
+        /// Коллекция шрифтов.
+        /// </summary>
         private PrivateFontCollection _fontCollection;
+        /// <summary>
+        /// Шрифт заголовка.
+        /// </summary>
         private Font _headerFont;
 #if FPSMETER
+        /// <summary>
+        /// Массив счетчиков FPS.
+        /// </summary>
         private int[ ] _counter;
+        /// <summary>
+        /// Таймер для отсчета FPS.
+        /// </summary>
         private DateTime _time;
 #endif
 
+        /// <summary>
+        /// Ссылка на метод модели по установке размеров камеры.
+        /// </summary>
         public dSetCameraSize SetCameraSize { get; set; }
 
+        /// <summary>
+        /// Инициализирует форму начальными значениями.
+        /// </summary>
         public FormMain()
         {
             InitializeComponent();
@@ -58,6 +115,10 @@ namespace AlienExplorer.View
 #endif
         }
 
+        /// <summary>
+        /// Вычисление емкости экрана в клетках и размера клетки.
+        /// </summary>
+        /// <param name="parModel">Модель.</param>
         private void FindCellsCapacityAndSize(GameModel parModel)
         {
             int newCellsCapacity;
@@ -76,6 +137,9 @@ namespace AlienExplorer.View
             }
         }
 
+        /// <summary>
+        /// Вычисление размера клетки.
+        /// </summary>
         private void FindCellSize()
         {
             _cellSize = this.Width / _cellsCapacity;
@@ -83,11 +147,18 @@ namespace AlienExplorer.View
             SendCameraSizeToModel();
         }
 
+        /// <summary>
+        /// Установка размеров камеры в модели.
+        /// </summary>
         public void SendCameraSizeToModel()
         {
             SetCameraSize?.Invoke(this.Width * 1.0f / _cellSize, this.Height * 1.0f / _cellSize);
         }
 
+        /// <summary>
+        /// Отображение модели.
+        /// </summary>
+        /// <param name="parModel">Модель.</param>
         public void ViewModel(GameModel parModel)
         {
             FindCellsCapacityAndSize(parModel);
@@ -98,11 +169,19 @@ namespace AlienExplorer.View
             ViewCanvas();
         }
 
+        /// <summary>
+        /// Отрисовка фона.
+        /// </summary>
+        /// <param name="parModelType">Тип модели.</param>
         private void DrawBackground(GameModelType parModelType)
         {
             _bufGraphics.Graphics.FillRectangle(_backgroundBrushes[(int)parModelType], 0, 0, this.Width, this.Height);
         }
 
+        /// <summary>
+        /// Отрисовка модели.
+        /// </summary>
+        /// <param name="parModel">Модель.</param>
         private void DrawLevel(GameModel parModel)
         {
             float cameraX = parModel.CameraX;
@@ -125,11 +204,18 @@ namespace AlienExplorer.View
             }
         }
 
+        /// <summary>
+        /// Отрисовка объекта модели.
+        /// </summary>
+        /// <param name="parObject">Объект.</param>
+        /// <param name="parModel">Модель.</param>
+        /// <param name="parCameraX">Координата X камеры.</param>
+        /// <param name="parCameraY">Координата Y камеры.</param>
         private void DrawGameObject(GameObject parObject, GameModel parModel, float parCameraX, float parCameraY)
         {
             if (IsVisible(parObject, parModel))
             {
-                Image sprite = _spritesContainer.GetLevelSprite(parObject, parObject.FlippedY);
+                Image sprite = _spritesContainer.GetLevelSprite(parObject);
                 _bufGraphics.Graphics.DrawImage(
                     sprite,
                     parObject.X * _cellSize - parCameraX * _cellSize - _drawingCorrection,
@@ -139,6 +225,12 @@ namespace AlienExplorer.View
             }
         }
 
+        /// <summary>
+        /// Определение, виден ли объект на экране.
+        /// </summary>
+        /// <param name="parObject">Объект.</param>
+        /// <param name="parModel">Модель.</param>
+        /// <returns>True, если виден.</returns>
         private bool IsVisible(GameObject parObject, GameModel parModel)
         {
             double leftBound = parModel.CameraX;
@@ -152,6 +244,10 @@ namespace AlienExplorer.View
                     || ((parObject.Y + parObject.SizeY) > downBound));
         }
 
+        /// <summary>
+        /// Отрисовка интерфейса.
+        /// </summary>
+        /// <param name="parModel"></param>
         private void DrawUI(GameModel parModel)
         {
             if (parModel.ModelLogic.ShadowLevel)
@@ -204,6 +300,14 @@ namespace AlienExplorer.View
             }
         }
 
+        /// <summary>
+        /// Получение видимого диапазона элементов меню.
+        /// </summary>
+        /// <param name="parModel">Модель.</param>
+        /// <param name="refOffset">Смещение по строкам на экране.</param>
+        /// <param name="refDrawUpArrow">Флаг отрисовки кнопки "вверх".</param>
+        /// <param name="refDrawDownArrow">Флаг отрисовки кнопки "вниз".</param>
+        /// <returns>Список видимых элементов меню.</returns>
         private List<UIObject> GetVisibleMenuRange(
             GameModel parModel,
             ref int refOffset,
@@ -211,6 +315,7 @@ namespace AlienExplorer.View
             ref bool refDrawDownArrow)
         {
             List<UIObject> result = null;
+            refOffset = 0;
 
             if (parModel.UIItems.Count <= MENU_CAPACITY)
             {
@@ -248,6 +353,11 @@ namespace AlienExplorer.View
             return result;
         }
 
+        /// <summary>
+        /// Отрисовка элемента меню.
+        /// </summary>
+        /// <param name="parObject">Элемент меню.</param>
+        /// <param name="parRowNumber">Номер строки для вывода.</param>
         private void DrawUIObject(UIObject parObject, int parRowNumber)
         {
             string text = "";
@@ -269,6 +379,9 @@ namespace AlienExplorer.View
             _bufGraphics.Graphics.DrawString(text, this.Font, brush, offsetX, offsetY);
         }
 
+        /// <summary>
+        /// Вывод кадра из буфера на форму.
+        /// </summary>
         private void ViewCanvas()
         {
 #if FPSMETER
@@ -278,6 +391,11 @@ namespace AlienExplorer.View
             _bufGraphics.Render(_formGraphics);
         }
 
+        /// <summary>
+        /// Обработчик события изменения размеров формы.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
             _formGraphics = this.CreateGraphics();
@@ -294,6 +412,10 @@ namespace AlienExplorer.View
             delayedGC.Start(500);
         }
 
+        /// <summary>
+        /// Сборка мусора с задержкой.
+        /// </summary>
+        /// <param name="parData">Задержка (в миллисекундах).</param>
         private void GCcollectWithDelay(object parData)
         {
             Thread.Sleep((int)parData);
@@ -301,6 +423,9 @@ namespace AlienExplorer.View
         }
 
 #if FPSMETER
+        /// <summary>
+        /// Реакция на запуск отрисовки готового кадра на форме.
+        /// </summary>
         private void FormMain_Paint()
         {
             _counter[3]++;
@@ -315,6 +440,11 @@ namespace AlienExplorer.View
         }
 #endif
 
+        /// <summary>
+        /// Обработчик события закрытия формы.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {   
             Environment.Exit(0);

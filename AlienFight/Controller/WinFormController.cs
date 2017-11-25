@@ -6,8 +6,14 @@ using AlienExplorer.Model;
 
 namespace AlienExplorer.Controller
 {
+    /// <summary>
+    /// Контроллер для вида на Windows Forms.
+    /// </summary>
     public class WinFormController : GameController
     {
+        /// <summary>
+        /// Производит загрузку главного меню игры и вида, запуск цикла отрисовки кадров.
+        /// </summary>
         public WinFormController() : base()
         {
             View = new FormMain();
@@ -19,41 +25,56 @@ namespace AlienExplorer.Controller
             framesSender.Start();
         }
 
+        /// <summary>
+        /// Обработчик события вида - нажатия кнопки на клавиатуре.
+        /// </summary>
+        /// <param name="sender">Отправитель.</param>
+        /// <param name="e">Аргументы события.</param>
         public void KeyDown(object sender, KeyEventArgs e)
         {
             bool beginCommand = true;
             SendCommandToPlayer(e, beginCommand);
         }
 
+        /// <summary>
+        /// Обработчик события вида - отпускания кнопки на клавиатуре.
+        /// </summary>
+        /// <param name="sender">Отправитель.</param>
+        /// <param name="e">Аргументы события.</param>
         public void KeyUp(object sender, KeyEventArgs e)
         {
             bool beginCommand = false;
             SendCommandToPlayer(e, beginCommand);
         }
 
-        private void SendCommandToPlayer(KeyEventArgs e, bool parBeginCommand)
+        /// <summary>
+        /// Универсальная обработка событий клавиш.
+        /// </summary>
+        /// <param name="parEventArgs">Аргументы события.</param>
+        /// <param name="parBeginCommand">Флаг нажатия клавишы (если нажата, то true).</param>
+        private void SendCommandToPlayer(KeyEventArgs parEventArgs, bool parBeginCommand)
         {
-            if ((e.KeyCode == Keys.Left) || (e.KeyCode == Keys.A))
+            if ((parEventArgs.KeyCode == Keys.Left) || (parEventArgs.KeyCode == Keys.A))
             {
                 Model.ModelLogic.ReceiveCommand(ModelCommand.Left, parBeginCommand);
             }
-            else if ((e.KeyCode == Keys.Right) || (e.KeyCode == Keys.D))
+            else if ((parEventArgs.KeyCode == Keys.Right) || (parEventArgs.KeyCode == Keys.D))
             {
                 Model.ModelLogic.ReceiveCommand(ModelCommand.Right, parBeginCommand);
             }
-            else if ((e.KeyCode == Keys.Up) || (e.KeyCode == Keys.W) || (e.KeyCode == Keys.Space))
+            else if ((parEventArgs.KeyCode == Keys.Up) || (parEventArgs.KeyCode == Keys.W) || (parEventArgs.KeyCode == Keys.Space))
             {
                 Model.ModelLogic.ReceiveCommand(ModelCommand.Up, parBeginCommand);
             }
-            else if ((e.KeyCode == Keys.Down) || (e.KeyCode == Keys.S) || (e.KeyCode == Keys.ControlKey))
+            else if ((parEventArgs.KeyCode == Keys.Down) || (parEventArgs.KeyCode == Keys.S) || (parEventArgs.KeyCode == Keys.ControlKey))
             {
                 Model.ModelLogic.ReceiveCommand(ModelCommand.Down, parBeginCommand);
             }
-            else if (e.KeyCode == Keys.Enter)
+            else if (parEventArgs.KeyCode == Keys.Enter)
             {
                 Model.ModelLogic.ReceiveCommand(ModelCommand.OK, parBeginCommand);
             }
-            else if ((e.KeyCode == Keys.Escape) || (e.KeyCode == Keys.Back))
+            else if ((parEventArgs.KeyCode == Keys.Escape) || (parEventArgs.KeyCode == Keys.Back))
             {
                 Model.ModelLogic.ReceiveCommand(ModelCommand.Escape, parBeginCommand);
             }

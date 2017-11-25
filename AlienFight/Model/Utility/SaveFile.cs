@@ -8,18 +8,41 @@ using System.Text.RegularExpressions;
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Класс по работе с файлом сохранения.
+    /// </summary>
     [Serializable]
     public class SaveFile
     {
+        /// <summary>
+        /// Имя файла сохранения.
+        /// </summary>
         private static readonly string SAVEFILE_NAME = "SaveFile.sf";
 
+        /// <summary>
+        /// Экземпляр объекта данного класса.
+        /// </summary>
         private static SaveFile _instance;
-
+        /// <summary>
+        /// ID уровня для загрузки через меню продолжения игры.
+        /// </summary>
         private int _levelToLoad;
+        /// <summary>
+        /// ID последнего открытого уровня.
+        /// </summary>
         private int _openedLevel;
+        /// <summary>
+        /// Словарь: ID уровня - рекорд.
+        /// </summary>
         private Dictionary<int, TimeSpan> _records;
+        /// <summary>
+        /// Словарь: ID уровня - MD5 сумма его файла.
+        /// </summary>
         private Dictionary<int, string> _levelsMD5;
 
+        /// <summary>
+        /// ID уровня для загрузки через меню продолжения игры.
+        /// </summary>
         public int LevelToLoad
         {
             get
@@ -34,7 +57,9 @@ namespace AlienExplorer.Model
                 SaveInfoChanged?.Invoke(null, null);
             }
         }
-
+        /// <summary>
+        /// ID последнего открытого уровня.
+        /// </summary>
         public int OpenedLevel
         {
             get
@@ -49,7 +74,9 @@ namespace AlienExplorer.Model
                 SaveInfoChanged?.Invoke(null, null);
             }
         }
-
+        /// <summary>
+        /// Словарь: ID уровня - рекорд.
+        /// </summary>
         public Dictionary<int, TimeSpan> Records
         {
             get
@@ -63,9 +90,18 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Событие возникновения необходимости проверки файлов уровней на диске.
+        /// </summary>
         public event EventHandler FilesVerificationRequired;
+        /// <summary>
+        /// Событие изменения данных для сохранения.
+        /// </summary>
         public event EventHandler SaveInfoChanged;
 
+        /// <summary>
+        /// Инициализирует новый объект для файла сохранения.
+        /// </summary>
         private SaveFile()
         {
             _levelsMD5 = new Dictionary<int, string>();
@@ -76,6 +112,10 @@ namespace AlienExplorer.Model
             this.SaveInfoChanged += SaveInfoChangedHandler;
         }
 
+        /// <summary>
+        /// Получение синглтонного экземпляра объекта для файла сохранения.
+        /// </summary>
+        /// <returns></returns>
         public static SaveFile GetInstance()
         {
             if (_instance == null)
@@ -85,6 +125,11 @@ namespace AlienExplorer.Model
             return _instance;
         }
 
+        /// <summary>
+        /// Проверка и установка (при необходимости) рекорда.
+        /// </summary>
+        /// <param name="parLevelNumber">ID уровня.</param>
+        /// <param name="parRecord">Рекорд.</param>
         public void CheckAndSetRecord(int parLevelNumber, TimeSpan parRecord)
         {
             if (!_records.Keys.Contains(parLevelNumber))
@@ -99,6 +144,10 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Загрузка файла сохранения.
+        /// </summary>
+        /// <returns>Объект по работе с файлом сохранения.</returns>
         private static SaveFile LoadFile()
         {
             SaveFile result = null;
@@ -117,6 +166,11 @@ namespace AlienExplorer.Model
             return result;
         }
 
+        /// <summary>
+        /// Обработчик события возникновения необходимости проверки файлов уровней на диске.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void FilesVerificationRequiredHandler(object sender, EventArgs e)
         {
             string[ ] fileNames = Directory.GetFiles(LevelLoader.LEVELS_FOLDER);
@@ -159,6 +213,11 @@ namespace AlienExplorer.Model
             GC.Collect();
         }
 
+        /// <summary>
+        /// Обработчик события изменения данных для сохранения.
+        /// </summary>
+        /// <param name="sender">Отправитель события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void SaveInfoChangedHandler(object sender, EventArgs e)
         {
             Stream file = new FileStream(SAVEFILE_NAME, FileMode.Create);
@@ -167,6 +226,11 @@ namespace AlienExplorer.Model
             file.Close();
         }
 
+        /// <summary>
+        /// Вычисление MD5 суммы для файла.
+        /// </summary>
+        /// <param name="parFile">Путь к файлу.</param>
+        /// <returns>Строковое представление MD5 суммы.</returns>
         private static string CalculateMD5(string parFile)
         {
             MD5 md5 = MD5.Create();

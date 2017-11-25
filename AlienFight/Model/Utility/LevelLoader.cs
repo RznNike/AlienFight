@@ -7,10 +7,21 @@ using System.Linq;
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Загрузчик уровней.
+    /// </summary>
     public class LevelLoader
     {
+        /// <summary>
+        /// Относительный путь к папке, содержащей файлы уровней.
+        /// </summary>
         public static readonly string LEVELS_FOLDER = "resources/levels";
 
+        /// <summary>
+        /// Загрузка указанного уровня.
+        /// </summary>
+        /// <param name="parLevelID">ID уровня</param>
+        /// <returns>Уровень.</returns>
         public static GameModel Load(int parLevelID)
         {
             string path = $"{LEVELS_FOLDER}/level{parLevelID}.xml";
@@ -45,6 +56,10 @@ namespace AlienExplorer.Model
             return level;
         }
 
+        /// <summary>
+        /// Анализ папки с уровнями и выдача списка ID имеющихся уровней.
+        /// </summary>
+        /// <returns>Список ID уровней.</returns>
         public static List<int> CheckAvailableLevels()
         {
             List<int> result = new List<int>();
@@ -66,42 +81,52 @@ namespace AlienExplorer.Model
             return result;
         }
 
-        private static void ParseLevelProperties(GameModel level, XmlReader xmlReader)
+        /// <summary>
+        /// Считывание из XML настроек уровня.
+        /// </summary>
+        /// <param name="parLevel">Уровень для сохранения данных.</param>
+        /// <param name="parXmlReader">Парсер XML в нужном состоянии.</param>
+        private static void ParseLevelProperties(GameModel parLevel, XmlReader parXmlReader)
         {
-            xmlReader.ReadToFollowing("settings");
-            xmlReader.ReadToDescendant("sizeX");
-            level.SizeX = xmlReader.ReadElementContentAsInt();
-            xmlReader.ReadToNextSibling("sizeY");
-            level.SizeY = xmlReader.ReadElementContentAsInt();
-            xmlReader.ReadToNextSibling("cameraX");
-            level.CameraX = xmlReader.ReadElementContentAsFloat();
-            xmlReader.ReadToNextSibling("cameraY");
-            level.CameraY = xmlReader.ReadElementContentAsFloat();
+            parXmlReader.ReadToFollowing("settings");
+            parXmlReader.ReadToDescendant("sizeX");
+            parLevel.SizeX = parXmlReader.ReadElementContentAsInt();
+            parXmlReader.ReadToNextSibling("sizeY");
+            parLevel.SizeY = parXmlReader.ReadElementContentAsInt();
+            parXmlReader.ReadToNextSibling("cameraX");
+            parLevel.CameraX = parXmlReader.ReadElementContentAsFloat();
+            parXmlReader.ReadToNextSibling("cameraY");
+            parLevel.CameraY = parXmlReader.ReadElementContentAsFloat();
         }
 
-        private static List<LevelObject> ParseLevelObjects(XmlReader xmlReader)
+        /// <summary>
+        /// Считывание из XML элементов уровня.
+        /// </summary>
+        /// <param name="parXmlReader">Парсер XML в нужном состоянии.</param>
+        /// <returns>Список созданных элементов уровня.</returns>
+        private static List<LevelObject> ParseLevelObjects(XmlReader parXmlReader)
         {
             List<LevelObject> levelObjects = new List<LevelObject>();
-            xmlReader.ReadToFollowing("levelObjects");
-            xmlReader.Read();
-            while (xmlReader.ReadToNextSibling("object"))
+            parXmlReader.ReadToFollowing("levelObjects");
+            parXmlReader.Read();
+            while (parXmlReader.ReadToNextSibling("object"))
             {
                 LevelObject levelObject = new LevelObject();
-                xmlReader.ReadToDescendant("type");
-                levelObject.Type = (LevelObjectType)Enum.Parse(typeof(LevelObjectType), xmlReader.ReadElementContentAsString());
-                xmlReader.ReadToNextSibling("x");
-                levelObject.X = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("y");
-                levelObject.Y = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("sizeX");
-                levelObject.SizeX = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("sizeY");
-                levelObject.SizeY = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("state");
-                levelObject.State = xmlReader.ReadElementContentAsInt();
-                xmlReader.ReadToNextSibling("flippedY");
-                levelObject.FlippedY = xmlReader.ReadElementContentAsBoolean();
-                xmlReader.ReadEndElement();
+                parXmlReader.ReadToDescendant("type");
+                levelObject.Type = (LevelObjectType)Enum.Parse(typeof(LevelObjectType), parXmlReader.ReadElementContentAsString());
+                parXmlReader.ReadToNextSibling("x");
+                levelObject.X = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("y");
+                levelObject.Y = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("sizeX");
+                levelObject.SizeX = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("sizeY");
+                levelObject.SizeY = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("state");
+                levelObject.State = parXmlReader.ReadElementContentAsInt();
+                parXmlReader.ReadToNextSibling("flippedY");
+                levelObject.FlippedY = parXmlReader.ReadElementContentAsBoolean();
+                parXmlReader.ReadEndElement();
 
                 levelObjects.Add(levelObject);
             }
@@ -109,29 +134,34 @@ namespace AlienExplorer.Model
             return levelObjects;
         }
 
-        private static List<LevelObject> ParseDoors(XmlReader xmlReader)
+        /// <summary>
+        /// Считывание из XML целей уровня.
+        /// </summary>
+        /// <param name="parXmlReader">Парсер XML в нужном состоянии.</param>
+        /// <returns>Список созданных целей уровня.</returns>
+        private static List<LevelObject> ParseDoors(XmlReader parXmlReader)
         {
             List<LevelObject> doors = new List<LevelObject>();
-            xmlReader.ReadToFollowing("doors");
-            xmlReader.Read();
-            while (xmlReader.ReadToNextSibling("object"))
+            parXmlReader.ReadToFollowing("doors");
+            parXmlReader.Read();
+            while (parXmlReader.ReadToNextSibling("object"))
             {
                 LevelObject door = new LevelObject();
-                xmlReader.ReadToDescendant("type");
-                door.Type = (LevelObjectType)Enum.Parse(typeof(LevelObjectType), xmlReader.ReadElementContentAsString());
-                xmlReader.ReadToNextSibling("x");
-                door.X = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("y");
-                door.Y = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("sizeX");
-                door.SizeX = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("sizeY");
-                door.SizeY = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("state");
-                door.State = xmlReader.ReadElementContentAsInt();
-                xmlReader.ReadToNextSibling("flippedY");
-                door.FlippedY = xmlReader.ReadElementContentAsBoolean();
-                xmlReader.ReadEndElement();
+                parXmlReader.ReadToDescendant("type");
+                door.Type = (LevelObjectType)Enum.Parse(typeof(LevelObjectType), parXmlReader.ReadElementContentAsString());
+                parXmlReader.ReadToNextSibling("x");
+                door.X = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("y");
+                door.Y = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("sizeX");
+                door.SizeX = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("sizeY");
+                door.SizeY = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("state");
+                door.State = parXmlReader.ReadElementContentAsInt();
+                parXmlReader.ReadToNextSibling("flippedY");
+                door.FlippedY = parXmlReader.ReadElementContentAsBoolean();
+                parXmlReader.ReadEndElement();
 
                 doors.Add(door);
             }
@@ -139,42 +169,47 @@ namespace AlienExplorer.Model
             return doors;
         }
 
-        private static List<EnemyObject> ParseEnemies(XmlReader xmlReader)
+        /// <summary>
+        /// Считывание из XML врагов.
+        /// </summary>
+        /// <param name="parXmlReader">Парсер XML в нужном состоянии.</param>
+        /// <returns>Список созданных врагов.</returns>
+        private static List<EnemyObject> ParseEnemies(XmlReader parXmlReader)
         {
             List<EnemyObject> enemies = new List<EnemyObject>();
-            xmlReader.ReadToFollowing("enemies");
-            xmlReader.Read();
-            while (xmlReader.ReadToNextSibling("enemy"))
+            parXmlReader.ReadToFollowing("enemies");
+            parXmlReader.Read();
+            while (parXmlReader.ReadToNextSibling("enemy"))
             {
                 EnemyObject enemy = new EnemyObject();
-                xmlReader.ReadToDescendant("type");
-                enemy.Type = (EnemyObjectType)Enum.Parse(typeof(EnemyObjectType), xmlReader.ReadElementContentAsString());
-                xmlReader.ReadToNextSibling("damage");
-                enemy.Damage = xmlReader.ReadElementContentAsInt();
-                xmlReader.ReadToNextSibling("x");
-                enemy.X = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("y");
-                enemy.Y = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("sizeX");
-                enemy.SizeX = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("sizeY");
-                enemy.SizeY = xmlReader.ReadElementContentAsFloat();
-                xmlReader.ReadToNextSibling("state");
-                enemy.State = xmlReader.ReadElementContentAsInt();
-                xmlReader.ReadToNextSibling("flippedY");
-                enemy.FlippedY = xmlReader.ReadElementContentAsBoolean();
-                xmlReader.ReadToNextSibling("isMoving");
-                enemy.IsMoving = xmlReader.ReadElementContentAsBoolean();
-                if (xmlReader.ReadToNextSibling("leftWalkingBoundX"))
+                parXmlReader.ReadToDescendant("type");
+                enemy.Type = (EnemyObjectType)Enum.Parse(typeof(EnemyObjectType), parXmlReader.ReadElementContentAsString());
+                parXmlReader.ReadToNextSibling("damage");
+                enemy.Damage = parXmlReader.ReadElementContentAsInt();
+                parXmlReader.ReadToNextSibling("x");
+                enemy.X = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("y");
+                enemy.Y = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("sizeX");
+                enemy.SizeX = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("sizeY");
+                enemy.SizeY = parXmlReader.ReadElementContentAsFloat();
+                parXmlReader.ReadToNextSibling("state");
+                enemy.State = parXmlReader.ReadElementContentAsInt();
+                parXmlReader.ReadToNextSibling("flippedY");
+                enemy.FlippedY = parXmlReader.ReadElementContentAsBoolean();
+                parXmlReader.ReadToNextSibling("isMoving");
+                enemy.IsMoving = parXmlReader.ReadElementContentAsBoolean();
+                if (parXmlReader.ReadToNextSibling("leftWalkingBoundX"))
                 {
-                    enemy.LeftWalkingBoundX = xmlReader.ReadElementContentAsFloat();
-                    xmlReader.ReadToNextSibling("leftWalkingBoundY");
-                    enemy.LeftWalkingBoundY = xmlReader.ReadElementContentAsFloat();
-                    xmlReader.ReadToNextSibling("rightWalkingBoundX");
-                    enemy.RightWalkingBoundX = xmlReader.ReadElementContentAsFloat();
-                    xmlReader.ReadToNextSibling("rightWalkingBoundY");
-                    enemy.RightWalkingBoundY = xmlReader.ReadElementContentAsFloat();
-                    xmlReader.ReadEndElement();
+                    enemy.LeftWalkingBoundX = parXmlReader.ReadElementContentAsFloat();
+                    parXmlReader.ReadToNextSibling("leftWalkingBoundY");
+                    enemy.LeftWalkingBoundY = parXmlReader.ReadElementContentAsFloat();
+                    parXmlReader.ReadToNextSibling("rightWalkingBoundX");
+                    enemy.RightWalkingBoundX = parXmlReader.ReadElementContentAsFloat();
+                    parXmlReader.ReadToNextSibling("rightWalkingBoundY");
+                    enemy.RightWalkingBoundY = parXmlReader.ReadElementContentAsFloat();
+                    parXmlReader.ReadEndElement();
                 }
                 else
                 {
@@ -182,7 +217,7 @@ namespace AlienExplorer.Model
                     enemy.LeftWalkingBoundY = 0;
                     enemy.RightWalkingBoundX = 0;
                     enemy.RightWalkingBoundY = 0;
-                    xmlReader.ReadEndElement();
+                    parXmlReader.ReadEndElement();
                 }
 
                 enemies.Add(enemy);
@@ -191,35 +226,40 @@ namespace AlienExplorer.Model
             return enemies;
         }
 
-        private static PlayerObject ParsePlayer(XmlReader xmlReader)
+        /// <summary>
+        /// Считывание из XML игрока.
+        /// </summary>
+        /// <param name="parXmlReader">Парсер XML в нужном состоянии.</param>
+        /// <returns>Созданный объект игрока.</returns>
+        private static PlayerObject ParsePlayer(XmlReader parXmlReader)
         {
             PlayerObject player = new PlayerObject();
-            xmlReader.ReadToFollowing("player");
+            parXmlReader.ReadToFollowing("player");
 
-            xmlReader.ReadToDescendant("type");
-            player.Type = (PlayerObjectType)Enum.Parse(typeof(PlayerObjectType), xmlReader.ReadElementContentAsString());
-            xmlReader.ReadToNextSibling("x");
-            player.X = xmlReader.ReadElementContentAsFloat();
-            xmlReader.ReadToNextSibling("y");
-            player.Y = xmlReader.ReadElementContentAsFloat();
-            xmlReader.ReadToNextSibling("sizeX");
-            player.SizeX = xmlReader.ReadElementContentAsFloat();
-            xmlReader.ReadToNextSibling("sizeY");
-            player.SizeY = xmlReader.ReadElementContentAsFloat();
-            xmlReader.ReadToNextSibling("sizeYstandart");
-            player.SizeYstandart = xmlReader.ReadElementContentAsFloat();
-            xmlReader.ReadToNextSibling("sizeYsmall");
-            player.SizeYsmall = xmlReader.ReadElementContentAsFloat();
-            xmlReader.ReadToNextSibling("state");
-            player.State = xmlReader.ReadElementContentAsInt();
-            xmlReader.ReadToNextSibling("flippedY");
-            player.FlippedY = xmlReader.ReadElementContentAsBoolean();
-            xmlReader.ReadToNextSibling("health");
-            player.Health = xmlReader.ReadElementContentAsInt();
-            xmlReader.ReadToNextSibling("healthMax");
-            player.HealthMax = xmlReader.ReadElementContentAsInt();
-            xmlReader.ReadToNextSibling("energyMax");
-            player.EnergyMax = xmlReader.ReadElementContentAsInt();
+            parXmlReader.ReadToDescendant("type");
+            player.Type = (PlayerObjectType)Enum.Parse(typeof(PlayerObjectType), parXmlReader.ReadElementContentAsString());
+            parXmlReader.ReadToNextSibling("x");
+            player.X = parXmlReader.ReadElementContentAsFloat();
+            parXmlReader.ReadToNextSibling("y");
+            player.Y = parXmlReader.ReadElementContentAsFloat();
+            parXmlReader.ReadToNextSibling("sizeX");
+            player.SizeX = parXmlReader.ReadElementContentAsFloat();
+            parXmlReader.ReadToNextSibling("sizeY");
+            player.SizeY = parXmlReader.ReadElementContentAsFloat();
+            parXmlReader.ReadToNextSibling("sizeYstandart");
+            player.SizeYstandart = parXmlReader.ReadElementContentAsFloat();
+            parXmlReader.ReadToNextSibling("sizeYsmall");
+            player.SizeYsmall = parXmlReader.ReadElementContentAsFloat();
+            parXmlReader.ReadToNextSibling("state");
+            player.State = parXmlReader.ReadElementContentAsInt();
+            parXmlReader.ReadToNextSibling("flippedY");
+            player.FlippedY = parXmlReader.ReadElementContentAsBoolean();
+            parXmlReader.ReadToNextSibling("health");
+            player.Health = parXmlReader.ReadElementContentAsInt();
+            parXmlReader.ReadToNextSibling("healthMax");
+            player.HealthMax = parXmlReader.ReadElementContentAsInt();
+            parXmlReader.ReadToNextSibling("energyMax");
+            player.EnergyMax = parXmlReader.ReadElementContentAsInt();
 
             return player;
         }

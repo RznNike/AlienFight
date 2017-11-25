@@ -5,23 +5,70 @@ using System.Linq;
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Логика игрового уровня.
+    /// </summary>
     public class LevelLogic : BaseModelLogic
     {
+        /// <summary>
+        /// Период задержки для цикла вычислений состояния модели.
+        /// </summary>
         private static readonly int THREAD_SLEEP_MS = 5;
+        /// <summary>
+        /// Необходимый для выигрыша наезд игрока на цель (в клетках).
+        /// </summary>
         private static readonly float PLAYER_TO_DOOR_WIN_OFFSET = 0.4f;
+        /// <summary>
+        /// Радиус активации движения камеры к игроку по горизонтали (доля ширины камеры).
+        /// </summary>
         private static readonly float CAMERA_ACTIVATE_RANGE_X = 0.1f;
+        /// <summary>
+        /// Радиус активации движения камеры к игроку по вертикали (доля высоты камеры).
+        /// </summary>
         private static readonly float CAMERA_ACTIVATE_RANGE_Y = 0.15f;
+        /// <summary>
+        /// Радиус деактивации движения камеры к игроку по горизонтали (доля ширины камеры).
+        /// </summary>
         private static readonly float CAMERA_DEACTIVATE_RANGE_X = 0.03f;
+        /// <summary>
+        /// Радиус деактивации движения камеры к игроку по вертикали (доля высоты камеры).
+        /// </summary>
         private static readonly float CAMERA_DEACTIVATE_RANGE_Y = 0.03f;
-
-        public TimeSpan LevelTimer { get; private set; }
-        private DateTime _timer;
+        
+        /// <summary>
+        /// Модель.
+        /// </summary>
         private GameModel _model;
+        /// <summary>
+        /// Таймер для нахождения дельты времени в потоковом цикле логики.
+        /// </summary>
+        private DateTime _timer;
+        /// <summary>
+        /// Флаг движения камеры к игроку по горизонтали.
+        /// </summary>
         private bool _cameraMovingX;
+        /// <summary>
+        /// Флаг движения камеры к игроку по вертикали.
+        /// </summary>
         private bool _cameraMovingY;
+        /// <summary>
+        /// Флаг остановки потокового цикла логики.
+        /// </summary>
         private bool _stopThread;
+        /// <summary>
+        /// Событие для блокировки потока во время паузы.
+        /// </summary>
         private ManualResetEventSlim _manualResetEventSlim;
 
+        /// <summary>
+        /// Таймер времени прохождения уровня.
+        /// </summary>
+        public TimeSpan LevelTimer { get; private set; }
+
+        /// <summary>
+        /// Инициализирует логику модели.
+        /// </summary>
+        /// <param name="parModel">Модель.</param>
         public LevelLogic(GameModel parModel) : base(parModel)
         {
             _stateMachine = new LevelMenuStateMachine(parModel);
@@ -32,6 +79,9 @@ namespace AlienExplorer.Model
             _manualResetEventSlim = new ManualResetEventSlim(true);
         }
 
+        /// <summary>
+        /// Запуск работы логики уровня и всех логик объектов.
+        /// </summary>
         public void Start()
         {
             _manualResetEventSlim.Set();
@@ -53,6 +103,9 @@ namespace AlienExplorer.Model
             logicThread.Start();
         }
 
+        /// <summary>
+        /// Остановка работы логики уровня и всех логик объектов.
+        /// </summary>
         public void Stop()
         {
             _stopThread = true;
@@ -67,11 +120,17 @@ namespace AlienExplorer.Model
             _manualResetEventSlim.Set();
         }
 
+        /// <summary>
+        /// Пауза работы логики уровня и всех логик объектов.
+        /// </summary>
         public void Pause()
         {
             _manualResetEventSlim.Reset();
         }
 
+        /// <summary>
+        /// Возобновление работы логики уровня и всех логик объектов.
+        /// </summary>
         public void Resume()
         {
             _timer = DateTime.UtcNow;
@@ -86,6 +145,11 @@ namespace AlienExplorer.Model
             _manualResetEventSlim.Set();
         }
 
+        /// <summary>
+        /// Получение команды от контроллера.
+        /// </summary>
+        /// <param name="parCommand">Команда.</param>
+        /// <param name="parBeginCommand">Флаг начала команды (true, если начата).</param>
         public override void ReceiveCommand(ModelCommand parCommand, bool parBeginCommand)
         {
             if (parBeginCommand)
@@ -101,6 +165,10 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Обработка команды контроллера внутри логики модели.
+        /// </summary>
+        /// <param name="parCommand">Команда.</param>
         protected override void HandleCommand(ModelCommand parCommand)
         {
             _stateMachine.ChangeState(parCommand);
@@ -140,6 +208,9 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Потоковый цикл логики уровня.
+        /// </summary>
         private void IterativeAction()
         {
             _timer = DateTime.UtcNow;
@@ -163,6 +234,10 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Проверка очков жизни игрока. При необходимости изменяет состояние автомата.
+        /// </summary>
+        /// <returns>True, если очков 0 и нужно остановить поток.</returns>
         private bool CheckPlayerHP()
         {
             bool stopThread = false;
@@ -179,13 +254,17 @@ namespace AlienExplorer.Model
             return stopThread;
         }
 
+        /// <summary>
+        /// Проверка позиции игрока. При необходимости изменяет состояние автомата и сохраняет рекорд.
+        /// </summary>
+        /// <returns>True, если игрок у цели и нужно остановить поток.</returns>
         private bool CheckPlayerPosition()
         {
             bool stopThread = false;
             if (IsPlayerInGoalPoint())
             {
                 this.Stop();
-                ((LevelMenuStateMachine)_stateMachine).EnterToMenu(UIObjectType.Next);
+                ((LevelMenuStateMachine)_stateMachine).EnterToMenu(UIObjectType.Next_level);
                 SelectedMenuItem = _stateMachine.SelectedMenuItem;
                 MenuHeader = _stateMachine.MenuHeader;
                 ShadowLevel = _stateMachine.ShadowLevel;
@@ -209,6 +288,10 @@ namespace AlienExplorer.Model
             return stopThread;
         }
 
+        /// <summary>
+        /// Проверка достижения игроком цели.
+        /// </summary>
+        /// <returns>True, если игрок у цели.</returns>
         private bool IsPlayerInGoalPoint()
         {
             bool result = false;
@@ -230,12 +313,24 @@ namespace AlienExplorer.Model
             return result;
         }
 
+        /// <summary>
+        /// Проверка пересечения двух отрезков.
+        /// </summary>
+        /// <param name="parMin1">Левая граница отрезка 1.</param>
+        /// <param name="parMax1">Правая граница отрезка 1.</param>
+        /// <param name="parMin2">Левая граница отрезка 2.</param>
+        /// <param name="parMax2">Правая граница отрезка 2.</param>
+        /// <returns>True, если отрезки пересекаются.</returns>
         private bool IsIntersected(float parMin1, float parMax1, float parMin2, float parMax2)
         {
             return ((parMax2 >= parMin1) && (parMax2 <= parMax1))
                 || ((parMax2 > parMax1) && (parMin2 <= parMax1));
         }
 
+        /// <summary>
+        /// Перемещение камеры за игроком.
+        /// </summary>
+        /// <param name="parDeltaSeconds">Прошедшее с предыдуего шага время.</param>
         private void MoveCamera(float parDeltaSeconds)
         {
             float dX = (_model.Player.X + _model.Player.SizeX * 0.5f) - (_model.CameraX + _model.CameraSizeX * 0.5f);

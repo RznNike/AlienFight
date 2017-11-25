@@ -2,22 +2,42 @@
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Автомат состояний летучей мыши.
+    /// </summary>
     public class BatStateMachine : ObjectStateMachine<BatStateType>
     {
+        /// <summary>
+        /// Период анимации (смены состояний объекта) (в секундах).
+        /// </summary>
         private static readonly float SUBSTATE_PERIOD = 0.15f;
 
+        /// <summary>
+        /// Инициализирует автомат состояний объекта.
+        /// </summary>
         public BatStateMachine()
         {
             _machineState = BatStateType.Fly;
             _timeInState = 0;
         }
 
+        /// <summary>
+        /// Изменение состояния автомата и состояния объекта на основе входных данных.
+        /// </summary>
+        /// <param name="parEnemy">Целевой объект.</param>
+        /// <param name="parFreeSpace">Массив свободных расстояний вокруг объекта (слева, сверху, справа, снизу).</param>
+        /// <param name="parMove">Вектор перемещения (X, Y).</param>
+        /// <param name="parDeltaSeconds">Время, прошедшее с предыдущего шага (в секундах).</param>
         public override void ChangeState(GameObject parEnemy, float[ ] parFreeSpace, float[ ] parMove, float parDeltaSeconds)
         {
             _timeInState += parDeltaSeconds;
             ProcessInSameState(parEnemy);
         }
 
+        /// <summary>
+        /// Изменение состояния объекта (анимация).
+        /// </summary>
+        /// <param name="parEnemy">Целевой объект.</param>
         private void ProcessInSameState(GameObject parEnemy)
         {
             if (_timeInState > SUBSTATE_PERIOD)

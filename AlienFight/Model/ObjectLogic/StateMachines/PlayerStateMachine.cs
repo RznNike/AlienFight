@@ -2,17 +2,36 @@
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Автомат состояний игрока.
+    /// </summary>
     public class PlayerStateMachine : ObjectStateMachine<PlayerStateType>
     {
+        /// <summary>
+        /// Период анимации (смены состояний объекта) (в секундах).
+        /// </summary>
         private static readonly float SUBSTATE_PERIOD = 0.05f;
+        /// <summary>
+        /// Множитель периода состояния повреждения (после получения урона).
+        /// </summary>
         private static readonly int HURT_PERIOD_MULT = 10;
 
+        /// <summary>
+        /// Инициализирует автомат состояний объекта.
+        /// </summary>
         public PlayerStateMachine()
         {
             _machineState = PlayerStateType.Stand;
             _timeInState = 0;
         }
 
+        /// <summary>
+        /// Изменение состояния автомата и состояния объекта на основе входных данных.
+        /// </summary>
+        /// <param name="parPlayer">Целевой объект.</param>
+        /// <param name="parFreeSpace">Массив свободных расстояний вокруг объекта (слева, сверху, справа, снизу).</param>
+        /// <param name="parMove">Вектор перемещения (X, Y).</param>
+        /// <param name="parDeltaSeconds">Время, прошедшее с предыдущего шага (в секундах).</param>
         public override void ChangeState(GameObject parPlayer, float[ ] parFreeSpace, float[ ] parMove, float parDeltaSeconds)
         {
             _timeInState += parDeltaSeconds;
@@ -27,6 +46,13 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Нахождение возможного следующего состояния автомата.
+        /// </summary>
+        /// <param name="parPlayer">Целевой объект.</param>
+        /// <param name="parFreeSpace">Массив свободных расстояний вокруг объекта (слева, сверху, справа, снизу).</param>
+        /// <param name="parMove">Вектор перемещения (X, Y).</param>
+        /// <returns>Возможное состояние.</returns>
         private PlayerStateType FindPossibleState(PlayerObject parPlayer, float[ ] parFreeSpace, float[ ] parMove)
         {
             if (parFreeSpace[3] > EPSILON)
@@ -53,6 +79,10 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Изменение состояния объекта (анимация).
+        /// </summary>
+        /// <param name="parPlayer">Целевой объект.</param>
         private void ProcessInSameState(GameObject parPlayer)
         {
             if (_timeInState >= SUBSTATE_PERIOD)
@@ -72,6 +102,11 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Изменение состояний автомата и объекта.
+        /// </summary>
+        /// <param name="parPlayer">Целевой объект.</param>
+        /// <param name="parState">Новое состояние автомата.</param>
         private void ProcessInNewState(GameObject parPlayer, PlayerStateType parState)
         {
             if ((_machineState != PlayerStateType.Hurt)

@@ -1,7 +1,16 @@
 ﻿namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Фабрика логик врагов.
+    /// </summary>
     public static class EnemyLogicFactory
     {
+        /// <summary>
+        /// Создание логики для врага.
+        /// </summary>
+        /// <param name="parLevel">Уровень.</param>
+        /// <param name="parObject">Целевой объект.</param>
+        /// <returns></returns>
         public static ILogic CreateLogic(GameModel parLevel, EnemyObject parObject)
         {
             ILogic logic = null;

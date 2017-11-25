@@ -4,13 +4,25 @@ using System.Linq;
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Автомат состояний главного меню.
+    /// </summary>
     public class MainMenuStateMachine : ModelStateMachine
     {
+        /// <summary>
+        /// Инициализирует автомат состояний начальными значениями.
+        /// </summary>
+        /// <param name="parModel">Модель.</param>
+        /// <param name="parSelectedMenuItem">(Необязательно) выбранный пункт меню.</param>
         public MainMenuStateMachine(GameModel parModel, int parSelectedMenuItem = 0) : base(parModel, parSelectedMenuItem)
         {
             InitializeMainMenu();
         }
 
+        /// <summary>
+        /// Изменение состояния согласно команде извне.
+        /// </summary>
+        /// <param name="parCommand">Команда.</param>
         public override void ChangeState(ModelCommand parCommand)
         {
             if ((_model.UIItems != null) && (_model.UIItems.Count > 0))
@@ -33,6 +45,9 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Обработка действия подтверждения (обычно нажатие клавишы Enter).
+        /// </summary>
         protected override void AcceptAction()
         {
             UIObjectType selectedItem = _model.UIItems[SelectedMenuItem].Type;
@@ -94,6 +109,9 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Обработка действия отмены (обычно нажатие клавишы Escape).
+        /// </summary>
         protected override void CancelAction()
         {
             switch (_currentMenu)
@@ -107,6 +125,10 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Выбор процедуры инициализации нужного меню.
+        /// </summary>
+        /// <param name="parType">Тип меню.</param>
         private void EnterToMenu(UIObjectType parType)
         {
             switch (parType)
@@ -128,6 +150,9 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Инициализация главного меню.
+        /// </summary>
         private void InitializeMainMenu()
         {
             _model.UIItems = new List<UIObject>();
@@ -147,6 +172,10 @@ namespace AlienExplorer.Model
             CurrentCommand = ModelStateMachineCommand.None;
         }
 
+        /// <summary>
+        /// Инициализация меню подтвержения действия.
+        /// </summary>
+        /// <param name="parType">Тип родительского меню.</param>
         private void InitializeConfirmationMenu(UIObjectType parType)
         {
             string caption = "";
@@ -182,6 +211,9 @@ namespace AlienExplorer.Model
             CurrentCommand = ModelStateMachineCommand.None;
         }
 
+        /// <summary>
+        /// Инициализация меню выбора уровня.
+        /// </summary>
         private void InitializeChooseLevelMenu()
         {
             int maxLevel = SaveFile.GetInstance().OpenedLevel;
@@ -206,6 +238,9 @@ namespace AlienExplorer.Model
             CurrentCommand = ModelStateMachineCommand.None;
         }
 
+        /// <summary>
+        /// Инициализация меню списка рекордов.
+        /// </summary>
         private void InitializeRecordsMenu()
         {
             Dictionary<int, TimeSpan> records = SaveFile.GetInstance().Records;

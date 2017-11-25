@@ -3,13 +3,28 @@ using AlienExplorer.Model;
 
 namespace AlienExplorerTests
 {
+    /// <summary>
+    /// Тесты класса PlayerStateMachine - автомата состояний игрока.
+    /// </summary>
     [TestClass]
     public class PlayerStateMachineTests
     {
+        /// <summary>
+        /// Погрешность вычислений.
+        /// </summary>
         protected static readonly float EPSILON = 0.01f;
+        /// <summary>
+        /// Период анимации (смены состояний объекта) (в секундах).
+        /// </summary>
         private static readonly float SUBSTATE_PERIOD = 0.05f;
+        /// <summary>
+        /// Множитель периода состояния повреждения (после получения урона).
+        /// </summary>
         private static readonly int HURT_PERIOD_MULT = 10;
         
+        /// <summary>
+        /// Тест установки состояния в указанное.
+        /// </summary>
         [TestMethod]
         public void SetStateTest()
         {
@@ -30,6 +45,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 12);
         }
 
+        /// <summary>
+        /// Тест анимации за нулевой промежуток времени.
+        /// </summary>
         [TestMethod]
         public void ChangeStateZeroTimeTest()
         {
@@ -52,6 +70,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 1);
         }
 
+        /// <summary>
+        /// Тест анимации за половину периода времени.
+        /// </summary>
         [TestMethod]
         public void ChangeStateHalfStepTest()
         {
@@ -74,6 +95,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 1);
         }
 
+        /// <summary>
+        /// Тест анимации за один период времени.
+        /// </summary>
         [TestMethod]
         public void ChangeStateOneStepTest()
         {
@@ -96,6 +120,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 2);
         }
 
+        /// <summary>
+        /// Тест анимации за полтора периода времени.
+        /// </summary>
         [TestMethod]
         public void ChangeStateOneAndHalfStepTest()
         {
@@ -118,6 +145,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 2);
         }
 
+        /// <summary>
+        /// Тест анимации за три периода времени.
+        /// </summary>
         [TestMethod]
         public void ChangeStateThreeStepsTest()
         {
@@ -140,6 +170,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 2);
         }
 
+        /// <summary>
+        /// Тест анимации после получения урона за три периода времени.
+        /// </summary>
         [TestMethod]
         public void ChangeStateThreeStepsHurtTest()
         {
@@ -162,6 +195,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 12);
         }
 
+        /// <summary>
+        /// Тест анимации после получения урона за период анимации урона.
+        /// </summary>
         [TestMethod]
         public void ChangeStateHurtCooldownTest()
         {
@@ -184,6 +220,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 1);
         }
 
+        /// <summary>
+        /// Тест циклической смены анимации.
+        /// </summary>
         [TestMethod]
         public void ChangeStateCycleTest()
         {
@@ -208,6 +247,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 1);
         }
 
+        /// <summary>
+        /// Тест анимации при смене состояния.
+        /// </summary>
         [TestMethod]
         public void ChangeStateNewStateTest()
         {
@@ -229,6 +271,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 1);
         }
 
+        /// <summary>
+        /// Тест анимации при прыжке.
+        /// </summary>
         [TestMethod]
         public void ChangeStateJumpTest()
         {
@@ -250,6 +295,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 10);
         }
 
+        /// <summary>
+        /// Тест анимации при прыжке и движении.
+        /// </summary>
         [TestMethod]
         public void ChangeStateJumpAndMoveTest()
         {
@@ -271,6 +319,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 10);
         }
 
+        /// <summary>
+        /// Тест анимации при бездвижности.
+        /// </summary>
         [TestMethod]
         public void ChangeStateStandTest()
         {
@@ -293,6 +344,9 @@ namespace AlienExplorerTests
             Assert.AreEqual(player.State, 0);
         }
 
+        /// <summary>
+        /// Тест анимации при приседании.
+        /// </summary>
         [TestMethod]
         public void ChangeStateDuckTest()
         {

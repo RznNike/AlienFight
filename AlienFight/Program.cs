@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using AlienExplorer.Controller;
-using AlienExplorer.View;
 
 namespace AlienExplorer
 {
+    /// <summary>
+    /// Инициализатор работы приложения.
+    /// </summary>
     static class Program
     {
         /// <summary>

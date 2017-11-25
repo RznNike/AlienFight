@@ -4,19 +4,42 @@ using System.Threading;
 
 namespace AlienExplorer.Model
 {
+    /// <summary>
+    /// Логика призрака.
+    /// </summary>
     public class GhostLogic : BaseObjectLogic<GhostStateMachine, GhostStateType>
     {
+        /// <summary>
+        /// Скорость перемещения.
+        /// </summary>
         private static readonly float HORISONTAL_SPEED = PlayerLogic.HORISONTAL_SPEED;
+        /// <summary>
+        /// Период бездействия после атаки (в секундах).
+        /// </summary>
         private static readonly float ATTACK_COOLDOWN_TIME = 1f;
+        /// <summary>
+        /// Период задержки для цикла вычислений состояния объекта.
+        /// </summary>
         private static readonly int THREAD_SLEEP_MS = 10;
-
+        
+        /// <summary>
+        /// Целевой объект.
+        /// </summary>
         public EnemyObject Enemy { get { return (EnemyObject)Object; } set { Object = value; } }
 
+        /// <summary>
+        /// Инициализирует логику объекта.
+        /// </summary>
+        /// <param name="parLevel">Уровень.</param>
+        /// <param name="parEnemy">Объект.</param>
         public GhostLogic(GameModel parLevel, EnemyObject parEnemy) : base(parLevel)
         {
             Enemy = parEnemy;
         }
 
+        /// <summary>
+        /// Потоковый цикл вычислений.
+        /// </summary>
         protected override void IterativeAction()
         {
             // left, up, right, down
@@ -44,24 +67,32 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Нахождение вектора скорости.
+        /// </summary>
+        /// <param name="parSpeed">Вектор скорости (X, Y) на предыдущем шаге.</param>
+        /// <param name="parFreeSpace">Массив свободных расстояний вокруг объекта (слева, сверху, справа, снизу).</param>
+        /// <param name="parDeltaSeconds">Время, прошедшее с предыдущего шага (в секундах).</param>
+        /// <param name="refAttackCooldown">Таймер бездействия после атаки.</param>
+        /// <returns>Вектор скорости (X, Y).</returns>
         private float[ ] FindSpeed(
             float[ ] parSpeed,
             float[ ] parFreeSpace,
             float parDeltaSeconds,
-            ref float parAttackCooldown)
+            ref float refAttackCooldown)
         {
             float[ ] speed = new float[2] { 0, 0 };
 
-            if (parAttackCooldown > EPSILON)
+            if (refAttackCooldown > EPSILON)
             {
-                parAttackCooldown -= parDeltaSeconds;
+                refAttackCooldown -= parDeltaSeconds;
                 return speed;
             }
 
             if ((IsIntersected(Enemy.X, Enemy.X + Enemy.SizeX, Level.Player.X, Level.Player.X + Level.Player.SizeX))
                 && (IsIntersected(Enemy.Y, Enemy.Y + Enemy.SizeY, Level.Player.Y, Level.Player.Y + Level.Player.SizeY)))
             {
-                parAttackCooldown = ATTACK_COOLDOWN_TIME;
+                refAttackCooldown = ATTACK_COOLDOWN_TIME;
                 return speed;
             }
 
@@ -82,6 +113,10 @@ namespace AlienExplorer.Model
             return speed;
         }
 
+        /// <summary>
+        /// Определяет, виден ли игрок призраку.
+        /// </summary>
+        /// <returns>True, если виден.</returns>
         private bool IsPlayerVisible()
         {
             float downBound = Enemy.Y;
@@ -101,6 +136,13 @@ namespace AlienExplorer.Model
             }
         }
 
+        /// <summary>
+        /// Проверяет, находится ли значение внутри заданного диапазона.
+        /// </summary>
+        /// <param name="parMiddleValue">Целевое значение.</param>
+        /// <param name="parBorder1">Левая граница диапазона.</param>
+        /// <param name="parBorder2">Правая граница диапазона.</param>
+        /// <returns>True, если значение внутри диапазона.</returns>
         private bool IsBetween(float parMiddleValue, float parBorder1, float parBorder2)
         {
             if (parBorder1 < parBorder2)
