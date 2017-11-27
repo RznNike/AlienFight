@@ -8,18 +8,20 @@ namespace AlienExplorer.View
     public interface IViewable
     {
         /// <summary>
-        /// Ссылка на метод модели по установке размеров камеры.
-        /// </summary>
-        dSetCameraSize SetCameraSize { get; set; }
-
-        /// <summary>
-        /// Установка размеров камеры в модели.
-        /// </summary>
-        void SendCameraSizeToModel();
-        /// <summary>
         /// Отображение модели.
         /// </summary>
         /// <param name="parModel">Модель.</param>
         void ViewModel(GameModel parModel);
+
+        /// <summary>
+        /// Отправка ссылки на метод установки размеров камеры в модели.
+        /// </summary>
+        /// <param name="parSetCameraSize">Ссылка на метод.</param>
+        void SendCameraSizeDelegateSending(dSetCameraSize parSetCameraSize);
+
+        /// <summary> 
+        /// Установка размеров камеры в модели.
+        /// </summary> 
+        void SendCameraSizeToModel();
     }
 }

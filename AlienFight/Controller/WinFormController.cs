@@ -17,7 +17,7 @@ namespace AlienExplorer.Controller
         public WinFormController() : base()
         {
             View = new FormMain();
-            View.SetCameraSize += Model.SetCameraSize;
+            View.SendCameraSizeDelegateSending(Model.SetCameraSize);
             ((Form)View).Show();
             ((Form)View).KeyDown += KeyDown;
             ((Form)View).KeyUp += KeyUp;

@@ -91,6 +91,7 @@
     <Compile Include="Model\Main\GameModel.cs" />
     <Compile Include="Model\Objects\GameObject.cs" />
     <Compile Include="Model\Utility\SaveFile.cs" />
+    <Compile Include="View\WinForm\BufferedWinFormDrawer.cs" />
     <Compile Include="View\WinForm\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

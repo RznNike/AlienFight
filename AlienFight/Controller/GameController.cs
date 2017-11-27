@@ -38,7 +38,7 @@ namespace AlienExplorer.Controller
                 Model = LevelLoader.Load(parLevelID);
                 if (View != null)
                 {
-                    View.SetCameraSize += Model.SetCameraSize;
+                    View.SendCameraSizeDelegateSending(Model.SetCameraSize);
                     View.SendCameraSizeToModel();
                 }
                 ((LevelLogic)Model.ModelLogic).Start();
@@ -58,7 +58,7 @@ namespace AlienExplorer.Controller
             Model = MenuLoader.Load();
             if (View != null)
             {
-                View.SetCameraSize += Model.SetCameraSize;
+                View.SendCameraSizeDelegateSending(Model.SetCameraSize);
                 View.SendCameraSizeToModel();
             }
             Model.ModelLogic.LoadAnotherModel += LoadAnotherModel;
