@@ -115,7 +115,7 @@ namespace AlienExplorer.Model
         /// <summary>
         /// Получение синглтонного экземпляра объекта для файла сохранения.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Объект для файла сохранения.</returns>
         public static SaveFile GetInstance()
         {
             if (_instance == null)

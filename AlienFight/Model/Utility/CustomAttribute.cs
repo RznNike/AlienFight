@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -19,7 +19,7 @@ namespace AlienExplorer.Model
         /// Инициализирует атрибут значением.
         /// </summary>
         /// <param name="parValue">Значение для хранения.</param>
-		public CustomAttribute(object parValue)
+        public CustomAttribute(object parValue)
         {
             _value = parValue;
         }

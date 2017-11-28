@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="parLevel">Уровень.</param>
         /// <param name="parObject">Целевой объект.</param>
-        /// <returns></returns>
+        /// <returns>Объект логики для врага.</returns>
         public static ILogic CreateLogic(GameModel parLevel, EnemyObject parObject)
         {
             ILogic logic = null;

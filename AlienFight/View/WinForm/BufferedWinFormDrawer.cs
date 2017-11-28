@@ -284,22 +284,23 @@ namespace AlienExplorer.View
             for (int i = 0; i < uiList.Count; i++)
             {
                 Image sprite = null;
+                float uiSize = _bufGraphics.Graphics.MeasureString("0", _standartFont).Height;
                 switch (uiList[i].Type)
                 {
                     case UIObjectType.Health:
                         sprite = _spritesContainer.GetUISprite(uiList[i]);
-                        _bufGraphics.Graphics.DrawImage(sprite, _cellSize / 5f, _height - _cellSize * 0.7f, _cellSize / 2f, _cellSize / 2f);
+                        _bufGraphics.Graphics.DrawImage(sprite, uiSize / 5f, _height - uiSize * 1.2f, uiSize, uiSize);
                         _bufGraphics.Graphics.DrawString(
-                            parModel.Player.Health.ToString(), _standartFont, Brushes.Crimson, _cellSize / 1.5f, _height - _cellSize * 0.67f);
+                            parModel.Player.Health.ToString(), _standartFont, Brushes.Crimson, uiSize * 1.1f, _height - uiSize * 1.1f);
                         break;
                     case UIObjectType.Timer:
                         sprite = _spritesContainer.GetUISprite(uiList[i]);
                         TimeSpan time = ((LevelLogic)parModel.ModelLogic).LevelTimer;
                         string timeString = $"{time.Minutes:D2}:{time.Seconds:D2}.{(time.Milliseconds / 100):D1}";
                         int offsetX = (int)((_width - _bufGraphics.Graphics.MeasureString("00:00:0", _standartFont).Width) / 2);
-                        _bufGraphics.Graphics.DrawImage(sprite, offsetX - _cellSize / 2f, _cellSize / 5f, _cellSize / 2f, _cellSize / 2f);
+                        _bufGraphics.Graphics.DrawImage(sprite, offsetX - uiSize, uiSize / 10f, uiSize, uiSize);
                         _bufGraphics.Graphics.DrawString(
-                            timeString, _standartFont, Brushes.White, offsetX, _cellSize / 5f);
+                            timeString, _standartFont, Brushes.White, offsetX, uiSize / 5f);
                         break;
                     default:
                         DrawUIObject(uiList[i], i + offset);
@@ -376,11 +377,15 @@ namespace AlienExplorer.View
             Brush brush = Brushes.White;
             if (parObject.State == 1)
             {
-                brush = Brushes.GreenYellow;
+                brush = Brushes.LawnGreen;
             }
             if (parObject.Type == UIObjectType.Text)
             {
                 text = parObject.Text;
+                if ((parRowNumber == 0) && !text.StartsWith("Level "))
+                {
+                    brush = Brushes.Yellow;
+                }
             }
             else
             {
