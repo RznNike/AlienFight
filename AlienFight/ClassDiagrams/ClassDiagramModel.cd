@@ -1,91 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="AlienExplorer.Model.GameModel" Collapsed="true">
-    <Position X="13.5" Y="0.5" Width="1.5" />
+    <Position X="1.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAgIAFQABAAEAAIAAAQMBARAgABA=</HashCode>
       <FileName>Model\Main\GameModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.LevelMenuStateMachine" Collapsed="true">
-    <Position X="5.5" Y="10.75" Width="1.5" />
+    <Position X="4.75" Y="14" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIACAAAgAAADAAAAAAgAAAAAAAIAAAgAAAAAABAAAA=</HashCode>
       <FileName>Model\MainLogic\StateMachines\LevelMenuStateMachine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.MainMenuStateMachine" Collapsed="true">
-    <Position X="7.75" Y="10.75" Width="1.5" />
+    <Position X="7" Y="14" Width="2" />
     <TypeIdentifier>
       <HashCode>AAIAACAAAAAALAAAAAAAAAAEEAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>Model\MainLogic\StateMachines\MainMenuStateMachine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.ModelStateMachine" Collapsed="true">
-    <Position X="6.75" Y="9.5" Width="1.5" />
+    <Position X="6" Y="12.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAQAEATAAEAgAAAAAAAEAAACAAAAAAAABCAAA=</HashCode>
       <FileName>Model\MainLogic\StateMachines\ModelStateMachine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.BaseModelLogic" Collapsed="true">
-    <Position X="1.75" Y="9.5" Width="1.5" />
+    <Position X="1.5" Y="12.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQCEAQAgAAAAAAAAAAAAAAACAAIAAAAAAAAA=</HashCode>
       <FileName>Model\MainLogic\BaseModelLogic.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.LevelLogic" Collapsed="true">
-    <Position X="0.5" Y="10.75" Width="1.5" />
+    <Position X="0.5" Y="14" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAgECEMASAgAAAAAhBAAAAAADAAABCAIIAAIAgAAFA=</HashCode>
       <FileName>Model\MainLogic\LevelLogic.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.MenuLogic" Collapsed="true">
-    <Position X="2.75" Y="10.75" Width="1.5" />
+    <Position X="2.5" Y="14" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAACAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Model\MainLogic\MenuLogic.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.BatStateMachine" Collapsed="true">
-    <Position X="5.25" Y="7.75" Width="1.5" />
+    <Position X="5.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAgAAAACA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\BatStateMachine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.GhostStateMachine" Collapsed="true">
-    <Position X="0.75" Y="7.75" Width="1.5" />
+    <Position X="0.75" Y="10.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAgAAAAAAAAAAAAAACAgAAAACA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\GhostStateMachine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.ObjectStateMachine&lt;MachineStatesEnum&gt;" Collapsed="true">
-    <Position X="4" Y="6.5" Width="1.5" />
+    <Position X="3.5" Y="9.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAABAAAAAAAAAAAAEAAAAAAAACAEAAAAAA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\ObjectStateMachine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.PlayerStateMachine" Collapsed="true">
-    <Position X="3" Y="7.75" Width="1.5" />
+    <Position X="3" Y="10.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAgAAAAAAAAAAAAQACAgAAAACA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\PlayerStateMachine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.SlimeStateMachine" Collapsed="true">
-    <Position X="7.5" Y="7.75" Width="1.5" />
+    <Position X="7.25" Y="10.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAgAAAAAAAAAAAAAACAgAAAACA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\SlimeStateMachine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.BaseObjectLogic&lt;StateMachineType, StateType&gt;" Collapsed="true">
-    <Position X="4" Y="3.5" Width="1.5" />
+    <Position X="3.25" Y="6.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAASCgAAggEAAAAAAAAAAAABABIIAYOAgAAAA=</HashCode>
       <FileName>Model\ObjectLogic\BaseObjectLogic.cs</FileName>
@@ -93,70 +93,70 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="AlienExplorer.Model.BatLogic" Collapsed="true">
-    <Position X="3" Y="4.75" Width="1.5" />
+    <Position X="3" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAhAAAAAAAAAAAACAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ObjectLogic\BatLogic.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.EnemyLogicFactory" Collapsed="true">
-    <Position X="11.75" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="5.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ObjectLogic\EnemyLogicFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.GhostLogic" Collapsed="true">
-    <Position X="5.25" Y="4.75" Width="1.5" />
+    <Position X="5.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAhAAAAgAAAAAAAAAAAAAABAAAAMAAAAAAACAAAA=</HashCode>
       <FileName>Model\ObjectLogic\GhostLogic.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.PlayerLogic" Collapsed="true">
-    <Position X="7.5" Y="4.75" Width="1.5" />
+    <Position X="7.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>GIAAABAAACgAAAAAAAAAAAAAABAAAAAEAAAhAQgAAAA=</HashCode>
       <FileName>Model\ObjectLogic\PlayerLogic.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.SlimeLogic" Collapsed="true">
-    <Position X="0.75" Y="4.75" Width="1.5" />
+    <Position X="0.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAhAAAAgAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ObjectLogic\SlimeLogic.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.EnemyObject" Collapsed="true">
-    <Position X="0.75" Y="1.75" Width="1.5" />
+    <Position X="0.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAACAAAAAAABAAAAAAAAAAAAAAAEAAQAAAAAAAQA=</HashCode>
       <FileName>Model\Objects\EnemyObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.GameObject" Collapsed="true">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="4" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAABBAAYAA=</HashCode>
       <FileName>Model\Objects\GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.LevelObject" Collapsed="true">
-    <Position X="5.25" Y="1.75" Width="1.5" />
+    <Position X="5.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Model\Objects\LevelObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.PlayerObject" Collapsed="true">
-    <Position X="7.5" Y="1.75" Width="1.5" />
+    <Position X="7.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAAAEAAAAAAAAAAAAAQAgAAEEAAA=</HashCode>
       <FileName>Model\Objects\PlayerObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.UIObject" Collapsed="true">
-    <Position X="3" Y="1.75" Width="1.5" />
+    <Position X="3" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAQAACAAAAAA=</HashCode>
       <FileName>Model\Objects\UIObject.cs</FileName>
@@ -170,112 +170,112 @@
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.LevelLoader" Collapsed="true">
-    <Position X="15.25" Y="0.5" Width="1.5" />
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgQAAAAQAAAAAAAAAAAAAAAAAAAgAAQIAAgAAAAA=</HashCode>
       <FileName>Model\Utility\LevelLoader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.MenuLoader" Collapsed="true">
-    <Position X="10" Y="1.5" Width="1.5" />
+    <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Utility\MenuLoader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AlienExplorer.Model.SaveFile" Collapsed="true">
-    <Position X="11.75" Y="1.5" Width="1.5" />
+    <Position X="12" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAEAAAAAAAAwEAAAAAQAAAAFAAAQgAAAEAAASIEBAA=</HashCode>
       <FileName>Model\Utility\SaveFile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="AlienExplorer.Model.ILogic" Collapsed="true">
-    <Position X="10" Y="2.75" Width="1.5" />
+    <Position X="4" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAgAAAA=</HashCode>
       <FileName>Model\ObjectLogic\ILogic.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="AlienExplorer.Model.GameModelType" Collapsed="true">
-    <Position X="13.5" Y="3.75" Width="1.5" />
+    <Position X="13.5" Y="2.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAABAAAAAAAAAAA=</HashCode>
       <FileName>Model\Main\GameModelType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.ModelStateMachineCommand" Collapsed="true">
-    <Position X="13.5" Y="4.5" Width="1.5" />
+    <Position X="13.5" Y="3.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAgYAAgAAkAABA=</HashCode>
       <FileName>Model\MainLogic\StateMachines\ModelStateMachineCommand.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.ModelCommand" Collapsed="true">
-    <Position X="11.75" Y="4.5" Width="1.5" />
+    <Position X="11.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAIAAAAAAAAAAAAAAAAAAAAAACACBAAAAAAI=</HashCode>
       <FileName>Model\MainLogic\ModelCommand.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.BatStateType" Collapsed="true">
-    <Position X="10" Y="3.75" Width="1.5" />
+    <Position X="10" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\BatStateType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.GhostStateType" Collapsed="true">
-    <Position X="15.25" Y="3.75" Width="1.5" />
+    <Position X="16" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\GhostStateType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.PlayerStateType" Collapsed="true">
-    <Position X="10" Y="5.25" Width="1.5" />
+    <Position X="10" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAAAAAAAAAAEAAAAACIAAAAAAAAAAAgAA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\PlayerStateType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.SlimeStateType" Collapsed="true">
-    <Position X="11.75" Y="5.25" Width="1.5" />
+    <Position X="11.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\ObjectLogic\StateMachines\SlimeStateType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.EnemyObjectType" Collapsed="true">
-    <Position X="11.75" Y="3.75" Width="1.5" />
+    <Position X="11.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAEAAACAAA=</HashCode>
       <FileName>Model\Objects\EnemyObjectType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.LevelObjectType" Collapsed="true">
-    <Position X="10" Y="4.5" Width="1.5" />
+    <Position X="10" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>Model\Objects\LevelObjectType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.PlayerObjectType" Collapsed="true">
-    <Position X="15.25" Y="4.5" Width="1.5" />
+    <Position X="16" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Model\Objects\PlayerObjectType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AlienExplorer.Model.UIObjectType" Collapsed="true">
-    <Position X="13.5" Y="5.25" Width="1.5" />
+    <Position X="13.5" Y="4.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>MAAACAgAQAAQAAAAGAAAAAAACAAAAAAAIAABCAgEAAA=</HashCode>
       <FileName>Model\Objects\UIObjectType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Delegate Name="AlienExplorer.Model.dLoadAnotherModel" Collapsed="true">
-    <Position X="11.75" Y="6.25" Width="1.5" />
+    <Position X="11.75" Y="6.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
       <FileName>Model\MainLogic\Delegates.cs</FileName>
@@ -289,7 +289,7 @@
     </TypeIdentifier>
   </Delegate>
   <Delegate Name="AlienExplorer.Model.dSetCameraSize" Collapsed="true">
-    <Position X="13.5" Y="6.25" Width="1.5" />
+    <Position X="13.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\MainLogic\Delegates.cs</FileName>
